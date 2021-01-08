@@ -7,20 +7,20 @@ if not vim.g.loaded_completion_tabnine then
   vim.cmd [[ packadd completion-nvim completion-tabnine ]]
 end
 
--- vim.g.completion_auto_change_source = 1
--- vim.g.completion_disable_filetypes = {'TelescopePrompt'}
--- vim.g.completion_enable_auto_hover = 1
--- vim.g.completion_enable_auto_paren = 1
--- vim.g.completion_enable_auto_popup = 1
--- vim.g.completion_enable_snippet = 'snippets.nvim'
--- vim.g.completion_matching_ignore_case = 1
--- vim.g.completion_matching_strategy_list = {'exact'}
--- vim.g.completion_tabnine_max_lines = 1000
--- vim.g.completion_tabnine_max_num_results = 3
--- vim.g.completion_tabnine_priority = 1
--- vim.g.completion_tabnine_sort_by_details = 1
--- vim.g.completion_tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine'
--- vim.g.completion_trigger_keyword_length = 2
+vim.g.completion_auto_change_source = 1
+vim.g.completion_disable_filetypes = {'TelescopePrompt'}
+vim.g.completion_enable_auto_hover = 1
+vim.g.completion_enable_auto_paren = 1
+vim.g.completion_enable_auto_popup = 1
+vim.g.completion_enable_snippet = 'snippets.nvim'
+vim.g.completion_matching_ignore_case = 1
+vim.g.completion_matching_strategy_list = {'exact'}
+vim.g.completion_tabnine_max_lines = 1000
+vim.g.completion_tabnine_max_num_results = 3
+vim.g.completion_tabnine_priority = 1
+vim.g.completion_tabnine_sort_by_details = 1
+vim.g.completion_tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine'
+vim.g.completion_trigger_keyword_length = 2
 
 
 vim.g.completion_chain_complete_list = {
