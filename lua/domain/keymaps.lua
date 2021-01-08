@@ -16,23 +16,6 @@ function _G.check_back_space()
     end
 end
 
---[[ these still need doing
-nnoremap <Leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
-
-this is from rainbow plugin suggestions:
-The following keymappings will help you to check the syntax name and definitions under the cursor, add them to your vimrc and restart vim:
-nnoremap <f1> :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
-nnoremap <f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<cr>
-nnoremap <f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
-nnoremap <f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
-]]
-
--- ["n|]w"]         = map_cu('WhitespaceNext'):with_noremap():with_silent(),
--- ["n|<Leader>r"]  = map_cr("<cmd> lua require'klooj.selfunc'.run_command()"):with_noremap():with_silent(),
--- ["n|]e"]         = map_cmd("<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>"):with_noremap():with_silent(),
-
                                                                             --[[
 
 leader maps; these are displayed by which-key popup
@@ -54,8 +37,6 @@ function maps:load_whichKey_define()
     ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,
     ["n|<Leader><Left>"]  = map_cr("BufferMoveNext"):with_noremap():with_silent()           ,
     ["n|<Leader><Right>"] = map_cr("BufferMovePrevious"):with_noremap():with_silent()       ,
-    ["n|<Leader>["]    = map_cmd("<Plug>(dial-increment)"):with_noremap()                ,
-    ["n|<Leader>]"]  = map_cmd("<Plug>(dial-decrement)"):with_noremap()                ,
   -- [a]ctions
   -- [A]dd lazy packs
   -- [b]uffer
@@ -79,8 +60,6 @@ function maps:load_whichKey_define()
     ["n|<Leader>a#"]      = map_cmd(":py3 import vim, random; vim.current.line += str(random.randint(0,9))<CR><esc>A"):with_noremap():with_silent(),
     ["n|<Leader>ac"]      = map_cr("ColorizerToggle"):with_noremap():with_silent()                                ,
     ["n|<Leader>ah"]      = map_cr("Helptags"):with_noremap():with_silent()                                       ,
-    ["n|<Leader>an"]      = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
-    ["n|<Leader>aN"]      = map_cr("set number!"):with_noremap():with_silent()                                    ,
     ["n|<Leader>au"]      = map_cr("UndotreeToggle"):with_noremap():with_silent()                                 ,
     ["n|<Leader>aw"]      = map_cr("StripWhitespace"):with_noremap():with_silent()                                ,
     --   |- [p]acker
@@ -114,6 +93,8 @@ function maps:load_whichKey_define()
     ["n|<Leader>boC"]     = map_cr("set nocursorcolumn"):with_noremap():with_silent()                             ,
     ["n|<Leader>bow"]     = map_cr("hi ColorColumn ctermbg=#202020 guibg=#202020"):with_noremap():with_silent()   ,
     ["n|<Leader>boW"]     = map_cr("hi ColorColumn ctermbg=darkcyan guibg=darkcyan"):with_noremap():with_silent() ,
+    ["n|<Leader>boN"]      = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
+    ["n|<Leader>bon"]      = map_cr("set number!"):with_noremap():with_silent()                                    ,
 
   -- |> [d]ebug
     ["n|<Leader>dM"]      = map_cr("Neomake"):with_noremap():with_silent()                                        ,
@@ -170,11 +151,6 @@ function maps:load_whichKey_define()
 
     ["n|<LocalLeader>l"]  = map_cmd("<C-G>"):with_noremap():with_silent()                      , -- file info and line count
     ["n|<LocalLeader>t"]  = map_cr("call kp#rightAlignEndWord()"):with_noremap():with_silent() ,
-    ["i|<LocalLeader>]"]  = map_cmd("<C-O><Plug>(completion_next_source)"):with_noremap()      ,
-    ["i|<LocalLeader>["]  = map_cmd("<C-O><Plug>(completion_prev_source)"):with_noremap()      ,
-
--- " " " imap <C-,>
--- " " " imap <C-.> <Plug>(completion_prev_source)
   }
 end
 
@@ -235,15 +211,13 @@ function maps:load_plugin_define()
     ["n|J"]      = map_cr("call tj#join_lines()"):with_noremap()                           ,
     ["n|gj"]     = map_cmd([[<cmd>let _=&lazyredraw<CR>:set lazyredraw<CR>/\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>]]):with_noremap(),
     ["n|gk"]     = map_cmd([[<cmd>let _=&lazyredraw<CR>:set lazyredraw<CR>?\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>]]):with_noremap(),
--- open 'plugin/repo' with the browser NOT WORKING
-    -- ["n|<Leader>gx"] = map_cr("call kp#ghPage()"):with_noremap(),
 
                                                                             --[[
     ===  3rd party ===
                                                                               ]]
--- just go
-    ["n|gx"]      = map_cmd("<Plug>(gxext-normal)")                                        ,
-    ["x|gx"]      = map_cmd("<Plug>(gxext-visual)")                                        ,
+-- dial (like speeddating)
+    ["n|<C-a>"]       = map_cmd("<Plug>(dial-increment)")                ,
+    ["n|<C-S-A>"]     = map_cmd("<Plug>(dial-decrement)")           ,
 -- barbar
     ["n|<TAB>"]   = map_cr("BufferNext"):with_noremap():with_silent()                      ,
     ["n|<S-TAB>"] = map_cr("BufferPrevious"):with_noremap():with_silent()                  ,
@@ -256,16 +230,7 @@ function maps:load_plugin_define()
     -- ["n|<F2>"]    = map_cr([[echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")]]):with_noremap():with_silent(),
     -- ["n|<F3>"]    = map_cr([[echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')]]):with_noremap():with_silent(),
     -- ["n|<F4>"]    = map_cr([[exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')]]):with_noremap():with_silent(),
-  -- terminal
-    ["t|<ESC>"]   = map_cu([[<C-\><C-n>]]):with_noremap(),
-    -- ["t|<F1>"]      = map_cu([[<C-\><C-n>:FloatermKill<CR>]]):with_noremap(),
-    -- ["t|<F2>"]      = map_cu([[<C-\><C-n>:FloatermNew<CR>]]):with_noremap(),
-    -- ["t|<F3>"]      = map_cu([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap(),
-    -- ["t|<F4>"]      = map_cu([[<C-\><C-n>:FloatermNext<CR>]]):with_noremap(),
-    -- ["n|<F2>"]      = map_cr("call kp#floaterm()"):with_noremap(),
-    -- ["n|<F3>"]      = map_cr("FloatermToggle"):with_noremap(),
-    -- ["n|<F4>"]      = map_cr("FloatermNext"):with_noremap(),
--- one offs
+    ["t|<ESC>"]   = map_cu([[<C-\><C-n>]]):with_noremap(), -- terminal
     ["n|<F5>"]      = map_cr("UndotreeToggle"):with_noremap(),
 
   }
@@ -282,3 +247,33 @@ local function load_maps()
 end
 
 load_maps()
+
+--[[ these still need doing
+nnoremap <Leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+
+this is from rainbow plugin suggestions:
+The following keymappings will help you to check the syntax name and definitions under the cursor, add them to your vimrc and restart vim:
+nnoremap <f1> :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+nnoremap <f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<cr>
+nnoremap <f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+nnoremap <f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+]]
+
+-- ["n|]w"]         = map_cu('WhitespaceNext'):with_noremap():with_silent(),
+-- ["n|<Leader>r"]  = map_cr("<cmd> lua require'klooj.selfunc'.run_command()"):with_noremap():with_silent(),
+-- ["n|]e"]         = map_cmd("<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>"):with_noremap():with_silent(),
+
+    -- ["i|<LocalLeader>]"]  = map_cmd("<C-O><Plug>(completion_next_source)"):with_noremap()      ,
+    -- ["i|<LocalLeader>["]  = map_cmd("<C-O><Plug>(completion_prev_source)"):with_noremap()      ,
+
+-- " " " imap <C-,>
+-- " " " imap <C-.> <Plug>(completion_prev_source)
+    -- ["t|<F1>"]      = map_cu([[<C-\><C-n>:FloatermKill<CR>]]):with_noremap(),
+    -- ["t|<F2>"]      = map_cu([[<C-\><C-n>:FloatermNew<CR>]]):with_noremap(),
+    -- ["t|<F3>"]      = map_cu([[<C-\><C-n>:FloatermToggle<CR>]]):with_noremap(),
+    -- ["t|<F4>"]      = map_cu([[<C-\><C-n>:FloatermNext<CR>]]):with_noremap(),
+    -- ["n|<F2>"]      = map_cr("call kp#floaterm()"):with_noremap(),
+    -- ["n|<F3>"]      = map_cr("FloatermToggle"):with_noremap(),
+    -- ["n|<F4>"]      = map_cr("FloatermNext"):with_noremap(),
