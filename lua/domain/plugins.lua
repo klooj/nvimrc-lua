@@ -43,12 +43,14 @@ local function init()
   use {{'tpope/vim-commentary', event = 'UIEnter *'}, {'monaqa/dial.nvim', event = 'UIEnter *'}}
   use {'Raimondi/delimitMate', config = 'require("ploog.delimit")', event = 'InsertEnter *'}
   use {'ntpeters/vim-better-whitespace', event = 'InsertLeavePre *', config = 'require("ploog.whitespace")'}
+  use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
   -- use {{'gyim/vim-boxdraw', opt = true},
 
   --   === git ===
   use {'tpope/vim-fugitive', requires = 'tpope/vim-rhubarb'}
   use {'mhinz/vim-signify', event = 'VimEnter *'}
-  use {{'will133/vim-dirdiff', cmd = 'DirDiff'}, {'junegunn/gv.vim', cmd = 'GV'}}
+  use {{'junegunn/gv.vim', cmd = 'GV'}, {'will133/vim-dirdiff', cmd = 'DirDiff',
+    config = vim.cmd[[ let g:DirDiffExcludes = ".netrwhist, CVS,*.class,*.exe,*.swp,*.git,git*,*.DS_Store" ]]}}
   -- <https://github.com/stsewd/fzf-checkout.vim>
 
   --   === setup, startup, session ===
@@ -65,13 +67,14 @@ local function init()
   use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
         vim.cmd [[ augroup comps ]]
         vim.cmd [[ au BufEnter * lua require('completion').on_attach() ]]
+        -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
         vim.cmd [[ augroup END ]]
-        require('klooj.completion').imply()
+        require('klooj.completion')
         require('completion').on_attach()
         vim.cmd [[ doautoall FileType ]]
       end, requires = {{'norcalli/snippets.nvim', config = 'require("klooj.snippets")'},
-      {'aca/completion-tabnine', opt = true}}}
--- 'nvim-treesitter/completion-treesitter'
+      {'aca/completion-tabnine', opt = true }}}
+  -- use 'nvim-treesitter/completion-treesitter'
 
   use {'neovim/nvim-lspconfig', config = 'require("klooj.lsp_config")',
       requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}

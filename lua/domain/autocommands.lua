@@ -18,8 +18,7 @@ function autocmd.load_autocmds()
   local definitions = {
 
     bufs = {
-      -- reload vim on changes?
-      -- {"BufWritePost",[[$VIM_PATH/{*.vim,vimrc} nested source $MYVIMRC | redraw]]};
+      {"BufWritePost",[[$VIM_PATH/{*.vim,vimrc} nested source $MYVIMRC | redraw]]}; -- reload vim on changes?
       {"BufWritePost",[[$FOONV/lua/domain/plugins.lua PackerCompile]]};       -- recompile packer when plugins.lua is saved
       {"BufWritePre","/tmp/*","setlocal noundofile"};
       {"BufWritePre","COMMIT_EDITMSG","setlocal noundofile"};
@@ -45,12 +44,17 @@ function autocmd.load_autocmds()
     ft = {
       {"BufRead,BufNewFile", "*.wiki", "setf markdown"};
       {"FileType", "json", "set filetype=jsonc"};
-      {"FileType", "which_key", "set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"}
+      {"FileType", "which_key", "set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
     };
 
     yank = {
       {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
     };
+    -- completions = {
+      -- {"InsertEnter", [[* if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]};
+  -- if vim.api.nvim_buf_get_option(0, 'filetype') ~= 'TelescopePrompt' then
+      -- {"InsertEnter", "*", "lua require'completion'.on_attach()"}
+    -- };
     -- completions = {
       -- {"BufEnter", "*", "lua require'completion'.on_attach()"}
     -- };

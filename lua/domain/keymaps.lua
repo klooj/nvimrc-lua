@@ -1,3 +1,5 @@
+-- the organization below is slowly deteriorating as I experiment with grouping items by layout rather than functionality
+
 local pbind    = require('publibs.plbind')
 local map_cr   = pbind.map_cr     --  self.cmd = (":%s<CR>"):format(cmd_string)
 local map_cu   = pbind.map_cu     -- self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
@@ -93,8 +95,8 @@ function maps:load_whichKey_define()
     ["n|<Leader>boC"]     = map_cr("set nocursorcolumn"):with_noremap():with_silent()                             ,
     ["n|<Leader>bow"]     = map_cr("hi ColorColumn ctermbg=#202020 guibg=#202020"):with_noremap():with_silent()   ,
     ["n|<Leader>boW"]     = map_cr("hi ColorColumn ctermbg=darkcyan guibg=darkcyan"):with_noremap():with_silent() ,
-    ["n|<Leader>boN"]      = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
-    ["n|<Leader>bon"]      = map_cr("set number!"):with_noremap():with_silent()                                    ,
+    ["n|<Leader>boN"]     = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
+    ["n|<Leader>bon"]     = map_cr("set number!"):with_noremap():with_silent()                                    ,
 
   -- |> [d]ebug
     ["n|<Leader>dM"]      = map_cr("Neomake"):with_noremap():with_silent()                                        ,
@@ -102,7 +104,7 @@ function maps:load_whichKey_define()
   -- |> [e]dit TODO: check on this?? 'l' : 'my_snippets'
     ["n|<Leader>e."]      = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                                     ,
     ["n|<Leader>e;"]      = map_cr("AnyJumpBack"):with_noremap()                                                  ,
-    ["n|<Leader>ec"]      = map_cr([[vsplit $FOONV/lua/klooj/completion.lua]]):with_noremap()                    ,
+    ["n|<Leader>ec"]      = map_cr([[vsplit $FOONV/lua/klooj/completion.lua]]):with_noremap()                     ,
     ["n|<Leader>ei"]      = map_cr([[vsplit $FOONV/lua/init.lua]]):with_noremap()                                 ,
     ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()                       ,
     ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap()                     ,
@@ -176,29 +178,34 @@ function maps:load_vim_define()
     ["n|<M-j>"]      = map_cmd('<C-W>-'):with_noremap():with_silent()  ,
     ["n|<M-h>"]      = map_cmd('<C-W>5>'):with_noremap():with_silent() ,
     ["n|<M-l>"]      = map_cmd('<C-W>5<'):with_noremap():with_silent() ,
--- completion magic
+-- tab: completion magic and buffers
     ["i|<TAB>"]      = map_cmd([[pumvisible() ? "\<C-n>" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
     ["i|<S-TAB>"]    = map_cmd([[pumvisible() ? "\<C-p>" : "<Plug>(completion_smart_s_tab)"]]):with_expr():with_silent(),
+    ["n|<TAB>"]      = map_cr("BufferNext"):with_noremap():with_silent()        , --barbar
+    ["n|<S-TAB>"]    = map_cr("BufferPrevious"):with_noremap():with_silent()    ,
+-- enter
     ["n|<CR>"]       = map_cmd([[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]]):with_noremap():with_expr(),
     ["i|<CR>"]       = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
+
 -- text: sort, indent, caps, visual "drag and drop"
     ["x|<"]          = map_cmd('<gv'):with_noremap()                 ,
     ["x|>"]          = map_cmd('>gv'):with_noremap()                 ,
+    ["n|<C-<>"]      = map_cr("SidewaysLeft"):with_noremap()         , -- " shift + left/right to move args around
+    ["n|<C->>"]      = map_cr("SidewaysRight"):with_noremap()        ,
     -- ["x|<F8>"]       = map_cmd(":sort i<C-R>"):with_noremap()     ,
     ["x|<F8>"]       = map_cr("sort i"):with_noremap()               ,
-    ["x|<S-k>"]      = map_cmd(":move '<-2<CR>gv-gv"):with_noremap() , -- " Move selected line / block of text in visual mode
     ["x|<S-j>"]      = map_cmd(":move '>+2<CR>gv-gv"):with_noremap() , -- " shift + k to move up; shift + j to move down
+    ["x|<S-k>"]      = map_cmd(":move '<-2<CR>gv-gv"):with_noremap() , -- " Move selected line / block of text in visual mode
     ["i|<F7>"]       = map_cmd('<Esc>gUiw`]a')                       , -- upper case word before cursor
---edit
 
   }
 end
 
 function maps:load_plugin_define()
   self.plugin = {
-                                                                            --[[
+                                                        --[[
     === local autoload functions ===
-                                                                              ]]
+                                                          ]]
 -- lines: pad, join, jump over empty
     ["n|<S-BS>"] = map_cr("call kp#padDelBelow()"):with_noremap():with_silent()            ,
     ["i|<S-BS>"] = map_cmd("<C-O>:call kp#padDelBelow()<CR>"):with_noremap():with_silent() ,
@@ -212,26 +219,17 @@ function maps:load_plugin_define()
     ["n|gj"]     = map_cmd([[<cmd>let _=&lazyredraw<CR>:set lazyredraw<CR>/\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>]]):with_noremap(),
     ["n|gk"]     = map_cmd([[<cmd>let _=&lazyredraw<CR>:set lazyredraw<CR>?\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>]]):with_noremap(),
 
-                                                                            --[[
+                                                        --[[
     ===  3rd party ===
-                                                                              ]]
--- dial (like speeddating)
-    ["n|<C-a>"]       = map_cmd("<Plug>(dial-increment)")                ,
-    ["n|<C-S-A>"]     = map_cmd("<Plug>(dial-decrement)")           ,
--- barbar
-    ["n|<TAB>"]   = map_cr("BufferNext"):with_noremap():with_silent()                      ,
-    ["n|<S-TAB>"] = map_cr("BufferPrevious"):with_noremap():with_silent()                  ,
--- maximizer
-    ["n|<F6>"]    = map_cr("MaximizerToggle"):with_noremap():with_silent()                 ,
-    ["i|<F6>"]    = map_cmd("<C-O>:call MaximizerToggle<CR>"):with_noremap():with_silent() ,
-    ["x|<F6>"]    = map_cmd("<cmd>MaximizerToggle<CR>gv"):with_noremap():with_silent()     ,
--- showhighlighting groups
-    -- ["n|<F1>"]    = map_cr([[echo synIDattr(synID(line('.'), col('.'), 0), 'name')]]):with_noremap():with_silent(),
-    -- ["n|<F2>"]    = map_cr([[echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")]]):with_noremap():with_silent(),
-    -- ["n|<F3>"]    = map_cr([[echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')]]):with_noremap():with_silent(),
-    -- ["n|<F4>"]    = map_cr([[exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')]]):with_noremap():with_silent(),
-    ["t|<ESC>"]   = map_cu([[<C-\><C-n>]]):with_noremap(), -- terminal
-    ["n|<F5>"]      = map_cr("UndotreeToggle"):with_noremap(),
+                                                          ]]
+
+    ["n|<C-1>"] = map_cmd("<Plug>(dial-decrement)")                                      , -- dial (like speeddating)
+    ["n|<C-2>"] = map_cmd("<Plug>(dial-increment)")                                      ,
+    ["n|<F6>"]  = map_cr("MaximizerToggle"):with_noremap():with_silent()                 , -- maximizer
+    ["i|<F6>"]  = map_cmd("<C-O>:call MaximizerToggle<CR>"):with_noremap():with_silent() ,
+    ["x|<F6>"]  = map_cmd("<cmd>MaximizerToggle<CR>gv"):with_noremap():with_silent()     ,
+    ["t|<ESC>"] = map_cu([[<C-\><C-n>]]):with_noremap()                                  , -- terminal
+    ["n|<F5>"]  = map_cr("UndotreeToggle"):with_noremap()                                ,
 
   }
 end
