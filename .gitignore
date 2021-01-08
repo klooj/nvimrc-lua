@@ -1,0 +1,13 @@
+dein
+tags*
+.netrwhist
+vimspector-config/*
+session
+wiki/
+pack/
+scrap
+benched/
+notes/
+examples/
+dev/
+**/packer_compiled.vim
