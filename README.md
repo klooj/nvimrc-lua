@@ -20,7 +20,7 @@ In the absence of meaningful instructions, here's a few points worth noting:
 
 ## trajectory  
 
-Ultimately, I want my nvim to serve as a word processor for academic writing as effectively as it does a traditional text editor. The next big hurdle is really leveraging the power of pandoc and markdown with some existing plugins and new resources to create an inituitive, unified interface for writing prose.  
+Ultimately, I need my nvim to serve as a word processor for legal writing as effectively as it does a traditional text editor. The next big hurdle is really leveraging the power of pandoc and markdown with some existing plugins and new resources to create an inituitive, unified interface for writing prose.  
 
 ### near term todo  
 

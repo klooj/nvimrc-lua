@@ -2,7 +2,7 @@
 For jumping to a lua file from within a lua file, use `<localleader>gf` the same way
 you would `gf`; i.e. inside the parenthesis of require('some.file').
 $FOONV/notes.md.
-:
+TODO:
   1. tabnine isn't working properly
   2. snippets are just a pile rn
   3. be on lookout for formatting errors caused by the rampaging markdown linter
