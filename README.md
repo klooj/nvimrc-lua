@@ -7,11 +7,10 @@ This repo configures neovim with language servers, tree-sitter, completion, and 
 In the absence of meaningful instructions, here's a few points worth noting:  
 1. I have been sloppy about keeping track of attributions, but assume that every file here originally came from [@tjdevries](github.com/tjdevries), [@wbthomason](github.com/wbthomason), or [@glepnir](github.com/glepnir).  
 2. Lua Directories:  
-    - ploog/ is for files that simply declare variables for plugins
+    - ploog/ is for files that merely declare variables for plugins
     - klooj/ is for files that contain functions and are more like a kludge
     - mood/ is for theme and ui related files
-    - domain/ is for settings options, keymaps, etc...  
-    - every benched/ directory is the equivalent of a trash folder.  
+    - domain/ is for settings options, keymaps, etc...   
 3. there is a file in after/plugins that sources lua/init.lua, making it the rough equivalent of after/init.lua
 
 ## trajectory  
