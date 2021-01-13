@@ -102,7 +102,7 @@ local function init()
 
   -- |> markdown
   use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil' }
-  use 'kludgeon/vim-checkbox'
+  use 'klooj/vim-checkbox'
 
   -- |>  python
   use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
