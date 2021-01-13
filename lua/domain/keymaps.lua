@@ -4,7 +4,7 @@ local pbind    = require('publibs.plbind')
 local map_cr   = pbind.map_cr     --  self.cmd = (":%s<CR>"):format(cmd_string)
 local map_cu   = pbind.map_cu     -- self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
 local map_cmd  = pbind.map_cmd   -- self.cmd = cmd_string
-local map_args = pbind.map_args -- self.cmd = (":%s<Space>"):format(cmd_string)
+-- local map_args = pbind.map_args -- self.cmd = (":%s<Space>"):format(cmd_string)
 local vim      = vim
 
 local maps = setmetatable({}, { __index = { vim = {}, plugin = {}, whichKey= {} } })
@@ -116,19 +116,22 @@ function maps:load_whichKey_define()
     ["n|<Leader>f;"]      = map_cr("AnyJumpLastResults"):with_noremap()                                           ,
 
     -- |> [G]it
-    ["n|<Leader>Ga"]      = map_cr("Git add ."):with_noremap()                                 ,
-    ["n|<Leader>Gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
-    ["x|<Leader>Gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
-    ["n|<Leader>Gc"]      = map_cr("Gcommit"):with_noremap()                                   ,
-    ["n|<Leader>Gd"]      = map_cr("Gdiffsplit!"):with_noremap()                               ,
-    ["n|<Leader>Gl"]      = map_cr("Git log"):with_noremap()                                   ,
-    ["n|<Leader>GL"]      = map_cr("LazyGit"):with_noremap()                                   ,
-    ["n|<Leader>Gm"]      = map_cr("Git mergetool"):with_noremap()                             ,
-    ["n|<Leader>Gp"]      = map_cr("Git pull"):with_noremap()                                  ,
-    ["n|<Leader>GP"]      = map_cr("Git push"):with_noremap()                                  ,
-    ["n|<Leader>Gs"]      = map_cr("Gstatus"):with_noremap()                                   ,
-    ["n|<Leader>GV"]      = map_cr("GV!"):with_noremap()                                       ,
-    ["n|<Leader>Gv"]      = map_cr("GV"):with_noremap()                                        ,
+    ["n|<Leader>ga"]      = map_cr("Git add ."):with_noremap()                                 ,
+    ["n|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
+    ["n|<Leader>gc"]      = map_cr("Gcommit"):with_noremap()                                   ,
+    ["n|<Leader>gd"]      = map_cr("Gdiffsplit!"):with_noremap()                               ,
+    ["n|<Leader>gf"]      = map_cr("diffget //2")                                              ,
+    ["n|<Leader>gj"]      = map_cr("diffget //3")                                              ,
+    ["n|<Leader>gl"]      = map_cr("Git log"):with_noremap()                                   ,
+    ["n|<Leader>gL"]      = map_cr("LazyGit"):with_noremap()                                   ,
+    ["n|<Leader>gm"]      = map_cr("Git mergetool"):with_noremap()                             ,
+    ["n|<Leader>gp"]      = map_cr("Git pull"):with_noremap()                                  ,
+    ["n|<Leader>gP"]      = map_cr("Git push"):with_noremap()                                  ,
+    ["n|<Leader>gS"]      = map_cr("G")                                                        ,
+    ["n|<Leader>gs"]      = map_cr("Gstatus"):with_noremap()                                   ,
+    ["n|<Leader>gV"]      = map_cr("GV!"):with_noremap()                                       ,
+    ["n|<Leader>gv"]      = map_cr("GV"):with_noremap()                                        ,
+    ["x|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
 
     -- |> [q]uickfix
 

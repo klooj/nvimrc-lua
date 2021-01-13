@@ -38,3 +38,7 @@ Ultimately, I need my nvim to serve as a word processor for legal writing as eff
 1. install instructions, maybe a script, makefile, and/or dockerfile.  
     - language servers, pyenv, and other extras. maybe just throw my daily build script in here?  
 2. remove every file and folder that is not actively in use.
+3. finsh new statusline
+4. finish snippets
+5. fix tabnine completion
+6. create a better, centralized method for which-key

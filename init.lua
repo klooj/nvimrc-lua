@@ -4,8 +4,7 @@ you would `gf`; i.e. inside the parenthesis of require('some.file').
 $FOONV/notes.md.
 TODO:
   1. tabnine isn't working properly
-  2. ssnippn
-  3. bsnupd by the rampaging markdown linter
+  2. snippets barely half done
                                                                               ]]
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')   -- TODO: consolidate and cleanup
@@ -43,7 +42,7 @@ end
 disable_distribution_plugins()
 leader_map()
 options:load_options()
-require('domain.global')
+-- require('domain.global')
 
 vim.api.nvim_command('filetype plugin indent on')
 if vim.fn.has('vim_starting') == 1 then
