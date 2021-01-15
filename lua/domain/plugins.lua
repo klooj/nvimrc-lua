@@ -19,7 +19,9 @@ local function init()
   -- use {'lervag/wiki.vim', config = 'require("ploog.wiki")'}
 
   --    === SCOUR ===
-  use {{'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}, 'junegunn/fzf.vim'}
+  use {'ojroques/nvim-lspfuzzy', requires = 'junegunn/fzf.vim', config = 'require("lspfuzzy").setup{}'}   --use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup()', requires = 'junegunn/fzf.vim'}
+
+  use {'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}
   use {'pechorin/any-jump.vim', config = 'require("ploog.anyjump")'}
   use {'nvim-lua/telescope.nvim', config = 'require("klooj.telescope")', requires =
   {'nvim-telescope/telescope-fzy-native.nvim', 'nvim-telescope/telescope-github.nvim',
