@@ -17,11 +17,11 @@ In the absence of meaningful instructions, here's a few points worth noting:
 
 **~/.config/nvim/lua/**
 
-    - |-ploog/  files that merely declare plugin variables/settings  
-    - |-klooj/  files that involve more complex operations ... like a kludge    
-    - |-mood/   files for configuring the theme and ui  
-    - |-domain/ native settings, global options and vars, keymaps, etc ...  
-    - |-publibs/ exactly what it sounds like, probably will get broken up and renamed  
+    |-ploog/  files that merely declare plugin variables/settings  
+    |-klooj/  files that involve more complex operations ... like a kludge    
+    |-mood/   files for configuring the theme and ui  
+    |-domain/ native settings, global options and vars, keymaps, etc ...  
+    |-publibs/ exactly what it sounds like, probably will get broken up and renamed  
 
 ## trajectory  
 
