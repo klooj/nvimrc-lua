@@ -1,5 +1,5 @@
 require('nvim-web-devicons').setup {
-  default = true;
+  default = true
 }
 
 local gl = require('galaxyline')

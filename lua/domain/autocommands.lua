@@ -33,11 +33,9 @@ function autocmd.load_autocmds()
       {"VimResized", "*", [[tabdo wincmd =]]};        -- Equalize window dimensions when resizing vim window
       {"FocusGained", "*", "checktime"};              -- Check if file changed when its window is focus, more eager than 'autoread'
       {"VimLeave", "*", [[if has('nvim') | wshada! | else | wviminfo! | endif]]};       -- Force write shada on leaving nvim
-      -- Highlight current line only on focused window
+      -- Highlight current line  in focused window only
       {"WinEnter,BufEnter,InsertLeave", "*", [[if ! &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal cursorline | endif]]};
       {"WinLeave,BufLeave,InsertEnter", "*", [[if &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal nocursorline | endif]]};
-      -- highlight todo, note, etc
-      -- {"Syntax", [[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! extTodo guifg=red ctermfg=red]]};
       {"Syntax", [[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! link extTodo Todo]]};
     };
 
@@ -50,6 +48,21 @@ function autocmd.load_autocmds()
     yank = {
       {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
     };
+  }
+
+  autocmd.nvim_create_augroups(definitions)
+end
+
+return autocmd
+
+-------------------------------------------
+      -- highlight todo, note, etc
+      -- {"Syntax", [[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! extTodo guifg=red ctermfg=red]]};
+-- autocmd! FileType which_key
+-- autocmd  FileType which_key set laststatus=0 noshowmode noruler
+--       \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+-- {"FileType", "dashboard", "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"};
+-- {"BufNewFile,BufRead","*.toml"," setf toml"},
     -- completions = {
       -- {"InsertEnter", [[* if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]};
   -- if vim.api.nvim_buf_get_option(0, 'filetype') ~= 'TelescopePrompt' then
@@ -62,16 +75,3 @@ function autocmd.load_autocmds()
     --   {"CursorHold","*","lua require'version'.blameVirtualText()"};
     --   {"CursorMoved,CursorMovedI","*","lua require'version'.clearBlameVirtualText()"};
     -- }
-  }
-
-  autocmd.nvim_create_augroups(definitions)
-end
-
-return autocmd
-
-
--- autocmd! FileType which_key
--- autocmd  FileType which_key set laststatus=0 noshowmode noruler
---       \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
--- {"FileType", "dashboard", "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"};
--- {"BufNewFile,BufRead","*.toml"," setf toml"},

@@ -1,36 +1,45 @@
 local global = require('domain.global')
--- local M = {}
-
 require("klooj.snippets")
--- function M.infer()
+
+local opts = {
+  auto_change_source = 1,
+  disable_filetypes = {'TelescopePrompt'},
+  enable_auto_hover = 1,
+  enable_auto_paren = 1,
+  enable_auto_popup = 1,
+  enable_snippet = 'snippets.nvim',
+  matching_ignore_case = 1,
+  matching_strategy_list = {'exact'},
+  tabnine_max_lines = 1000,
+  tabnine_max_num_results = 3,
+  tabnine_priority = 1,
+  tabnine_sort_by_details = 1,
+  tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine',
+  trigger_keyword_length = 2,
+  chain_complete_list = {
+    default = {
+      { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
+      { mode = '<c-p>'},
+      { mode = '<c-n>'}
+    }
+  }
+}
+
+VG("completion_", opts)
+
 if not vim.g.loaded_completion_tabnine then
   vim.cmd [[ packadd completion-nvim completion-tabnine ]]
 end
 
-vim.g.completion_auto_change_source = 1
-vim.g.completion_disable_filetypes = {'TelescopePrompt'}
-vim.g.completion_enable_auto_hover = 1
-vim.g.completion_enable_auto_paren = 1
-vim.g.completion_enable_auto_popup = 1
-vim.g.completion_enable_snippet = 'snippets.nvim'
-vim.g.completion_matching_ignore_case = 1
-vim.g.completion_matching_strategy_list = {'exact'}
-vim.g.completion_tabnine_max_lines = 1000
-vim.g.completion_tabnine_max_num_results = 3
-vim.g.completion_tabnine_priority = 1
-vim.g.completion_tabnine_sort_by_details = 1
-vim.g.completion_tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine'
-vim.g.completion_trigger_keyword_length = 2
-
-
-vim.g.completion_chain_complete_list = {
-  default = {
-    { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
-    -- { mode = '<c-p>'},
-    -- { mode = '<c-n>'}
-  }
-}
--- end
+----------------------------
+-- vim.g.completion_chain_complete_list = {
+--   default = {
+--     { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
+--     -- { mode = '<c-p>'},
+--     -- { mode = '<c-n>'}
+--   }
+-- }
+-- -- end
 
 -- function M.imply()
   -- M.infer()

@@ -127,7 +127,7 @@ function maps:load_whichKey_define()
     ["n|<Leader>gm"]      = map_cr("Git mergetool"):with_noremap()                             ,
     ["n|<Leader>gp"]      = map_cr("Git pull"):with_noremap()                                  ,
     ["n|<Leader>gP"]      = map_cr("Git push"):with_noremap()                                  ,
-    ["n|<Leader>gS"]      = map_cr("G")                                                        ,
+    ["n|<Leader>gS"]      = map_cr("G"):with_silent()                                                        ,
     ["n|<Leader>gs"]      = map_cr("Gstatus"):with_noremap()                                   ,
     ["n|<Leader>gV"]      = map_cr("GV!"):with_noremap()                                       ,
     ["n|<Leader>gv"]      = map_cr("GV"):with_noremap()                                        ,
@@ -249,6 +249,7 @@ end
 
 load_maps()
 
+----------------------------------
 --[[ these still need doing
 nnoremap <Leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 

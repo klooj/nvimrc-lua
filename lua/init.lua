@@ -4,20 +4,23 @@ require('publibs.pfunc')
 if os.getenv("TRANSPARENT_TERM") then
   vim.cmd[[colorscheme gruvbox]]
   vim.cmd[[hi! Normal guibg=NONE ctermbg=NONE]]
-  vim.cmd[[hi! CursorLine guibg=#13111a ]]
+  vim.cmd[[hi! CursorLine guibg=#080656 ]]
   -- vim.cmd[[hi LineNr ctermbg=NONE guibg=NONE]]
 
 else
   -- vim.g.modus_faint_syntax = 1
-  vim.cmd[[packadd modus-theme-vim]]
-  require('colorbuddy').colorscheme('modus-vivendi')
+  -- vim.cmd[[packadd modus-theme-vim]]
+  -- require('colorbuddy').colorscheme('modus-vivendi')
 
-  -- vim.cmd[[packadd zephyr-nvim]]
+  vim.cmd[[packadd zephyr-nvim]]
+  require('colorbuddy').colorscheme('zephyr')
 
   -- vim.cmd[[ packadd doom-one.vim ]]
   -- vim.cmd[[ ColorScheme doom-one ]]
+  -- require('colorbuddy').colorscheme('doom-one')
 
   -- vim.cmd[[ packadd nvcode-color-schemes.vim ]]
+  -- require('colorbuddy').colorscheme('snazzy')
   -- vim.cmd[[colorscheme snazzy]]
 end
 -- require('mood.wolf_line')

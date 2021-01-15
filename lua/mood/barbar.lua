@@ -5,8 +5,6 @@ colors are specified in:
 
 vim.cmd[[let bufferline = {}]]
 -- vim.g.bufferline = " "
--- local bline = vim.g.bufferline
--- bufferline = {}
 local setopts = function ()
   vim.g.bufferline = {
     animation = 'both',
@@ -89,6 +87,8 @@ return setmetatable({}, {
     end
   end
 })
+
+----------------------------
 
 --[[
 

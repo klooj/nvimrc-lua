@@ -1,1 +1,1 @@
-vim.g["far#source"] = "rgnvim"
+vim.g['far#source'] = "rgnvim"

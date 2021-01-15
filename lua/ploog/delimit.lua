@@ -1,9 +1,12 @@
--- vim.g.loaded_delimitMate = 1 -- turn off plug
-vim.g.delimitMate_expand_space = 1
-vim.g.delimitMate_smart_quotes = 1
-vim.g.delimitMate_expand_inside_quotes = 1
-vim.g.delimitMate_jump_expansion = 1
-vim.g.delimitMate_balance_matchpairs = 1
+local opts = {
+  expand_space = 1,
+  smart_quotes = 1,
+  expand_inside_quotes = 1,
+  jump_expansion = 1,
+  balance_matchpairs = 1,
+  expand_cr = 2
+}
 
+VG("delimitMate_", opts)
 
-vim.g.delimitMate_expand_cr = 2
+-- vg.loaded_delimitMate = 1 -- turn off plug

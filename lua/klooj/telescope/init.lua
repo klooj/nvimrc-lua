@@ -100,9 +100,9 @@ require('telescope').setup {
   }
 }
 
-if not global.is_pi then
-  require('telescope').load_extension('fzy_native')
-end
+-- if not global.is_pi then
+require('telescope').load_extension('fzy_native')
+-- end
 require('telescope').load_extension('gh')
 require('telescope').load_extension('fzf_writer')
 

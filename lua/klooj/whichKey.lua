@@ -1,15 +1,18 @@
-vim.g.which_key_fallback_to_native_key = 1
-vim.g.which_key_timeout                = 100
-vim.g.which_key_ignore_invalid_key     = 1
-vim.g.which_key_run_map_on_popup       = 1
-vim.g.which_key_sep                    = '→'
-vim.g.which_key_display_names          = {['<CR>'] = '↵', ['<TAB>'] = '⇆'}
-vim.g.which_key_hspace                 = 2
-vim.g.which_key_flatten                = 1
-vim.g.which_key_align_by_seperator     = 1
-vim.g.which_key_use_floating_win       = 1
-vim.g.which_key_position               = 'botright'
+local opts = {
+  fallback_to_native_key = 1,
+  timeout                = 100,
+  ignore_invalid_key     = 1,
+  run_map_on_popup       = 1,
+  sep                    = '→',
+  display_names          = {['<CR>'] = '↵', ['<TAB>'] = '⇆'},
+  hspace                 = 2,
+  flatten                = 1,
+  align_by_seperator     = 1,
+  use_floating_win       = 1,
+  position               = 'botright',
+}
 
+VG("which_key_", opts)
 
 -- alias foo.pack="cds ~/.local/share/nvim/site/pack/packer"
 vim.g.which_key_map = {
