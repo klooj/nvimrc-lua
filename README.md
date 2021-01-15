@@ -15,12 +15,13 @@ In the absence of meaningful instructions, here's a few points worth noting:
 
 ### Layout  
 
-**~/.config/nvim/lua/**  
-\t    - |-ploog/  files that merely declare plugin variables/settings  
-\t    - |-klooj/  files that involve more complex operations ... like a kludge    
-\t    - |-mood/   files for configuring the theme and ui  
-\t    - |-domain/ native settings, global options and vars, keymaps, etc ...  
-\t    - |-publibs/ exactly what it sounds like, probably will get broken up and renamed  
+**~/.config/nvim/lua/**
+
+    - |-ploog/  files that merely declare plugin variables/settings  
+    - |-klooj/  files that involve more complex operations ... like a kludge    
+    - |-mood/   files for configuring the theme and ui  
+    - |-domain/ native settings, global options and vars, keymaps, etc ...  
+    - |-publibs/ exactly what it sounds like, probably will get broken up and renamed  
 
 ## trajectory  
 
