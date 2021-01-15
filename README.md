@@ -30,8 +30,7 @@ Ultimately, I'd like nvim to perform as a word processor with the same agile pow
 ### near term todo  
 
 [ ] instructions; maybe even a script, makefile, and/or dockerfile.  
-    
-    language servers, pyenv, and other extras. maybe just throw my daily build script in here?    
+    [ ] language servers, pyenv, and other extras. maybe just throw my daily build script in here?  
 [ ] remove every file and folder that is not actively in use.  
 [ ] finsh new statusline  
 [ ] finish snippets  
