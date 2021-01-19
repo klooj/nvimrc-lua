@@ -1,4 +1,5 @@
---[[  in lua files,  use `<localleader>gf` like `gf`
+--[[
+In lua files,  use `<localleader>gf` like `gf`
 TODO:
   1. tabnine isn't working properly
   2. snippets barely half done
@@ -46,6 +47,7 @@ end
 
 require('domain.keymaps')
 aucmd.load_autocmds()
+
 
 ----------------------------
   -- VG {

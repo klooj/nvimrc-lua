@@ -24,7 +24,6 @@ local custom_attach = function(client)
     client.config.flags.allow_indent = true
   end
 
-
   mapper('n', '<LocalLeader>dn', 'vim.lsp.diagnostic.goto_next()')
   mapper('n', '<LocalLeader>dp', 'vim.lsp.diagnostic.goto_prev()')
   mapper('n', '<LocalLeader>ds', 'vim.lsp.diagnostic.show_line_diagnostics()')
@@ -56,6 +55,9 @@ lspconfig.vimls.setup {
   }
 }
 lspconfig.bashls.setup {
+  on_attach = custom_attach
+}
+lspconfig.cmake.setup {
   on_attach = custom_attach
 }
 lspconfig.jsonls.setup {

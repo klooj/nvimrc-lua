@@ -1,5 +1,6 @@
 autopep8
 black
+cmake-language-server
 docutils
 flake8
 future
@@ -7,6 +8,7 @@ git+https://github.com/luarocks/hererocks
 jedi
 jedi-language-server
 jinja2
+msgpack
 neovim
 neovim-remote
 pathtools

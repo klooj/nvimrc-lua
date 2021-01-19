@@ -1,9 +1,8 @@
 local opts = {
-  unindent_after_newline = 1,
+  -- unindent_after_newline = 1,
   attribute_highlight = "b",
   name_highlight = 'd',
   extra_keywords_highlight = 1,
-  goto_role_paths = {'./roles', '../_common/roles'},
 }
 
 VG("ansible_", opts)
@@ -46,3 +45,4 @@ VG("ansible_", opts)
 -- for k,v in pairs(opts) do
   -- vg[.. k] = v
 -- end
+  -- goto_role_paths = {'./roles', '../_common/roles'},

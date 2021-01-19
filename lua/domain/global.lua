@@ -22,6 +22,7 @@ function global:load_variables()
   self.xdg         = xdg .. sep
   self.packerpath  = packer .. '/nvim/site/pack/packer/'
   self.vim_path    = foonv .. sep
+  self.foonv       = foonv
   self.sep         = sep
   self.home        = home .. sep
   self.sumneko_root_path = global.home .. "gits/lua-language-server"

@@ -1,3 +1,4 @@
+vim = vim
 require('publibs.pfunc')
 
 -- === theme ===
@@ -32,7 +33,9 @@ vim.cmd[[hi! link cursorcolumn cursorline]]
 vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
 vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]
 
+vim.cmd[[ set fo-=o ]]
 
+--------------------
 -- local ok, msg = pcall(function() require('klooj.lsp_config') end)
 -- if not ok then
   -- print(msg)

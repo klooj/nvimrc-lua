@@ -7,6 +7,8 @@ local opts = {
   enable_auto_hover = 1,
   enable_auto_paren = 1,
   enable_auto_popup = 1,
+  -- enable_snippet = 'UltiSnips',
+  -- enable_snippet = 'vim-vsnip',
   enable_snippet = 'snippets.nvim',
   matching_ignore_case = 1,
   matching_strategy_list = {'exact'},
@@ -19,8 +21,8 @@ local opts = {
   chain_complete_list = {
     default = {
       { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
-      { mode = '<c-p>'},
-      { mode = '<c-n>'}
+      -- { mode = '<c-p>'},
+      -- { mode = '<c-n>'}
     }
   }
 }
@@ -30,6 +32,15 @@ VG("completion_", opts)
 if not vim.g.loaded_completion_tabnine then
   vim.cmd [[ packadd completion-nvim completion-tabnine ]]
 end
+  -- chain_complete_list = {
+  --   default = {
+  --        { complete_items = { 'snippet', 'lsp' } },
+  --        { complete_items = { 'tabnine', 'path' } },
+  --     -- { mode = '<c-p>'},
+  --     -- { mode = '<c-n>'}
+  --   }
+  -- }
+-- }
 
 ----------------------------
 -- vim.g.completion_chain_complete_list = {

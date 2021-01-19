@@ -1,7 +1,7 @@
 local opts = {
   side = 'right',
   width = 25,
-  ignore = { '.git', 'node_modules', '.cache', '*.zwc*' },
+  ignore = { '.git', 'node_modules', '.cache', '.zwc', '.old', '.DS_Store' },
   auto_open = 0,
   auto_close = 0,
   quit_on_open = 0,

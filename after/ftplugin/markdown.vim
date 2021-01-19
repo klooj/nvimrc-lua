@@ -23,6 +23,10 @@ augroup mdlintonsave
 augroup end
 
 
+nnoremap <buffer> <localleader>o :Obsidian<CR>
+
+
+
 
 "========================
 

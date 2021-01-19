@@ -19,9 +19,7 @@ local function init()
   -- use {'lervag/wiki.vim', config = 'require("ploog.wiki")'}
 
   --    === SCOUR ===
-  use {'ojroques/nvim-lspfuzzy', requires = 'junegunn/fzf.vim', config = 'require("lspfuzzy").setup{}'}   --use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup()', requires = 'junegunn/fzf.vim'}
-
-  use {'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}
+  use {'junegunn/fzf.vim', 'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}
   use {'pechorin/any-jump.vim', config = 'require("ploog.anyjump")'}
   use {'nvim-lua/telescope.nvim', config = 'require("klooj.telescope")', requires =
   {'nvim-telescope/telescope-fzy-native.nvim', 'nvim-telescope/telescope-github.nvim',
@@ -75,13 +73,23 @@ local function init()
 
   use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
     vim.cmd [[ augroup comps ]]
-    vim.cmd [[ au BufEnter * if &buftype != "nofile" | lua require'completion'.on_attach() ]]
+    vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
     vim.cmd [[ augroup END ]]
     require('klooj.completion')
     require('completion').on_attach()
     vim.cmd [[ doautoall FileType ]]
-  end, requires = {{'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'},
-  {'aca/completion-tabnine', opt = true }}}
+  end, requires = {
+    {'aca/completion-tabnine', after = 'completion-nvim'}
+  }}
+  -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
+  -- use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
+  use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
+  -- {'aca/completion-tabnine', opt = true }}}
+
+  -- {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
+
+  -- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
+
   -- for fixing the completion in prompt issue
     -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
   -- use 'nvim-treesitter/completion-treesitter'
@@ -104,6 +112,8 @@ local function init()
   use {'cespare/vim-toml', ft = {'toml'}}
   -- use {{'elzr/vim-json', ft = {'json'}}, {'prettier/vim-prettier',
   -- ft = {'javascript', 'typescript', 'less', 'scss', 'css', 'json', 'graphql', 'markdown'}}}
+
+  use { 'jalvesaq/Nvim-R', ft = {'R'}}
 
   -- |> markdown
   use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil' }
