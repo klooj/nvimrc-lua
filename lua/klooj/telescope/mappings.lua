@@ -21,21 +21,21 @@ end
 
 vim.api.nvim_set_keymap('c', '<c-r><c-r>', '<Plug>(TelescopeFuzzyCommandSearch)', { noremap = false, nowait = true })
 
------------
-
 -- map_tele('<leader>Da', 'lsp_code_action')
+map_tele('<leader>ar', 'reloader')
 
 map_tele('<leader>f/', 'current_buffer_fuzzy_find')
 map_tele('<leader>f!', 'command_history')
+-- f; anyjump
 map_tele('<leader>fa', 'autocommands')
 map_tele('<leader>fA', 'search_all_files')
 map_tele('<leader>fb', 'buffers')
 map_tele('<leader>fB', 'builtin')
 map_tele('<leader>fc', 'colorscheme')
 map_tele('<leader>fd', 'fd')
-map_tele('<leader>ff', 'find_files')
+-- map_tele('<leader>ff', 'find_files')
 -- \ 'F' : [':NvimTreeFindFile'   , 'find file lua tree'] ,
-map_tele('<leader>fG', 'grep_prompt')
+-- map_tele('<leader>fG', 'grep_prompt')
 map_tele('<leader>fg', 'live_grep')
 map_tele('<leader>fh', 'help_tags')
 map_tele('<leader>fk', 'keymaps')
@@ -46,8 +46,8 @@ map_tele('<leader>fn', 'nvim_runtime')
 map_tele('<leader>fp', 'installed_plugins')
 map_tele('<leader>fq', 'quickfix')
 -- \ 'R' : 'grepper_replace'     ,
-map_tele('<leader>fr', 'reloader')
-map_tele('<leader>fs', 'staged_search')
+-- \ 'r' : 'frecency'     ,
+-- map_tele('<leader>fs', 'staged_search')
 map_tele('<leader>ft', 'current_buffer_tags')
 map_tele('<leader>fT', 'tags')
 map_tele('<leader>fv', 'vim_options')
@@ -63,7 +63,7 @@ map_tele('<leader>flo', 'oldfiles')
 map_tele('<leader>flp', 'edit_vplugs')
 map_tele('<leader>flr', 'registers')
 map_tele('<leader>flt', 'treesitter')
-map_tele('<leader>flw', 'edit_mywiki')
+-- map_tele('<leader>flw', 'edit_mywiki')
 map_tele('<leader>flz', 'edit_zsh')
 
 return map_tele

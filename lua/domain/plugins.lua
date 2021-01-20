@@ -21,10 +21,12 @@ local function init()
   --    === SCOUR ===
   use {'junegunn/fzf.vim', 'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}
   use {'pechorin/any-jump.vim', config = 'require("ploog.anyjump")'}
-  use {'nvim-lua/telescope.nvim', config = 'require("klooj.telescope")', requires =
-  {'nvim-telescope/telescope-fzy-native.nvim', 'nvim-telescope/telescope-github.nvim',
-  'nvim-telescope/telescope-symbols.nvim', 'nvim-telescope/telescope-fzf-writer.nvim',
-  {'brooth/far.vim', config = 'require("ploog.far")'}}}
+  use {'nvim-lua/telescope.nvim', config = 'require("klooj.telescope")', requires = {
+    'nvim-telescope/telescope-fzy-native.nvim', 'nvim-telescope/telescope-github.nvim',
+    'nvim-telescope/telescope-symbols.nvim', 'nvim-telescope/telescope-fzf-writer.nvim',
+    {'brooth/far.vim', config = 'require("ploog.far")'},
+    {'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
+  }}
 
   --    === ui accoutrement ===
   use {'kyazdani42/nvim-web-devicons', 'junegunn/vim-peekaboo', 'kshenoy/vim-signature', 'psliwka/vim-smoothie'}

@@ -105,6 +105,7 @@ function maps:load_whichKey_define()
     ["n|<Leader>e."]      = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                                     ,
     ["n|<Leader>e;"]      = map_cr("AnyJumpBack"):with_noremap()                                                  ,
     ["n|<Leader>ec"]      = map_cr([[vsplit $FOONV/lua/klooj/completion.lua]]):with_noremap()                     ,
+    ["n|<Leader>ee"]      = map_cr("Telescope symbols"):with_noremap()                                                  ,
     ["n|<Leader>ei"]      = map_cr([[vsplit $FOONV/lua/init.lua]]):with_noremap()                                 ,
     ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()                       ,
     ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap()                     ,
@@ -112,8 +113,11 @@ function maps:load_whichKey_define()
     ["n|<Leader>es"]      = map_cr([[e $FOONV/lua/klooj/snippets.lua]]):with_noremap()                            ,
     ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()                       ,
 
-    -- [f]ind (most of this is in the telescope file)
+    -- [f]ind (most of this is in lua/klooj/telesceope/init.lua )
     ["n|<Leader>f;"]      = map_cr("AnyJumpLastResults"):with_noremap()                                           ,
+    ["n|<Leader>fs"]      = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap()                                           ,
+    ["n|<Leader>ff"]      = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()                                           ,
+    ["n|<Leader>fG"]      = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()                                           ,
 
     -- |> [G]it
     ["n|<Leader>ga"]      = map_cr("Git add ."):with_noremap()                                 ,

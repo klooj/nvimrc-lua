@@ -18,6 +18,13 @@ local themes = require('telescope.themes')
 -- local finders = require('telescope.finders')
 -- local pickers = require('telescope.pickers')
 
+local hostfs
+if global.is_pi then
+  hostfs = sorters.get_fuzzy_file
+else
+  hostfs = sorters.get_fzy_sorter
+end
+
 require('telescope').setup {
 
   defaults = {
@@ -87,24 +94,35 @@ require('telescope').setup {
       },
     },
   },
-  file_sorter = sorters.get_fzy_sorter,
+  extensions = {
+    fzy_native = { override_generic_sorter = true, override_file_sorter = true },
+    fzf_writer = {
+      use_highlighter = true,
+      minimum_grep_characters  = 3,
+      minimum_files_characters = 2
+    },
+    frecency = {
+      show_scores = true,
+      ignore_patterns = {"*.git/*", "*/tmp/*"},
+    }
+  },
+  file_sorter = hostfs,
   file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
   grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
   qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
-  extensions = {
-    fzy_native = { override_generic_sorter = false, override_file_sorter = true },
-    --[[ fzf-writer adds 3 funcs out of the box: 1. require('telescope').extensions.fzf_writer.grep();
-      2. require('telescope').extensions.fzf_writer.files(); 3. require('telescope').extensions.fzf_writer.staged_grep().
-      re: #3, rg to filter exact matches then press ' | ' to switch to fzf]]
-    fzf_writer = { use_highlighter = false, minimum_grep_characters  = 3, minimum_files_characters = 2 },
-  }
 }
 
--- if not global.is_pi then
-require('telescope').load_extension('fzy_native')
--- end
+    --[[ notes about fzf-writer. it adds 3 funcs out of the box:
+        1. require('telescope').extensions.fzf_writer.grep();
+        2. require('telescope').extensions.fzf_writer.files();
+        3. require('telescope').extensions.fzf_writer.staged_grep().
+        for #3, rg to filter exact matches then press ' | ' to switch to fzf search them]]
+if not global.is_pi then
+  require('telescope').load_extension('fzy_native')
+end
 require('telescope').load_extension('gh')
 require('telescope').load_extension('fzf_writer')
+require('telescope').load_extension('frecency')
 
 local M = {}
 
