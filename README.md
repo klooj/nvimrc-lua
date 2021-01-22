@@ -5,27 +5,27 @@ This repo configures neovim for macOS, ubuntu, and raspberry OS with language se
 ## a few guideposts  
 
 In the absence of meaningful instructions, here's a few points worth noting:  
-1. In lua files, `<localleader>gf` is mapped the same way as `gf` in other files but uses the object definition instead of the path. So, 'gf' on `require(some.file)`.  
-2. there is a file in after/plugins that sources lua/init.lua, making it the rough equivalent of after/init.lua. It is sourced using `luafile` rather than `require`; the operative difference is caching, with luafile running the code regardless.  
-3. configured plugins:  
+1. There is an ansible playbook that overlays this directory. If you have know the tiniest bit of ansible, you can run the play right from the root of this repo and it will build the nightly version of neovim on all the mac or debian based linux hosts of your choosing. Just make sure to populate the variables for your situation.  
+2. In lua files, `<localleader>gf` is mapped the same way as `gf` in other files but uses the object definition instead of the path. So, 'gf' on `require(some.file)`.  
+3. there is a file in after/plugins that sources lua/init.lua, making it the rough equivalent of after/init.lua, which helps manage the occasional weirdness with runtime path timing and lua. Note, it is sourced using `luafile` rather than `require`; the operative difference is caching, with luafile running the code regardless.
+4. configured plugins:  
     - tree-sitter, lsp, completion (using snippets, tabnine, & lsp)  
     - telescope, which-key ...  
     - barbar, galaxyline, and multiple themes specifically configured for treesitter  
-
 
 ### Layout  
 
 **~/.config/nvim/lua/**
 
     |-ploog/  files that merely declare plugin variables/settings  
-    |-klooj/  files that involve more complex operations ... like a kludge    
+    |-klooj/  files that involve more complex operations ... like a kludge  
     |-mood/   files for configuring the theme and ui  
     |-domain/ native settings, global options and vars, keymaps, etc ...  
     |-publibs/ exactly what it sounds like, probably will get broken up and renamed  
 
 ## trajectory  
 
-Ultimately, I'd like nvim to perform as a word processor with the same agile power it wields in traditional text editing. The next big hurdle is leveraging the power of pandoc and markdown without reinventing the wheel, combining some existing plugins with new resources to create an inituitive, unified interface for writing prose and code seamlessly.    
+Ultimately, I'd like nvim to perform as a word processor with the same agile power it wields in traditional text editing. The next big hurdle is leveraging the power of pandoc and markdown without reinventing the wheel, combining some existing plugins with new resources to create an inituitive, unified interface for writing prose and code seamlessly.
 
 ### near term todo  
 
