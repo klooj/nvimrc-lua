@@ -5,7 +5,7 @@ This repo configures neovim for macOS, ubuntu, and raspberry OS with language se
 ## a few guideposts  
 
 In the absence of meaningful instructions, here's a few points worth noting:  
-1. There is an ansible playbook that overlays this directory. If you have know the tiniest bit of ansible, you can run the play right from the root of this repo and it will build the nightly version of neovim on all the mac or debian based linux hosts of your choosing. Just make sure to populate the variables for your situation.  
+1. There is an ansible playbook that overlays this directory. If you have know the tiniest bit of ansible, you can run the play right from the root of this repo and it will build the nightly version of neovim on all the mac or debian based linux hosts of your choosing. Just make sure to populate the variables; see the [page](https://klooj.github.io/nvim_build/) for info.  
 2. In lua files, `<localleader>gf` is mapped the same way as `gf` in other files but uses the object definition instead of the path. So, 'gf' on `require(some.file)`.  
 3. there is a file in after/plugins that sources lua/init.lua, making it the rough equivalent of after/init.lua, which helps manage the occasional weirdness with runtime path timing and lua. Note, it is sourced using `luafile` rather than `require`; the operative difference is caching, with luafile running the code regardless.
 4. configured plugins:  

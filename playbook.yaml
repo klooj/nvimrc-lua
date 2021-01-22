@@ -19,7 +19,7 @@
     build_it: yes
     nv_dirs_mk: yes
 
-    git_key: "~/.ssh/{{ ansible_hostname }}_git"
+    git_key: "~/.ssh/{{ ansible_hostname }}_superSecretKey"
     git_method: ssh
 
     lsp_lua_lx: yes
