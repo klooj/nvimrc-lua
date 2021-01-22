@@ -93,7 +93,7 @@ function maps:load_whichKey_define()
   --     |- [b]uf [o]ptions
     ["n|<Leader>boc"]     = map_cr("set cursorcolumn"):with_noremap():with_silent()                               ,
     ["n|<Leader>boC"]     = map_cr("set nocursorcolumn"):with_noremap():with_silent()                             ,
-    ["n|<Leader>bow"]     = map_cr("hi ColorColumn ctermbg=#202020 guibg=#202020"):with_noremap():with_silent()   ,
+    ["n|<Leader>bow"]     = map_cr("hi ColorColumn ctermbg=202020 guibg=202020"):with_noremap():with_silent()   ,
     ["n|<Leader>boW"]     = map_cr("hi ColorColumn ctermbg=darkcyan guibg=darkcyan"):with_noremap():with_silent() ,
     ["n|<Leader>boN"]     = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
     ["n|<Leader>bon"]     = map_cr("set number!"):with_noremap():with_silent()                                    ,

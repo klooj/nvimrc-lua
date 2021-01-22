@@ -118,7 +118,8 @@ local function init()
   use { 'jalvesaq/Nvim-R', ft = {'R'}}
 
   -- |> markdown
-  use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil' }
+  use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil',
+        config = 'require("ploog.markdown")'}
   use 'klooj/vim-checkbox'
 
   -- |>  python

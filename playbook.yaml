@@ -1,0 +1,41 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: copy node package.json for yarn
+      copy:
+        src: files/package.json
+        dest: "{{ nvim_dir }}"
+        force: no
+    - name: copy requirements.txt for pip
+      copy:
+        src: files/requirements.txt
+        dest: "{{ nvim_dir }}"
+        force: no
+
+  vars:
+    nvrc_repo: klooj/nvim
+
+    build_it: yes
+    nv_dirs_mk: yes
+
+    git_key: "~/.ssh/{{ ansible_hostname }}_git"
+    git_method: ssh
+
+    lsp_lua_lx: yes
+    lsp_lua_mac: yes
+    lx_rtp_bin: yes
+
+    install_brews: yes
+    install_apts: yes
+    install_pips: yes
+    exe_pip: ~/.pyenv/versions/neovim3.9/bin/pip
+    install_yarns: yes
+    exe_yarn: ~/.config/nvm/versions/node/v14.15.1/bin/yarn
+    install_gems: yes
+
+    # group_vars: exe_make, exe_shell, exe_gem, install_cargos
+
+  roles:
+    - klooj.nvim_build
+...

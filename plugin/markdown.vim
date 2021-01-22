@@ -28,7 +28,7 @@ function! CheckEmAll()
 endfunction
 
 "----- folding and layout -----
-let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_folding_disabled = 1
 " let g:vim_markdown_folding_level = 3
 " let g:vim_markdown_toc_autofit = 1
 
@@ -36,7 +36,7 @@ let g:vim_markdown_folding_disabled = 1
 " ---- following anchors and links -----
 " follow named anchors in links of the form file#anchor or just #anchor, where file may
 " omit the .md extension as usual, and omitting file allows jumping to the anchor.
-let g:vim_markdown_follow_anchor = 1
+" let g:vim_markdown_follow_anchor = 1
 
 " This expression will be evaluated substituting v:anchor with a quoted string that
 " contains the anchor to visit. The result of the evaluation will become the real anchor
@@ -51,30 +51,30 @@ let g:vim_markdown_follow_anchor = 1
 " let g:vim_markdown_no_extensions_in_markdown = 1
 
 " how to open the file
-let g:vim_markdown_edit_url_in = 'vsplit' " Possible values are tab, vsplit, hsplit, current
+" let g:vim_markdown_edit_url_in = 'vsplit' " Possible values are tab, vsplit, hsplit, current
 
 " ----- Syntax and languages ------
 " fenced code block languages; default is ['c++=cpp', 'viml=vim', 'bash=sh', 'ini=dosini'].
 " let g:vim_markdown_fenced_languages = ['csharp=cs']
-let g:vim_markdown_math = 1 			" latex
-let g:vim_markdown_frontmatter = 1 		" YAML front matter
-let g:vim_markdown_toml_frontmatter = 1 " TOML front matter
-let g:vim_markdown_json_frontmatter = 1 " JSON front matter
+" let g:vim_markdown_math = 1
+" let g:vim_markdown_frontmatter = 1
+" let g:vim_markdown_toml_frontmatter = 1
+" let g:vim_markdown_json_frontmatter = 1
 
 
 " highlight header markers
 
 " ---- Text effects ----
-let g:vim_markdown_conceal = 2
+" let g:vim_markdown_conceal = 2
 " let g:vim_markdown_strikethrough = 1 	" strikethrough
-let g:vim_markdown_new_list_item_indent = 1
-let g:vim_markdown_auto_insert_bullets = 1
+" let g:vim_markdown_new_list_item_indent = 1
+" let g:vim_markdown_auto_insert_bullets = 1
 
 " To disable math conceal with LaTeX math syntax enabled
-let g:tex_conceal = ""
+" let g:tex_conceal = ""
 
 " Disable conceal for code blocks
-let g:vim_markdown_conceal_code_blocks = 0
+" let g:vim_markdown_conceal_code_blocks = 0
 
 
 " ----- Key mapping ----
