@@ -1,5 +1,5 @@
 local global = require('domain.global')
-require("klooj.snippets")
+-- require("klooj.snippets")
 
 local opts = {
   auto_change_source = 1,
@@ -7,9 +7,9 @@ local opts = {
   enable_auto_hover = 1,
   enable_auto_paren = 1,
   enable_auto_popup = 1,
-  -- enable_snippet = 'UltiSnips',
+  enable_snippet = 'UltiSnips',
   -- enable_snippet = 'vim-vsnip',
-  enable_snippet = 'snippets.nvim',
+  -- enable_snippet = 'snippets.nvim',
   matching_ignore_case = 1,
   matching_strategy_list = {'exact'},
   tabnine_max_lines = 1000,

@@ -27,26 +27,28 @@ function autocmd.load_autocmds()
       {"BufWritePre","*.bak","setlocal noundofile"};
       {"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
       {"BufEnter","*","set fo -=o"};
+      {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
     };
+    -- vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
 
     wins = {
-      {"VimResized", "*", [[tabdo wincmd =]]};        -- Equalize window dimensions when resizing vim window
-      {"FocusGained", "*", "checktime"};              -- Check if file changed when its window is focus, more eager than 'autoread'
-      {"VimLeave", "*", [[if has('nvim') | wshada! | else | wviminfo! | endif]]};       -- Force write shada on leaving nvim
+      {"VimResized","*",[[tabdo wincmd =]]};        -- Equalize window dimensions when resizing vim window
+      {"FocusGained","*","checktime"};              -- Check if file changed when its window is focus, more eager than 'autoread'
+      {"VimLeave","*",[[if has('nvim') | wshada! | else | wviminfo! | endif]]};       -- Force write shada on leaving nvim
       -- Highlight current line  in focused window only
-      {"WinEnter,BufEnter,InsertLeave", "*", [[if ! &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal cursorline | endif]]};
-      {"WinLeave,BufLeave,InsertEnter", "*", [[if &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal nocursorline | endif]]};
-      {"Syntax", [[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! link extTodo Todo]]};
+      {"WinEnter,BufEnter,InsertLeave","*",[[if ! &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal cursorline | endif]]};
+      {"WinLeave,BufLeave,InsertEnter","*",[[if &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal nocursorline | endif]]};
+      {"Syntax",[[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! link extTodo Todo]]};
     };
 
     ft = {
-      {"BufRead,BufNewFile", "*.wiki", "setf markdown"};
-      {"FileType", "json", "set filetype=jsonc"};
-      {"FileType", "which_key", "set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
+      {"BufRead,BufNewFile","*.wiki","setf markdown"};
+      {"FileType","json","set filetype=jsonc"};
+      {"FileType","which_key","set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
     };
 
     yank = {
-      {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
+      {"TextYankPost",[[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
     };
   }
 

@@ -12,8 +12,8 @@ local function init()
   packer.reset()
 
   --    === apparatuses ===
-  use {'nvim-lua/popup.nvim', {'nvim-lua/plenary.nvim', config = 'require("klooj.plenary")'}}
   use {{'liuchengxu/vim-which-key', config = 'require("klooj.whichKey")'}, 'romainl/vim-qf'}
+  use {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
   use {{'wbthomason/packer.nvim', opt = true}, {'neomake/neomake', cmd = 'Neomake'}}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle', config = 'require("ploog.nvtree")'}
   -- use {'lervag/wiki.vim', config = 'require("ploog.wiki")'}
@@ -68,36 +68,34 @@ local function init()
 
 
   --   ===  treesitter, completion, snippets, etc  ===
-  use {'nvim-treesitter/nvim-treesitter', config = 'require("klooj.treesitter")', run = ':TSUpdate',
+  use {'nvim-treesitter/nvim-treesitter', config = 'require("klooj.treesitter")',
   requires = {'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
   'nvim-treesitter/nvim-treesitter-textobjects'}, {'nvim-treesitter/playground',
   cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
 
-  use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
-    vim.cmd [[ augroup comps ]]
-    vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
-    vim.cmd [[ augroup END ]]
-    require('klooj.completion')
-    require('completion').on_attach()
-    vim.cmd [[ doautoall FileType ]]
-  end, requires = {
-    {'aca/completion-tabnine', after = 'completion-nvim'}
-  }}
+  use {'nvim-lua/completion-nvim', config = 'require("klooj.completion")', requires = 'aca/completion-tabnine'}
+  use {'neovim/nvim-lspconfig', config = 'require("klooj.lsp_config")',
+    requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
+  use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
+  -- use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
+  --   vim.cmd [[ augroup comps ]]
+  --   vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
+  --   vim.cmd [[ augroup END ]]
+  --   require('klooj.completion')
+  --   require('completion').on_attach()
+  --   vim.cmd [[ doautoall FileType ]]
+  -- end, requires = {
+  --   {'aca/completion-tabnine', after = 'completion-nvim'}
+  -- }}
   -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
   -- use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
-  use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
-  -- {'aca/completion-tabnine', opt = true }}}
-
-  -- {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
-
+  -- use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
   -- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
 
   -- for fixing the completion in prompt issue
     -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
   -- use 'nvim-treesitter/completion-treesitter'
 
-  use {'neovim/nvim-lspconfig', config = 'require("klooj.lsp_config")',
-    requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
 
 
   --   === debug ===
@@ -120,6 +118,7 @@ local function init()
   -- |> markdown
   use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil',
         config = 'require("ploog.markdown")'}
+  use {'itspriddle/vim-marked', ft = {'markdown'}}
   use 'klooj/vim-checkbox'
 
   -- |>  python

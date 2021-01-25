@@ -24,6 +24,10 @@ augroup end
 
 
 nnoremap <buffer> <localleader>o :Obsidian<CR>
+nnoremap <buffer> <localleader>po :MarkedOpen!
+nnoremap <buffer> <localleader>pq :MarkedQuit
+nnoremap <buffer> <localleader>pt :MarkedQuit
+
 
 
 

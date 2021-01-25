@@ -5,6 +5,7 @@ docutils
 flake8
 future
 git+https://github.com/luarocks/hererocks
+github3.py
 jedi
 jedi-language-server
 jinja2
@@ -23,4 +24,5 @@ python-language-server[all]
 regex
 setuptools
 tasklib
+uvloop
 wheel

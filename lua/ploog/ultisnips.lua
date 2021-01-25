@@ -1,5 +1,5 @@
 local opts = {
-  ExpandTrigger = "<c-;",
+  ExpandTrigger = "<c-;>",
   JumpForwardTrigger = "<c-;>",
   JumpBackwardTrigger = "<c-'>",
   SnippetDirectories= {"UltiSnips", 'snips'}
