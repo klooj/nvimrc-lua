@@ -1,7 +1,7 @@
 require('indent_guides').setup {
   indent_guide_size = 1,
   indent_levels = 30,
-  indent_pretty_guides = true,
+  -- indent_pretty_guides = true,
   indent_soft_pattern = '\\s',
   indent_space_guides = true,
   indent_start_level = 1,

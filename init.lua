@@ -10,7 +10,7 @@ function VG(name,opts)
   end
 end
 
-local disable_distribution_plugins = function()
+local disable_vplugs = function()
   local vplgs = { 'gzip', 'tar', 'tarPlugin', 'zip', 'zipPlugin', 'getscript', 'getscriptPlugin',
     'vimball', 'vimballPlugin', 'matchit', 'matchparen', '2html_plugin', 'logiPat', 'rrhelper',
     'netrw', 'netrwPlugin', 'netrwSettings', 'netrwFileHandlers'}
@@ -30,7 +30,7 @@ local leader_map = function()
 end
 
 
-disable_distribution_plugins()
+disable_vplugs()
 leader_map()
 options:load_options()
 
