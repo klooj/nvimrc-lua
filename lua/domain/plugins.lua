@@ -12,11 +12,11 @@ local function init()
   packer.reset()
 
   --    === apparatuses ===
+  use {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'junegunn/vim-peekaboo', 'kshenoy/vim-signature'}
   use {{'liuchengxu/vim-which-key', config = 'require("klooj.whichKey")'}, 'romainl/vim-qf'}
-  use {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
   use {{'wbthomason/packer.nvim', opt = true}, {'neomake/neomake', cmd = 'Neomake'}}
-  use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle', config = 'require("ploog.nvtree")'}
   -- use {'lervag/wiki.vim', config = 'require("ploog.wiki")'}
+  use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle', config = 'require("ploog.nvtree")'}
 
   --    === SCOUR ===
   use {'junegunn/fzf.vim', 'rhysd/clever-f.vim', config = 'require("ploog.cleverf")'}
@@ -28,101 +28,83 @@ local function init()
     {'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
   }}
 
-  --    === ui accoutrement ===
-  use {'kyazdani42/nvim-web-devicons', 'junegunn/vim-peekaboo', 'kshenoy/vim-signature', 'psliwka/vim-smoothie'}
-  use {'norcalli/nvim-colorizer.lua', config = 'require("colorizer").setup()'}
-  use {'glepnir/indent-guides.nvim', config = 'require("ploog.indentGuide")'}
-
-  -- |> theme
-  use {'tjdevries/colorbuddy.vim', {'glepnir/galaxyline.nvim', config = 'require("mood.vendiline")'},
-    {'romgrk/barbar.nvim', config = 'require("mood.barbar").darkish()'}}
-  use {{'romgrk/doom-one.vim', opt = true}, {'christianchiarulli/nvcode-color-schemes.vim', opt = true}}
-  use {{'ishan9299/modus-theme-vim', opt = true}, {'glepnir/zephyr-nvim', opt = true, config = 'require("zephyr")'}}
-  -- for working out wolf_line
-  -- use {'tjdevries/colorbuddy.vim', 'glepnir/galaxyline.nvim',
-  -- , config = 'require("mood.wolf_line")'},
-  -- use {{'ishan9299/modus-theme-vim', opt = true, config = require("colorbuddy").colorscheme("modus-vivendi")},
-    -- {'glepnir/zephyr-nvim', opt = true, config = 'require("zephyr")'}}
-
-
   --   === treating text like objects ===
-  use {'godlygeek/tabular', 'tpope/vim-surround', 'tpope/vim-repeat'}
-  use {{'tpope/vim-commentary', event = 'UIEnter *'}, {'monaqa/dial.nvim', event = 'UIEnter *'}}
+  use {'godlygeek/tabular', 'tpope/vim-surround', 'tpope/vim-repeat', 'tpope/vim-commentary'}
+  use {{'monaqa/dial.nvim', event = 'UIEnter *'}, {'gyim/vim-boxdraw', opt = true}}
   use {'Raimondi/delimitMate', config = 'require("ploog.delimit")', event = 'InsertEnter *'}
   use {'ntpeters/vim-better-whitespace', event = 'InsertLeavePre *', config = 'require("ploog.whitespace")'}
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
-  use {'gyim/vim-boxdraw', opt = true}
-
 
   --   === git ===
   use {{'tpope/vim-fugitive', requires = 'tpope/vim-rhubarb'}, {'mhinz/vim-signify'}}
-  use {{'junegunn/gv.vim', cmd = 'GV'}, {'will133/vim-dirdiff', cmd = 'DirDiff',
-  config = vim.cmd[[ let g:DirDiffExcludes = ".netrwhist, CVS,*.class,*.exe,*.swp,*.git,git*,*.DS_Store" ]]}}
+  use {'junegunn/gv.vim', cmd = 'GV'}
+  use {'will133/vim-dirdiff', cmd = 'DirDiff',
+    config = vim.cmd[[ let g:DirDiffExcludes = ".netrwhist, CVS,*.class,*.exe,*.swp,*.git,git*,*.DS_Store" ]]}
   -- <https://github.com/stsewd/fzf-checkout.vim>
 
-
-  --   === setup, startup, session ===
-  use {'tpope/vim-eunuch', 'tpope/vim-obsession', {'dhruvasagar/vim-prosession', cmd = 'Prosession'}}
+  --   === setup, startup, syntax, session ===
+  use {'tpope/vim-eunuch', 'tpope/vim-obsession', 'justinmk/vim-syntax-extra'}
+  use {'dhruvasagar/vim-prosession', cmd = 'Prosession'}
   use {'mbbill/undotree', cmd = 'UndotreeToggle', config = 'require("ploog.undotree")'}
   use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
-
-
-  --   ===  treesitter, completion, snippets, etc  ===
-  use {'nvim-treesitter/nvim-treesitter', config = 'require("klooj.treesitter")',
-  requires = {'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
-  'nvim-treesitter/nvim-treesitter-textobjects'}, {'nvim-treesitter/playground',
-  cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
-
-  use {'nvim-lua/completion-nvim', config = 'require("klooj.completion")', requires = 'aca/completion-tabnine'}
-  use {'neovim/nvim-lspconfig', config = 'require("klooj.lsp_config")',
-    requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
-  use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
-  -- use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
-  --   vim.cmd [[ augroup comps ]]
-  --   vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
-  --   vim.cmd [[ augroup END ]]
-  --   require('klooj.completion')
-  --   require('completion').on_attach()
-  --   vim.cmd [[ doautoall FileType ]]
-  -- end, requires = {
-  --   {'aca/completion-tabnine', after = 'completion-nvim'}
-  -- }}
-  -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
-  -- use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
-  -- use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
-  -- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
-
-  -- for fixing the completion in prompt issue
-    -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
-  -- use 'nvim-treesitter/completion-treesitter'
-
-
 
   --   === debug ===
   use 'tpope/vim-scriptease'
   use {{'dstein64/vim-startuptime', cmd = 'StartupTime'}, {'bfredl/nvim-luadev', opt = true}}
-  use {'puremourning/vimspector', opt = true, requires = 'nvim-telescope/telescope-vimspector.nvim'}
+  use {'puremourning/vimspector', opt = true, requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}}
 
+  --   ===  treesitter, ===
+  use {'nvim-treesitter/nvim-treesitter', config = 'require("klooj.treesitter")',
+    requires = {'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
+      'nvim-treesitter/nvim-treesitter-textobjects', 'romgrk/nvim-treesitter-context'}}
+  -- {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
+
+  -- === completion, lsp, & snippets ===
+  use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
+  use {'neovim/nvim-lspconfig', config = 'require("klooj.lsp_config")',
+    requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
+  use {'nvim-lua/completion-nvim', config = 'require("klooj.completion")', requires = 'aca/completion-tabnine'}
+
+  --    === ui accoutrement ===
+  use {'kyazdani42/nvim-web-devicons', 'psliwka/vim-smoothie'}
+  use {'norcalli/nvim-colorizer.lua', config = 'require("colorizer").setup()'}
+  use {'glepnir/indent-guides.nvim', config = 'require("ploog.indentGuide")'}
+  -- |> themer
+  use 'tjdevries/colorbuddy.vim'
+  -- |> theme
+  use {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'}
+  use {
+    {'christianchiarulli/nvcode-color-schemes.vim', opt = true, config = 'require("colorbuddy").colorscheme("snazzy")'},
+    {'ishan9299/modus-theme-vim', opt = true, config = 'require("colorbuddy").colorscheme("modus-vivendi")'},
+    {'romgrk/doom-one.vim', opt = true, config = 'require("colorbuddy").colorscheme("doom-one")'}}
+  -- |> statusline & tabline
+  use {{'glepnir/galaxyline.nvim', config = 'require("mood.vendiline")'},
+    {'romgrk/barbar.nvim', config = 'require("mood.barbar").darkish()'}}
+
+  -- WIP
+  -- use {'tjdevries/colorbuddy.vim', 'glepnir/galaxyline.nvim',
+  -- , config = 'require("mood.wolf_line")'},
 
   -- === filetype/syntax specific ===
-  use 'justinmk/vim-syntax-extra'
+  -- |> lua
   use {'euclidianAce/BetterLua.vim', {'tjdevries/manillua.nvim', ft = {'lua'}}}
-  use {'pearofducks/ansible-vim', config = 'require("ploog.ansible")'}
-  use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml'}}
-  use {'cespare/vim-toml', ft = {'toml'}}
+  -- |> ansible
+  use {'pearofducks/ansible-vim', config = 'require("ploog.ansible")', ft = {'yaml', 'yaml.ansible', 'yml'}}
+  use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}
+  -- |>  R
+  use {'jalvesaq/Nvim-R', ft = {'R'}}
+  -- |>  python
+  use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
+  -- |> markdown
+  use {'SidOfc/mkdx', config = 'require("ploog.markdown")', requires = {'reedes/vim-pencil'}}
+  use {'itspriddle/vim-marked', ft = {'markdown'}}
+  -- use {'plasticboy/vim-markdown', ft = {'markdown'}}
+  -- use {'reedes/vim-pencil', ft = {'markdown'}}
+
+  -- |> json
   -- use {{'elzr/vim-json', ft = {'json'}}, {'prettier/vim-prettier',
   -- ft = {'javascript', 'typescript', 'less', 'scss', 'css', 'json', 'graphql', 'markdown'}}}
 
-  use { 'jalvesaq/Nvim-R', ft = {'R'}}
-
-  -- |> markdown
-  use {'plasticboy/vim-markdown', ft = {'markdown'}, requires = 'reedes/vim-pencil',
-        config = 'require("ploog.markdown")'}
-  use {'itspriddle/vim-marked', ft = {'markdown'}}
-  use 'klooj/vim-checkbox'
-
-  -- |>  python
-  use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
 
 end
 
@@ -137,8 +119,29 @@ return plugins
 
 ---------------------------
 
+-- mess from before switching back to ultisnips:
+-- use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
+--   vim.cmd [[ augroup comps ]]
+--   vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]
+--   vim.cmd [[ augroup END ]]
+--   require('klooj.completion')
+--   require('completion').on_attach()
+--   vim.cmd [[ doautoall FileType ]]
+-- end, requires = {
+--   {'aca/completion-tabnine', after = 'completion-nvim'}
+-- }}
+-- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
+-- use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
+-- use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
+-- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
+
+-- for fixing the completion in prompt issue
+  -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
+-- use 'nvim-treesitter/completion-treesitter'
+
 
 --[[
+'cespare/vim-toml', ft = {'toml'}
 'andymass/vim-matchup'
 'chaoren/vim-wordmotion''
 'junegunn/vim-easy-align',
@@ -150,7 +153,6 @@ return plugins
 'nvim-lua/lsp_extensions.nvim',
 'Olical/vim-enmasse'
 'rhysd/vim-clang-format', opt = true, rocks = {'lua-cjson', 'lpeg', 'asdf'}
-'romgrk/nvim-treesitter-context'
 'steelsojka/completion-buffers'
 'tjdevries/express_line.nvim', opt = true
 'tjdevries/gruvbuddy.nvim', opt = true

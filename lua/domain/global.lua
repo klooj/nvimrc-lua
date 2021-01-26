@@ -5,7 +5,7 @@ local foonv     = os.getenv("FOONV")
 local xdg       = os.getenv("XDG_CONFIG_HOME")
 local xdgcache  = os.getenv("XDG_CACHE_HOME")
 local packer    = os.getenv("XDG_DATA_HOME")
-local sep  = '/'
+local sep       = '/'
 local os_name   = vim.loop.os_uname().sysname
 local arch_type = vim.loop.os_uname().machine
 

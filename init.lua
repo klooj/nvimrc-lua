@@ -1,9 +1,5 @@
---[[
-In lua files,  use `<localleader>gf` like `gf`
-TODO:
-  1. tabnine isn't working properly
-  2. snippets barely half done
-                                                                              ]]
+-- In lua files,  use `<localleader>gf` like `gf`
+
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')
 
@@ -14,7 +10,6 @@ function VG(name,opts)
   end
 end
 
-
 local disable_distribution_plugins = function()
   local vplgs = { 'gzip', 'tar', 'tarPlugin', 'zip', 'zipPlugin', 'getscript', 'getscriptPlugin',
     'vimball', 'vimballPlugin', 'matchit', 'matchparen', '2html_plugin', 'logiPat', 'rrhelper',
@@ -24,7 +19,6 @@ local disable_distribution_plugins = function()
     vg[pk] =  1
   end
 end
-
 
 local leader_map = function()
   vg.mapleader = " "

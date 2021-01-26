@@ -79,6 +79,7 @@ if not global.is_pi then
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
     on_attach = custom_attach,
     globals = {
+      'vim',
       -- Colorbuddy
       "Color", "c", "Group", "g", "s",
 

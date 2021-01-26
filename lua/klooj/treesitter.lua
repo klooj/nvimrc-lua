@@ -33,7 +33,10 @@ require('nvim-treesitter.configs').setup {
   -- rainbow parenthesis
   rainbow = {
     enable = true,
-    disable = {'bash'}
+    -- disable = {'bash'}
+  },
+  context = {
+    enable = true
   },
   refactor = {
     highlight_definitions = {enable = true},
@@ -46,8 +49,8 @@ require('nvim-treesitter.configs').setup {
     navigation = {
       enable = true,
       keymaps = {
-        goto_definition = 'gnd', -- mapping to go to definition of symbol under cursor
-        list_definitions = 'gnD', -- mapping to list all definitions in current file
+        goto_definition = 'gtd', -- mapping to go to definition of symbol under cursor
+        list_definitions = 'gtD', -- mapping to list all definitions in current file
       },
     },
   },

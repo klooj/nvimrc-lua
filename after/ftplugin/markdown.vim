@@ -1,3 +1,5 @@
+" this is a mess
+
 " setl formatlistpat=^\\s*\\d\\+[.\)]\\s\\+\\\|^\\s*[*+~-]\\s\\+\\\|^\\(\\\|[*#]\\)\\[^[^\\]]\\+\\]:\\s
 " setl comments =n:>
 " setl fo+=cn tw=80 ts=2 sts=2 sw=2 expandtab
@@ -21,18 +23,25 @@ augroup mdlintonsave
   au!
   au BufWritePost *.md silent !markdownlint -f <afile> &>/dev/null
 augroup end
-
-
-nnoremap <buffer> <localleader>o :Obsidian<CR>
-nnoremap <buffer> <localleader>po :MarkedOpen!
-nnoremap <buffer> <localleader>pq :MarkedQuit
-nnoremap <buffer> <localleader>pt :MarkedQuit
-
-
-
+let g:marked_app = 'Marked'
+nmap <buffer> <leader>mO :Obsidian<CR>
+nmap <buffer> <leader>mpo :MarkedOpen!<CR>
+nmap <buffer> <leader>mpq :MarkedQuit<CR>
+nmap <buffer> <leader>mpt :MarkedToggle<CR>
 
 
 "========================
+" <Plug>(mkdx-ctrl-n-compl)
+" <Plug>(mkdx-ctrl-p-compl)
+
+
+" let g:mkdx#settings.map.prefix = '<localleader>'
+
+
+" augroup mdWhichKey
+" 	au!
+" 	au BufEnter *.md lua require('klooj.md_keymaps')
+" augroup end
 
   " autocmd BufWritePre *.md,*.wiki exe '!markdownlint -f %:p >&/dev/null'
 " lint save

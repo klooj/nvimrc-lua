@@ -1,20 +1,36 @@
 require('indent_guides').setup {
-    indent_levels = 30;
-    indent_guide_size = 1;
-    indent_pretty_guides = true;
-    indent_space_guides = true;
-    indent_tab_guides = true;
-    indent_soft_pattern = '\\s';
-    exclude_filetypes = {'help','dashboard','dashpreview','startify','NvimTree','packer','floaterm','term','start'};
+  indent_guide_size = 1,
+  indent_levels = 30,
+  indent_pretty_guides = true,
+  indent_soft_pattern = '\\s',
+  indent_space_guides = true,
+  indent_start_level = 1,
+  indent_tab_guides = true,
+  exclude_filetypes = {
+    'help',
+    'markdown',
+    'dashboard',
+    'dashpreview',
+    'startify',
+    'NvimTree',
+    'packer',
+    'floaterm',
+    'term',
+    'start',
+  },
+  even_colors = {
+    bg = '#300105',
+    fg = '#200152',
+  },
+  odd_colors = {
+    bg = '#200152',
+    fg = '#300105',
+  },
 }
 
-    -- even_colors = { fg color , bg color };
-    -- odd_colors = { fg color , bg color };
-    -- even_colors = {
-    --   fg = '#2E323A';
-    --   bg = '#34383F';
-    -- };
-    -- odd_colors = {
-    --   fg = '#34383F';
-    --   bg = '#2E323A';
-    -- }
+    -- fg = '#403010',
+    -- bg = '#705030',
+    -- fg = '#705030',
+    -- bg = '#403010',
+    -- fg = '#300130',
+    -- bg = '#100150',

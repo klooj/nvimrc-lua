@@ -110,7 +110,8 @@ function maps:load_whichKey_define()
     ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()                       ,
     ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap()                     ,
     ["n|<Leader>ep"]      = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()                       ,
-    ["n|<Leader>es"]      = map_cr([[e $FOONV/lua/klooj/snippets.lua]]):with_noremap()                            ,
+    ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()                       ,
+    -- ["n|<Leader>es"]      = map_cr([[e $FOONV/lua/klooj/snippets.lua]]):with_noremap()                            ,
     ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()                       ,
 
     -- [f]ind (most of this is in lua/klooj/telesceope/init.lua )
@@ -158,8 +159,8 @@ function maps:load_whichKey_define()
     -- TODO: these are generally going to specified per plugin/filetpye. also,
     -- telescope maps a lot of actions through the lsp attaching to a file.
 
-    ["n|<LocalLeader>l"]  = map_cmd("<C-G>"):with_noremap():with_silent()                      , -- file info and line count
-    ["n|<LocalLeader>t"]  = map_cr("call kp#rightAlignEndWord()"):with_noremap():with_silent() ,
+    -- ["n|<LocalLeader>l"]  = map_cmd("<C-G>"):with_noremap():with_silent()                      , -- file info and line count
+    -- ["n|<LocalLeader>t"]  = map_cr("call kp#rightAlignEndWord()"):with_noremap():with_silent() ,
   }
 end
 
@@ -195,14 +196,16 @@ function maps:load_vim_define()
     ["i|<CR>"]       = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
 
 -- text: sort, indent, caps, visual "drag and drop"
+    ["n|<"]          = map_cmd('<<'):with_noremap()                 ,
+    ["n|>"]          = map_cmd('>>'):with_noremap()                 ,
     ["x|<"]          = map_cmd('<gv'):with_noremap()                 ,
     ["x|>"]          = map_cmd('>gv'):with_noremap()                 ,
-    ["n|<C-<>"]      = map_cr("SidewaysLeft"):with_noremap()         , -- " shift + left/right to move args around
+    ["n|<C-<>"]      = map_cr("SidewaysLeft"):with_noremap()         , -- " ctrl + left/right to move args around
     ["n|<C->>"]      = map_cr("SidewaysRight"):with_noremap()        ,
     -- ["x|<F8>"]       = map_cmd(":sort i<C-R>"):with_noremap()     ,
     ["x|<F8>"]       = map_cr("sort i"):with_noremap()               ,
-    ["x|<S-j>"]      = map_cmd(":move '>+2<CR>gv-gv"):with_noremap() , -- " shift + k to move up; shift + j to move down
     ["x|<S-k>"]      = map_cmd(":move '<-2<CR>gv-gv"):with_noremap() , -- " Move selected line / block of text in visual mode
+    ["x|<S-j>"]      = map_cmd(":move '>+2<CR>gv-gv"):with_noremap() , -- " shift + k to move up; shift + j to move down
     ["i|<F7>"]       = map_cmd('<Esc>gUiw`]a')                       , -- upper case word before cursor
 
   }
