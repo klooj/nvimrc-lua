@@ -101,27 +101,26 @@ function maps:load_whichKey_define()
   -- |> [d]ebug
     ["n|<Leader>dM"]      = map_cr("Neomake"):with_noremap():with_silent()                                        ,
 
-  -- |> [e]dit TODO: check on this?? 'l' : 'my_snippets'
-    ["n|<Leader>e."]      = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                                     ,
-    ["n|<Leader>e;"]      = map_cr("AnyJumpBack"):with_noremap()                                                  ,
-    ["n|<Leader>ec"]      = map_cr([[vsplit $FOONV/lua/klooj/completion.lua]]):with_noremap()                     ,
-    ["n|<Leader>ee"]      = map_cr("Telescope symbols"):with_noremap()                                                  ,
-    ["n|<Leader>ei"]      = map_cr([[vsplit $FOONV/lua/init.lua]]):with_noremap()                                 ,
-    ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()                       ,
-    ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap()                     ,
-    ["n|<Leader>ep"]      = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()                       ,
-    ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()                       ,
-    ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()                       ,
+  -- |> [e]dit
+    ["n|<Leader>e."]      = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                 ,
+    ["n|<Leader>e;"]      = map_cr("AnyJumpBack"):with_noremap()                              ,
+    ["n|<Leader>ec"]      = map_cr([[vsplit $FOONV/lua/klooj/completion.lua]]):with_noremap() ,
+    ["n|<Leader>ee"]      = map_cr("Telescope symbols"):with_noremap()                        ,
+    ["n|<Leader>ei"]      = map_cr([[vsplit $FOONV/lua/init.lua]]):with_noremap()             ,
+    ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()   ,
+    ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap() ,
+    ["n|<Leader>ep"]      = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()   ,
+    ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()          ,
+    ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()   ,
 
     -- [f]ind (most of this is in lua/klooj/telesceope/init.lua )
     ["n|<Leader>f;"]      = map_cr("AnyJumpLastResults"):with_noremap()                                           ,
-    ["n|<Leader>fs"]      = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap()                                           ,
-    ["n|<Leader>ff"]      = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()                                           ,
-    ["n|<Leader>fG"]      = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()                                           ,
+    ["n|<Leader>ff"]      = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap() ,
+    ["n|<Leader>fz"]      = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()       ,
+    ["n|<Leader>fZ"]      = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()        ,
 
     -- [t]able
     -- tf<char> uses the first <char> as separator; applies in most common cases in visual and normal
-
     ["n|<Leader>t "]   = map_cr("Tabularize spaces"):with_noremap()           ,
     ["n|<Leader>t*"]   = map_cr("Tabularize asterisk"):with_noremap()         ,
     ["n|<Leader>ta"]   = map_cr("Tabularize assignment"):with_noremap()       ,

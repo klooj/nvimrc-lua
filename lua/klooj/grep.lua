@@ -50,7 +50,7 @@ end
 
 -- grepper.grep_for_string('buf_get_prev_diagnostic')
 
-vim.cmd [[nnoremap <leader>fW :lua R("klooj.grep").grep_for_string(vim.fn.input("Grep For > "))<CR>]]
-vim.cmd [[nnoremap <leader>fR :lua R("klooj.grep").replace_string(vim.fn.input("Grep For > "), vim.fn.input("Replace with > "))<CR>]]
+-- vim.cmd [[nnoremap <leader>fW :lua R("klooj.grep").grep_for_string(vim.fn.input("Grep For > "))<CR>]]
+-- vim.cmd [[nnoremap <leader>fR :lua R("klooj.grep").replace_string(vim.fn.input("Grep For > "), vim.fn.input("Replace with > "))<CR>]]
 
 return grepper

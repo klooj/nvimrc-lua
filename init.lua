@@ -1,4 +1,4 @@
--- In lua files,  use `<localleader>gf` like `gf`
+-- In lua files,  use `<localleader>g` like `gf`
 
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')

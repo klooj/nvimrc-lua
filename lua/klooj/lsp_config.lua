@@ -24,17 +24,18 @@ local custom_attach = function(client)
     client.config.flags.allow_indent = true
   end
 
-  mapper('n', '<LocalLeader>dn', 'vim.lsp.diagnostic.goto_next()')
-  mapper('n', '<LocalLeader>dp', 'vim.lsp.diagnostic.goto_prev()')
-  mapper('n', '<LocalLeader>ds', 'vim.lsp.diagnostic.show_line_diagnostics()')
+  mapper('n', '<LocalLeader>g', 'vim.lsp.buf.definition()')
 
-  mapper('n', '<LocalLeader>gf', 'vim.lsp.buf.definition()')
+  mapper('n', '<Leader>dn', 'vim.lsp.diagnostic.goto_next()')
+  mapper('n', '<Leader>dp', 'vim.lsp.diagnostic.goto_prev()')
+  mapper('n', '<Leader>dl', 'vim.lsp.diagnostic.show_line_diagnostics()')
+
   -- mapper('n', '<LocalLocalLeader>dR', 'vim.lsp.buf.references()')
-  mapper('n', '<LocalLocalLeader>dR', 'MyLspRename()')
+  mapper('n', '<Leader>dR', 'MyLspRename()')
 
-  telescope_mapper('<LocalLeader>dr', 'lsp_references', nil, true)
-  telescope_mapper('<LocalLeader>dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
-  telescope_mapper('<LocalLeader>da', 'lsp_code_actions', nil, true)
+  telescope_mapper('<Leader>dr', 'lsp_references', nil, true)
+  telescope_mapper('<Leader>dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
+  telescope_mapper('<Leader>da', 'lsp_code_actions', nil, true)
 
   local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
   if filetype ~= 'lua' then

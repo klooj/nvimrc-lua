@@ -70,11 +70,11 @@ local function init()
   use {'norcalli/nvim-colorizer.lua', config = 'require("colorizer").setup()'}
   use {'glepnir/indent-guides.nvim', config = 'require("ploog.indentGuide")'}
   -- |> themer
-  use {'tjdevries/colorbuddy.vim', requires = {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'}}
+  use 'tjdevries/colorbuddy.vim'
   -- |> theme
+  use {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'}
   use {
     {'ishan9299/modus-theme-vim', opt = true, config = 'require("colorbuddy").colorscheme("modus-vivendi")'},
-    -- {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'},
     {'christianchiarulli/nvcode-color-schemes.vim', opt = true, config = 'require("colorbuddy").colorscheme("snazzy")'},
     {'romgrk/doom-one.vim', opt = true, config = 'require("colorbuddy").colorscheme("doom-one")'}}
   -- |> statusline & tabline

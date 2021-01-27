@@ -1,4 +1,3 @@
--- local RELOAD = require('plenary.reload').reload_module
 local global = require('domain.global')
 local should_reload = true
 local reloader = function()
@@ -17,6 +16,13 @@ local sorters = require('telescope.sorters')
 local themes = require('telescope.themes')
 -- local finders = require('telescope.finders')
 -- local pickers = require('telescope.pickers')
+
+local drop_list = themes.get_dropdown {
+  results_height = 20;
+  winblend = 20;
+  width = 0.45;
+  previewer = false;
+}
 
 local hostfs
 if global.is_pi then
@@ -91,6 +97,7 @@ require('telescope').setup {
         ["<C-[>"] = actions.move_selection_prev,
         ["<tab>"] = actions.add_selection,
         ["<C-q>"] = actions.send_to_qflist,
+        ["<C-Q>"] = actions.send_to_qflist,
       },
     },
   },
@@ -111,12 +118,12 @@ require('telescope').setup {
   grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
   qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 }
+--[[ notes about fzf-writer. it adds 3 funcs out of the box:
+1. require('telescope').extensions.fzf_writer.grep();
+2. require('telescope').extensions.fzf_writer.files();
+3. require('telescope').extensions.fzf_writer.staged_grep().
+for #3, rg to filter exact matches then press ' | ' to switch to fzf search them]]
 
-    --[[ notes about fzf-writer. it adds 3 funcs out of the box:
-        1. require('telescope').extensions.fzf_writer.grep();
-        2. require('telescope').extensions.fzf_writer.files();
-        3. require('telescope').extensions.fzf_writer.staged_grep().
-        for #3, rg to filter exact matches then press ' | ' to switch to fzf search them]]
 if not global.is_pi then
   require('telescope').load_extension('fzy_native')
 end
@@ -127,7 +134,7 @@ require('telescope').load_extension('frecency')
 local M = {}
 
 function M.edit_neovim()
-  require('telescope.builtin').find_files {
+  require('telescope.builtin').fd {
     prompt_title = "|> ::foonv:: <|",
     shorten_path = false,
     cwd = "~/.config/nvim",
@@ -137,7 +144,7 @@ function M.edit_neovim()
 end
 
 function M.edit_zsh()
-  require('telescope.builtin').find_files {
+  require('telescope.builtin').fd {
     shorten_path = false,
     cwd = "~/.dotfiles/zdots",
     prompt = "|> ::zdots:: <| ",
@@ -146,7 +153,7 @@ function M.edit_zsh()
 end
 
 function M.edit_dots()
-  require('telescope.builtin').find_files {
+  require('telescope.builtin').fd {
     shorten_path = false,
     cwd = "~/.dotfiles",
     prompt = "|> ::dotfiles:: <| ",
@@ -155,7 +162,17 @@ function M.edit_dots()
 end
 
 function M.edit_klooj()
-  require('telescope.builtin').find_files {
+  require('telescope.builtin').fd {
+    prompt_title = "|> ::klooj:: <|",
+    shorten_path = false,
+    cwd = "~/.config/nvim/lua/klooj",
+    width = .25,
+    layout_strategy = 'horizontal',
+  }
+end
+
+function M.edit_ploog()
+  require('telescope.builtin').fd {
     prompt_title = "|> ::klooj:: <|",
     shorten_path = false,
     cwd = "~/.config/nvim/lua/klooj",
@@ -165,31 +182,11 @@ function M.edit_klooj()
 end
 
 function M.nvim_runtime()
-  require('telescope.builtin').find_files {
+  require('telescope.builtin').fd {
     prompt_title = "|> ::nvim runtime:: <|",
     shorten_path = false,
     cwd = "~/.local/share/nvim",
     width = .50,
-    layout_strategy = 'horizontal',
-  }
-end
-
-function M.edit_mywiki()
-  require('telescope.builtin').find_files {
-    prompt_title = "|> ::wiki:: <|",
-    shorten_path = false,
-    cwd = "~/Documents/wiki",
-    width = .25,
-    layout_strategy = 'horizontal',
-  }
-end
-
-function M.edit_vplugs()
-  require('telescope.builtin').find_files {
-    prompt_title = "|> ::plugins.vim:: <|",
-    shorten_path = false,
-    cwd = "~/.config/nvim/plugin",
-    width = .25,
     layout_strategy = 'horizontal',
   }
 end
@@ -200,29 +197,19 @@ function M.fd()
 end
 
 function M.builtin()
-  require('telescope.builtin').builtin()
+  require('telescope.builtin').builtin(drop_list)
+end
+
+function M.buf_fuzzy()
+  require('telescope.builtin').current_buffer_fuzzy_find(drop_list)
 end
 
 function M.git_files()
-  local opts = themes.get_dropdown {
-    winblend = 10,
-    border = true,
-    previewer = false,
-    shorten_path = false,
-  }
-
-  require('telescope.builtin').git_files(opts)
+  require('telescope.builtin').git_files(drop_list)
 end
 
 function M.lsp_code_actions()
-  local opts = themes.get_dropdown {
-    winblend = 10,
-    border = true,
-    previewer = false,
-    shorten_path = false,
-  }
-
-  require('telescope.builtin').lsp_code_actions(opts)
+  require('telescope.builtin').lsp_code_actions(drop_list)
 end
 
 function M.live_grep()
@@ -239,7 +226,11 @@ function M.grep_prompt()
 end
 
 function M.oldfiles()
-  require('telescope.builtin').oldfiles { layout_strategy = 'vertical' }
+  if pcall(require('telescope').load_extension, 'frecency') then
+    require('telescope').extensions.frecency.frecency()
+  else
+    require('telescope.builtin').oldfiles { layout_strategy = 'vertical' }
+  end
 end
 
 function M.staged_search()
@@ -253,8 +244,7 @@ function M.installed_plugins()
 end
 
 function M.project_search()
-  require('telescope.builtin').find_files {
-    previewer = false,
+  require('telescope.builtin').fd {
     layout_strategy = "vertical",
     cwd = require('nvim_lsp.util').root_pattern(".git")(vim.fn.expand("%:p")),
   }
@@ -264,18 +254,6 @@ function M.buffers()
   require('telescope.builtin').buffers {
     shorten_path = false,
   }
-end
-
-function M.curbuf()
-  local opts = themes.get_dropdown {
-    winblend = 10,
-    border = true,
-    previewer = false,
-    shorten_path = false,
-
-    -- layout_strategy = 'current_buffer',
-  }
-  require('telescope.builtin').current_buffer_fuzzy_find(opts)
 end
 
 function M.help_tags()
@@ -303,61 +281,3 @@ return setmetatable({}, {
     end
   end
 })
-
-
---[[ {{{ emojis
-👓
-🌙
-🌚
-🌘
-🌗
-🛸
-🚀
-🛰
-🔭
-💫
-👽
-}}}
-]]
---[[ {{{ unsuccessful attempt to move modules to their own file
--- require('klooj.telescope.pickers')
--- return setmetatable({}, {
-  --   __index = function(_, k)
-
-    --     reloader()
-
-    --     if M[k] then
-    --       return ('klooj.telescope.pickers').M[k]
-    --     else
-    --       return require('telescope.builtin')[k]
-    --     end
-    --   end
-    -- })
-
-
-    -- return setup
-    --[[
-    require('telescope').load_extension('symbols')
-    require('telescope').load_extension('dap')
-    require('telescope').load_extension('vimspector')
-    require('telescope').load_extension('packer')
-    fzy_native = {
-      override_generic_sorter = false,
-      override_file_sorter    = true,
-    },
-
-    -- file_sorter          =
-    -- sorters.fuzzy_with_index_bias
-
-    if not Is_raspberry then
-      local osFsort = sorters.get_fzy_sorter
-      local osfzy = { override_generic_sorter = false, override_file_sorter = true }
-    else
-      local osFsort = sorters.get_fuzzy_file
-      local osfzy = { override_generic_sorter = false, override_file_sorter = false }
-    end
-    -- sorters.get_fuzzy_file
-    -- extensions.fzy_native = { override_generic_sorter = false, override_file_sorter = true }
-    -- file_sorter = sorters.get_fzy_sorter
-
-}}} ]]
