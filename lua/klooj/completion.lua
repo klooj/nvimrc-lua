@@ -14,15 +14,18 @@ local opts = {
   matching_strategy_list = {'exact'},
   tabnine_max_lines = 1000,
   tabnine_max_num_results = 3,
-  tabnine_priority = 1,
+  tabnine_priority = 99,
   tabnine_sort_by_details = 1,
   tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine',
   trigger_keyword_length = 2,
   chain_complete_list = {
     default = {
-      { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
-      -- { mode = '<c-p>'},
-      -- { mode = '<c-n>'}
+      -- { complete_items = { 'path' }, triggered_only = {"/", "." } },
+      -- { complete_items = { 'tabnine', 'lsp' }},
+      { complete_items = { 'tabnine', 'path', 'lsp' }},
+      { complete_items = { 'snippet' }},
+      { mode = '<c-p>'},
+      { mode = '<c-n>'}
     }
   }
 }

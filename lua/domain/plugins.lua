@@ -70,12 +70,12 @@ local function init()
   use {'norcalli/nvim-colorizer.lua', config = 'require("colorizer").setup()'}
   use {'glepnir/indent-guides.nvim', config = 'require("ploog.indentGuide")'}
   -- |> themer
-  use 'tjdevries/colorbuddy.vim'
+  use {'tjdevries/colorbuddy.vim', requires = {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'}}
   -- |> theme
-  use {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'}
   use {
-    {'christianchiarulli/nvcode-color-schemes.vim', opt = true, config = 'require("colorbuddy").colorscheme("snazzy")'},
     {'ishan9299/modus-theme-vim', opt = true, config = 'require("colorbuddy").colorscheme("modus-vivendi")'},
+    -- {'glepnir/zephyr-nvim', config = 'require("colorbuddy").colorscheme("zephyr")'},
+    {'christianchiarulli/nvcode-color-schemes.vim', opt = true, config = 'require("colorbuddy").colorscheme("snazzy")'},
     {'romgrk/doom-one.vim', opt = true, config = 'require("colorbuddy").colorscheme("doom-one")'}}
   -- |> statusline & tabline
   use {{'glepnir/galaxyline.nvim', config = 'require("mood.vendiline")'},
@@ -87,7 +87,7 @@ local function init()
 
   -- === filetype/syntax specific ===
   -- |> lua
-  use {'euclidianAce/BetterLua.vim', {'tjdevries/manillua.nvim', ft = {'lua'}}}
+  -- use {'euclidianAce/BetterLua.vim', {'tjdevries/manillua.nvim', ft = {'lua'}}}
   -- |> ansible
   use {'pearofducks/ansible-vim', config = 'require("ploog.ansible")', ft = {'yaml', 'yaml.ansible', 'yml'}}
   use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}

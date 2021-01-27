@@ -1,8 +1,11 @@
-" there a function in $FOONV/autoload/kp.vim
 if !exists(':Tabularize')
-  finish " Give up here; the Tabular plugin musn't have been loaded
+  finish
 endif
-AddTabularPattern! nvar /nvarchar(\w*)/l1r0
+
+let s:save_cpo = &cpo
+set cpo&vim
+
+" AddTabularPattern! nvar /nvarchar(\w*)/l1r0
 AddTabularPattern! f_brackC /^[^\]]*\zs\]/
 AddTabularPattern! f_brackO /^[^\[]*\zs\[/
 AddTabularPattern! f_colon /^[^:]*\zs:/
@@ -22,17 +25,18 @@ AddTabularPattern! f_space /^[^\ ]*\zs\ /
 AddTabularPattern! f_squirlyC /^[^}]*\zs}/
 AddTabularPattern! f_squirlyO /^[^{]*\zs{/
 AddTabularPattern! asterisk /*/l1
-AddTabularPipeline! remove_leading_spaces /^ /
-      \ map(a:lines, "substitute(v:val, '^ *', '', '')")
-AddTabularPipeline! multiple_spaces / \{2,}/
-      \ map(a:lines, "substitute(v:val, ' \{2,}', '  ', 'g')")
-      \   | tabular#TabularizeStrings(a:lines, '  ', 'l0')
 
+AddTabularPipeline! remove_leading_spaces /^ / map(a:lines, "substitute(v:val, '^ *', '', '')")
 
-" Make line wrapping possible by resetting the 'cpo' option, first saving it
-" let s:save_cpo = &cpo
-" set cpo&vim
+function! TableChar() abort
+	if !exists(':Tabularize')
+		finish
+	endif
+	call inputsave()
+	let l:tabch = input('enter character to align on: ')
+	call inputrestore()
+	exec printf("Tabularize /^[^%s]*\zs%s/", l:tabch)
+endfunction
 
-" " Restore the saved value of 'cpo'
-" let &cpo = s:save_cpo
-" unlet s:save_cpo
+let &cpo = s:save_cpo
+unlet s:save_cpo

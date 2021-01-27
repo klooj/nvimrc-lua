@@ -111,7 +111,6 @@ function maps:load_whichKey_define()
     ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap()                     ,
     ["n|<Leader>ep"]      = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()                       ,
     ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()                       ,
-    -- ["n|<Leader>es"]      = map_cr([[e $FOONV/lua/klooj/snippets.lua]]):with_noremap()                            ,
     ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()                       ,
 
     -- [f]ind (most of this is in lua/klooj/telesceope/init.lua )
@@ -120,6 +119,97 @@ function maps:load_whichKey_define()
     ["n|<Leader>ff"]      = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()                                           ,
     ["n|<Leader>fG"]      = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()                                           ,
 
+    -- [t]able
+    -- tf<char> uses the first <char> as separator; applies in most common cases in visual and normal
+
+    ["n|<Leader>t "]   = map_cr("Tabularize spaces"):with_noremap()           ,
+    ["n|<Leader>t*"]   = map_cr("Tabularize asterisk"):with_noremap()         ,
+    ["n|<Leader>ta"]   = map_cr("Tabularize assignment"):with_noremap()       ,
+    ["n|<Leader>tf#"]  = map_cr("Tabularize f_hash"):with_noremap()           ,
+    ["n|<Leader>tf'"]  = map_cr("Tabularize f_quoteS"):with_noremap()         ,
+    ["n|<Leader>tf("]  = map_cr("Tabularize f_parenO"):with_noremap()         ,
+    ["n|<Leader>tf)"]  = map_cr("Tabularize f_parenC"):with_noremap()         ,
+    ["n|<Leader>tf,"]  = map_cr("Tabularize f_comma"):with_noremap()          ,
+    ["n|<Leader>tf-"]  = map_cr("Tabularize f_hyphen"):with_noremap()         ,
+    ["n|<Leader>tf."]  = map_cr("Tabularize f_period"):with_noremap()         ,
+    ["n|<Leader>tf/"]  = map_cr("Tabularize f_slashF"):with_noremap()         ,
+    ["n|<Leader>tf:"]  = map_cr("Tabularize f_colon"):with_noremap()          ,
+    ["n|<Leader>tf;"]  = map_cr("Tabularize f_semi"):with_noremap()           ,
+    ["n|<Leader>tf="]  = map_cr("Tabularize f_equal"):with_noremap()          ,
+    ["n|<Leader>tf["]  = map_cr("Tabularize f_brackO"):with_noremap()         ,
+    ["n|<Leader>tf\\"] = map_cr("Tabularize f_slashB"):with_noremap()         ,
+    ["n|<Leader>tf]"]  = map_cr("Tabularize f_brackC"):with_noremap()         ,
+    ["n|<Leader>tf{"]  = map_cr("Tabularize f_squirlyO"):with_noremap()       ,
+    ["n|<Leader>tf}"]  = map_cr("Tabularize f_squirlyC"):with_noremap()       ,
+    ["n|<Leader>t|"]   = map_cr("Tabularize ternary_operator"):with_noremap() ,
+    ['n|<Leader>t2 ']  = map_cr("Tabularize two_spaces"):with_noremap()       ,
+    ['n|<Leader>tf ']  = map_cr("Tabularize f_space"):with_noremap()          ,
+    ['n|<Leader>tf"']  = map_cr("Tabularize f_quoteD"):with_noremap()         ,
+    ['n|<Leader>tRl']  = map_cr("Tabularize multiple_spaces"):with_noremap()  ,
+    ['n|<Leader>tRm']  = map_cr("Tabularize remove_leading_spaces"):with_noremap()  ,
+
+    ["x|<Leader>t "]   = map_cr("Tabularize spaces"):with_noremap()           ,
+    ["x|<Leader>t*"]   = map_cr("Tabularize asterisk"):with_noremap()         ,
+    ["x|<Leader>ta"]   = map_cr("Tabularize assignment"):with_noremap()       ,
+    ["x|<Leader>tf#"]  = map_cr("Tabularize f_hash"):with_noremap()           ,
+    ["x|<Leader>tf'"]  = map_cr("Tabularize f_quoteS"):with_noremap()         ,
+    ["x|<Leader>tf("]  = map_cr("Tabularize f_parenO"):with_noremap()         ,
+    ["x|<Leader>tf)"]  = map_cr("Tabularize f_parenC"):with_noremap()         ,
+    ["x|<Leader>tf,"]  = map_cr("Tabularize f_comma"):with_noremap()          ,
+    ["x|<Leader>tf-"]  = map_cr("Tabularize f_hyphen"):with_noremap()         ,
+    ["x|<Leader>tf."]  = map_cr("Tabularize f_period"):with_noremap()         ,
+    ["x|<Leader>tf/"]  = map_cr("Tabularize f_slashF"):with_noremap()         ,
+    ["x|<Leader>tf:"]  = map_cr("Tabularize f_colon"):with_noremap()          ,
+    ["x|<Leader>tf;"]  = map_cr("Tabularize f_semi"):with_noremap()           ,
+    ["x|<Leader>tf="]  = map_cr("Tabularize f_equal"):with_noremap()          ,
+    ["x|<Leader>tf["]  = map_cr("Tabularize f_brackO"):with_noremap()         ,
+    ["x|<Leader>tf\\"] = map_cr("Tabularize f_slashB"):with_noremap()         ,
+    ["x|<Leader>tf]"]  = map_cr("Tabularize f_brackC"):with_noremap()         ,
+    ["x|<Leader>tf{"]  = map_cr("Tabularize f_squirlyO"):with_noremap()       ,
+    ["x|<Leader>tf}"]  = map_cr("Tabularize f_squirlyC"):with_noremap()       ,
+    ["x|<Leader>t|"]   = map_cr("Tabularize ternary_operator"):with_noremap() ,
+    ['x|<Leader>t2 ']  = map_cr("Tabularize two_spaces"):with_noremap()       ,
+    ['x|<Leader>tf ']  = map_cr("Tabularize f_space"):with_noremap()          ,
+    ['x|<Leader>tf"']  = map_cr("Tabularize f_quoteD"):with_noremap()         ,
+    ['x|<Leader>tRl']  = map_cr("Tabularize multiple_spaces"):with_noremap()  ,
+    ['x|<Leader>tRm']  = map_cr("Tabularize remove_leading_spaces"):with_noremap()  ,
+
+--[[
+we want to create a function that will accept input and let me just enter the key i want to separate on,
+plus modifiers for things like first, last, alignment, etc. it needs to work in both visual and normal
+modes. below is a list of mapped app patterns that can be used for individual mappings
+
+pipelines
+  argument_list
+  multiple_spaces
+  remove_leading_spaces
+  spaces
+  split_declarations
+
+patterns
+  assignment
+  asterisk
+  f_brackC
+  f_brackO
+  f_colon
+  f_comma
+  f_equal
+  f_hash
+  f_hyphen
+  f_parenC
+  f_parenO
+  f_period
+  f_quoteD
+  f_quoteS
+  f_semi
+  f_slashB
+  f_slashF
+  f_space
+  f_squirlyC
+  f_squirlyO
+  ternary_operator
+  two_spaces
+]]
     -- |> [G]it
     ["n|<Leader>ga"]      = map_cr("Git add ."):with_noremap()                                 ,
     ["n|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
