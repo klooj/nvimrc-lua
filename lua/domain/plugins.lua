@@ -96,7 +96,7 @@ local function init()
   -- |>  python
   use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
   -- |> markdown
-  use {'SidOfc/mkdx', config = 'require("ploog.markdown")', requires = {'reedes/vim-pencil'}}
+  use {'SidOfc/mkdx', config = 'require("klooj.markdown")', requires = {'reedes/vim-pencil'}}
   use {'itspriddle/vim-marked', ft = {'markdown'}}
   -- use {'plasticboy/vim-markdown', ft = {'markdown'}}
   -- use {'reedes/vim-pencil', ft = {'markdown'}}

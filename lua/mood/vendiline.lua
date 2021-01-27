@@ -110,7 +110,7 @@ gls.left[2] = {
   },
 }
 
-gls.left[5] = {
+gls.left[3] = {
   GitIcon = {
     provider = function() return ' ' end,
     condition = buffer_not_empty,
@@ -118,7 +118,7 @@ gls.left[5] = {
   }
 }
 
-gls.left[6] = {
+gls.left[4] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = buffer_not_empty,
@@ -126,7 +126,7 @@ gls.left[6] = {
   }
 }
 
-gls.left[7] = {
+gls.left[5] = {
   DiffAdd = {
     provider = 'DiffAdd',
     condition = checkwidth,
@@ -135,7 +135,7 @@ gls.left[7] = {
   }
 }
 
-gls.left[8] = {
+gls.left[6] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
@@ -144,7 +144,7 @@ gls.left[8] = {
   }
 }
 
-gls.left[9] = {
+gls.left[7] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
@@ -153,7 +153,7 @@ gls.left[9] = {
   }
 }
 
-gls.left[10] = {
+gls.left[8] = {
   LeftEnd = {
     provider = function() return icn.sl.r end,
     condition = buffer_not_empty,
@@ -169,7 +169,7 @@ gls.right[1] = {
   }
 }
 
-gls.right[3] = {
+gls.right[2] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -177,7 +177,7 @@ gls.right[3] = {
   }
 }
 
-gls.right[4] = {
+gls.right[3] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '   ',
@@ -186,7 +186,7 @@ gls.right[4] = {
   }
 }
 
-gls.right[5] = {
+gls.right[4] = {
   LineInfo = {
     provider = function()
       vim.api.nvim_command('hi GalaxyLineInfo guibg='..mode_color[vim.fn.mode()])
@@ -197,7 +197,7 @@ gls.right[5] = {
     condition = buffer_not_empty,
   },
 }
-gls.right[6] = {
+gls.right[5] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow_active,colors.purple},
