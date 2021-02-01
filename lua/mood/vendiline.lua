@@ -50,8 +50,8 @@ if background == 'light' then
 
 elseif background == 'dark' then
   local palette = {
-    bg_active      = '#630419',
-    bg_main        = '#280419',
+    bg_main        = '#630419',
+    bg_active      = '#280419',
     blue_active    = '#5A9CD6',
     cyan_active    = '#00C0C0',
     darkblue       = '#0817A7',

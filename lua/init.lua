@@ -11,7 +11,7 @@ end
 vim.cmd[[hi! link colorcolumn cursorline]]
 vim.cmd[[hi! link cursorcolumn cursorline]]
 -- vim.cmd[[hi! LineNr guifg=#BB4422 ]]
-vim.cmd[[hi LineNr guifg=#822000]]
+vim.cmd[[hi LineNr guifg=#824020]]
 
 vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
 vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]

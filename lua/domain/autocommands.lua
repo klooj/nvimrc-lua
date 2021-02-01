@@ -26,7 +26,7 @@ function autocmd.load_autocmds()
       {"BufWritePre","*.tmp","setlocal noundofile"};
       {"BufWritePre","*.bak","setlocal noundofile"};
       {"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
-      {"BufEnter","*","set fo -=o"};
+      {"BufEnter","*","set fo=jnqrc fo-=o"};
       {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
     };
     -- vim.cmd [[ au BufRead,BufNewFile * if (&buftype != "prompt") && (&buftype != "nofile") | lua require'completion'.on_attach() ]]

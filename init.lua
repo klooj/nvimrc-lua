@@ -1,5 +1,5 @@
 -- In lua files,  use `<localleader>g` like `gf`
-
+vim = vim
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')
 
@@ -29,7 +29,6 @@ local leader_map = function()
   vim.fn.nvim_set_keymap('x','\\','',{noremap = true})
 end
 
-
 disable_vplugs()
 leader_map()
 options:load_options()
@@ -43,7 +42,7 @@ require('domain.keymaps')
 aucmd.load_autocmds()
 
 
-----------------------------
+--------------
   -- VG {
   --   loaded_gzip              = 1,
   --   loaded_tar               = 1,

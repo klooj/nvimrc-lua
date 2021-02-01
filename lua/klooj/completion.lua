@@ -22,8 +22,8 @@ local opts = {
     default = {
       -- { complete_items = { 'path' }, triggered_only = {"/", "." } },
       -- { complete_items = { 'tabnine', 'lsp' }},
-      { complete_items = { 'tabnine', 'path', 'lsp' }},
-      { complete_items = { 'snippet' }},
+      { complete_items = {'path', 'lsp'}},
+      { complete_items = {'snippet','tabnine'}},
       { mode = '<c-p>'},
       { mode = '<c-n>'}
     }
