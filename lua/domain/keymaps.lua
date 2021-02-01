@@ -28,7 +28,6 @@ function maps:load_whichKey_define()
     ["n|<LocalLeader>"]   = map_cu("silent WhichKey '\\'"):with_noremap():with_silent()            ,
     ["v|<LocalLeader>"]   = map_cu("silent WhichKeyVisual '\\'"):with_noremap():with_silent()      ,
 
-    -- === singles ===
     ["n|<Leader>,"]       = map_cr("Commentary"):with_noremap():with_silent()               ,
     ["x|<Leader>,"]       = map_cr("'<,'>Commentary"):with_noremap():with_silent()          ,
     ["n|<Leader>."]       = map_cr([[vsplit $FOONV/init.lua]]):with_noremap():with_silent() ,
@@ -36,29 +35,6 @@ function maps:load_whichKey_define()
     ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,
     ["n|<Leader><Left>"]  = map_cr("BufferMoveNext"):with_noremap():with_silent()           ,
     ["n|<Leader><Right>"] = map_cr("BufferMovePrevious"):with_noremap():with_silent()       ,
-    -- [a]ctions
-    -- [A]dd lazy packs
-    -- [b]uffer
-    -- [d]ebug
-    ["n|<Leader>ddo"]      = map_cr("Luadev"):with_noremap():with_silent() ,
-    ["n|<Leader>ddl"]      = map_cmd("<Plug>(Luadev-RunLine)")             ,
-    ["v|<Leader>ddv"]      = map_cmd("<Plug>(Luadev-Run)")                 ,
-    ["n|<Leader>ddw"]      = map_cmd("<Plug>(Luadev-RunWord)")             ,
-
-    -- [e]dit
-    -- [f]ind
-    -- [G]it
-    ["n|<Leader>h"]       = map_cmd("<C-W>s"):with_noremap():with_silent()                        ,
-    ["n|<Leader>v"]       = map_cmd("<C-W>v"):with_noremap():with_silent()                        ,
-    ["n|<Leader>j"]       = map_cr("AnyJump"):with_noremap():with_silent()                        ,
-    ["x|<Leader>j"]       = map_cr("AnyJumpVisual"):with_noremap():with_silent()                  ,
-    ["n|<Leader>k"]       = map_cr("BufferPick"):with_noremap():with_silent()                     ,
-    ["n|<Leader>H"]       = map_cr("TSHighlightCapturesUnderCursor"):with_noremap():with_silent() ,
-    -- [q]uickfix
-    ["n|<Leader>V"]       = map_cr("vertical wincmd f"):with_noremap():with_silent()              ,
-    ["n|<Leader>z"]       = map_cr([[vsplit ~/.zshrc]]):with_noremap():with_silent()              ,
-
-    -- === groups ===
 
     -- |> [a]ctions
     ["n|<Leader>a#"]      = map_cmd(":py3 import vim, random; vim.current.line += str(random.randint(0,9))<CR><esc>A"):with_noremap():with_silent(),
@@ -102,6 +78,10 @@ function maps:load_whichKey_define()
 
     -- |> [d]ebug
     ["n|<Leader>dM"]      = map_cr("Neomake"):with_noremap():with_silent()                                        ,
+    ["n|<Leader>ddo"]      = map_cr("Luadev"):with_noremap():with_silent() ,
+    ["n|<Leader>ddl"]      = map_cmd("<Plug>(Luadev-RunLine)")             ,
+    ["v|<Leader>ddv"]      = map_cmd("<Plug>(Luadev-Run)")                 ,
+    ["n|<Leader>ddw"]      = map_cmd("<Plug>(Luadev-RunWord)")             ,
 
     -- |> [e]dit
     ["n|<Leader>e."]      = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                 ,
@@ -112,16 +92,61 @@ function maps:load_whichKey_define()
     ["n|<Leader>ek"]      = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()   ,
     ["n|<Leader>eL"]      = map_cr([[vsplit $FOONV/lua/klooj/lsp_config.lua]]):with_noremap() ,
     ["n|<Leader>ep"]      = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()   ,
-    ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()          ,
-    ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/klooj/whichKey.lua]]):with_noremap()   ,
+    ["n|<Leader>et"]      = map_cr([[vsplit ~/Desktop/wiki/todo.md]]):with_noremap()          ,
+    ["n|<Leader>ew"]      = map_cr([[vsplit $FOONV/lua/plugin/whichKey.lua]]):with_noremap()   ,
 
-    -- [f]ind (most of this is in lua/klooj/telesceope/init.lua )
+    -- |> [f]ind (most of this is in lua/klooj/telesceope/init.lua )
     ["n|<Leader>f;"]      = map_cr("AnyJumpLastResults"):with_noremap()                                           ,
     ["n|<Leader>ff"]      = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap() ,
     ["n|<Leader>fz"]      = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()       ,
     ["n|<Leader>fZ"]      = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()        ,
 
-    -- [t]able
+    -- [g]it
+    ["n|<Leader>ga"]      = map_cr("Git add ."):with_noremap()                               ,
+    ["n|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                 ,
+    ["x|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                 ,
+    ["n|<Leader>gc"]      = map_cr("Gcommit"):with_noremap()                                 ,
+    ["n|<Leader>gd"]      = map_cr("Gdiffsplit!"):with_noremap()                             ,
+    ["n|<Leader>gf"]      = map_cr("diffget //2")                                            ,
+
+    ["n|<Leader>ghs"]     = map_cr("lua require'gitsigns'.stage_hunk()"):with_noremap()      ,
+    ["n|<Leader>ghu"]     = map_cr("lua require'gitsigns'.undo_stage_hunk()"):with_noremap() ,
+    ["n|<Leader>ghr"]     = map_cr("lua require'gitsigns'.reset_hunk()"):with_noremap()      ,
+    ["n|<Leader>ghp"]     = map_cr("lua require'gitsigns'.preview_hunk()"):with_noremap()    ,
+    ["n|<Leader>ghb"]     = map_cr("lua require'gitsigns'.blame_line()"):with_noremap()      ,
+
+    ["n|<Leader>gj"]      = map_cr("diffget //3")                                            ,
+    ["n|<Leader>gl"]      = map_cr("Git log"):with_noremap()                                 ,
+    ["n|<Leader>gm"]      = map_cr("Git mergetool"):with_noremap()                           ,
+    ["n|<Leader>gp"]      = map_cr("Git pull"):with_noremap()                                ,
+    ["n|<Leader>gP"]      = map_cr("Git push"):with_noremap()                                ,
+    ["n|<Leader>gS"]      = map_cr("G"):with_silent()                                        ,
+    ["n|<Leader>gs"]      = map_cr("Gstatus"):with_noremap()                                 ,
+    ["n|<Leader>gV"]      = map_cr("GV!"):with_noremap()                                     ,
+    ["n|<Leader>gv"]      = map_cr("GV"):with_noremap()                                      ,
+    --
+    ["n|<Leader>h"]       = map_cmd("<C-W>s"):with_noremap():with_silent()                        ,
+    ["n|<Leader>H"]       = map_cr("TSHighlightCapturesUnderCursor"):with_noremap():with_silent() ,
+    ["n|<Leader>j"]       = map_cr("AnyJump"):with_noremap():with_silent()                        ,
+    ["x|<Leader>j"]       = map_cr("AnyJumpVisual"):with_noremap():with_silent()                  ,
+    ["n|<Leader>k"]       = map_cr("BufferPick"):with_noremap():with_silent()                     ,
+
+    -- |> [q]uickfix
+    ["n|<Leader>qp"]      = map_cmd("<Plug>(qf_qf_previous)")                   ,
+    ["n|<Leader>qn"]      = map_cmd("<Plug>(qf_qf_next)")                       ,
+    ["n|<Leader>q["]      = map_cmd("<Plug>(qf_loc_previous)")                  ,
+    ["n|<Leader>q]"]      = map_cmd("<Plug>(qf_loc_next)")                      ,
+    ["n|<Leader>qj"]      = map_cmd("<Plug>(qf_qf_switch)")                     ,
+    ["n|<Leader>qt"]      = map_cmd("<Plug>(qf_qf_toggle)")                     ,
+    ["n|<Leader>qs"]      = map_cmd("<Plug>(qf_qf_toggle_stay)")                ,
+    ["n|<Leader>qT"]      = map_cmd("<Plug>(qf_loc_toggle)")                    ,
+    ["n|<Leader>qS"]      = map_cmd("<Plug>(qf_loc_toggle_stay)")               ,
+    ["n|<Leader>qo"]      = map_cmd("<Plug>(qf_older)")                         ,
+    ["n|<Leader>qr"]      = map_cmd("<Plug>(qf_newer)")                         ,
+    ["n|<Leader>qb"]      = map_cmd("<Plug>(qf_previous_file)")                 ,
+    ["n|<Leader>qf"]      = map_cmd("<Plug>(qf_next_file)")                     ,
+
+    -- |> [t]able
     -- tf<char> uses the first <char> as separator; applies in most common cases in visual and normal
     ["n|<Leader>t "]   = map_cr("Tabularize spaces"):with_noremap()           ,
     ["n|<Leader>t*"]   = map_cr("Tabularize asterisk"):with_noremap()         ,
@@ -152,6 +177,7 @@ function maps:load_whichKey_define()
     ["x|<Leader>t "]   = map_cr("Tabularize spaces"):with_noremap()           ,
     ["x|<Leader>t*"]   = map_cr("Tabularize asterisk"):with_noremap()         ,
     ["x|<Leader>ta"]   = map_cr("Tabularize assignment"):with_noremap()       ,
+    ["x|<Leader>tf*"]   = map_cr("Tabularize f_asterisk"):with_noremap()      ,
     ["x|<Leader>tf#"]  = map_cr("Tabularize f_hash"):with_noremap()           ,
     ["x|<Leader>tf'"]  = map_cr("Tabularize f_quoteS"):with_noremap()         ,
     ["x|<Leader>tf("]  = map_cr("Tabularize f_parenO"):with_noremap()         ,
@@ -175,83 +201,10 @@ function maps:load_whichKey_define()
     ['x|<Leader>tRl']  = map_cr("Tabularize multiple_spaces"):with_noremap()  ,
     ['x|<Leader>tRm']  = map_cr("Tabularize remove_leading_spaces"):with_noremap()  ,
 
-    --[[
-    we want to create a function that will accept input and let me just enter the key i want to separate on,
-    plus modifiers for things like first, last, alignment, etc. it needs to work in both visual and normal
-    modes. below is a list of mapped app patterns that can be used for individual mappings
+    ["n|<Leader>v"]       = map_cmd("<C-W>v"):with_noremap():with_silent()                        ,
+    ["n|<Leader>V"]       = map_cr("vertical wincmd f"):with_noremap():with_silent()              ,
+    ["n|<Leader>z"]       = map_cr([[vsplit ~/.zshrc]]):with_noremap():with_silent()              ,
 
-    pipelines
-    argument_list
-    multiple_spaces
-    remove_leading_spaces
-    spaces
-    split_declarations
-
-    patterns
-    assignment
-    asterisk
-    f_brackC
-    f_brackO
-    f_colon
-    f_comma
-    f_equal
-    f_hash
-    f_hyphen
-    f_parenC
-    f_parenO
-    f_period
-    f_quoteD
-    f_quoteS
-    f_semi
-    f_slashB
-    f_slashF
-    f_space
-    f_squirlyC
-    f_squirlyO
-    ternary_operator
-    two_spaces
-    ]]
-    -- |> [G]it
-    ["n|<Leader>ga"]      = map_cr("Git add ."):with_noremap()                                 ,
-    ["n|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
-    ["n|<Leader>gc"]      = map_cr("Gcommit"):with_noremap()                                   ,
-    ["n|<Leader>gd"]      = map_cr("Gdiffsplit!"):with_noremap()                               ,
-    ["n|<Leader>gf"]      = map_cr("diffget //2")                                              ,
-    ["n|<Leader>gj"]      = map_cr("diffget //3")                                              ,
-    ["n|<Leader>gl"]      = map_cr("Git log"):with_noremap()                                   ,
-    ["n|<Leader>gL"]      = map_cr("LazyGit"):with_noremap()                                   ,
-    ["n|<Leader>gm"]      = map_cr("Git mergetool"):with_noremap()                             ,
-    ["n|<Leader>gp"]      = map_cr("Git pull"):with_noremap()                                  ,
-    ["n|<Leader>gP"]      = map_cr("Git push"):with_noremap()                                  ,
-    ["n|<Leader>gS"]      = map_cr("G"):with_silent()                                                        ,
-    ["n|<Leader>gs"]      = map_cr("Gstatus"):with_noremap()                                   ,
-    ["n|<Leader>gV"]      = map_cr("GV!"):with_noremap()                                       ,
-    ["n|<Leader>gv"]      = map_cr("GV"):with_noremap()                                        ,
-    ["x|<Leader>gb"]      = map_cr("GBrowse"):with_noremap()                                   ,
-
-    -- |> [q]uickfix
-
-    ["n|<Leader>qp"]      = map_cmd("<Plug>(qf_qf_previous)")                   ,
-    ["n|<Leader>qn"]      = map_cmd("<Plug>(qf_qf_next)")                       ,
-    ["n|<Leader>q["]      = map_cmd("<Plug>(qf_loc_previous)")                  ,
-    ["n|<Leader>q]"]      = map_cmd("<Plug>(qf_loc_next)")                      ,
-    ["n|<Leader>qj"]      = map_cmd("<Plug>(qf_qf_switch)")                     ,
-    ["n|<Leader>qt"]      = map_cmd("<Plug>(qf_qf_toggle)")                     ,
-    ["n|<Leader>qs"]      = map_cmd("<Plug>(qf_qf_toggle_stay)")                ,
-    ["n|<Leader>qT"]      = map_cmd("<Plug>(qf_loc_toggle)")                    ,
-    ["n|<Leader>qS"]      = map_cmd("<Plug>(qf_loc_toggle_stay)")               ,
-    ["n|<Leader>qo"]      = map_cmd("<Plug>(qf_older)")                         ,
-    ["n|<Leader>qr"]      = map_cmd("<Plug>(qf_newer)")                         ,
-    ["n|<Leader>qb"]      = map_cmd("<Plug>(qf_previous_file)")                 ,
-    ["n|<Leader>qf"]      = map_cmd("<Plug>(qf_next_file)")                     ,
-
-
-    -- === LOCAL LEADER ===
-    -- TODO: these are generally going to specified per plugin/filetpye. also,
-    -- telescope maps a lot of actions through the lsp attaching to a file.
-
-    -- ["n|<LocalLeader>l"]  = map_cmd("<C-G>"):with_noremap():with_silent()                      , -- file info and line count
-    -- ["n|<LocalLeader>t"]  = map_cr("call kp#rightAlignEndWord()"):with_noremap():with_silent() ,
   }
 end
 

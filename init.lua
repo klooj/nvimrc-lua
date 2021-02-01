@@ -32,6 +32,7 @@ end
 disable_vplugs()
 leader_map()
 options:load_options()
+require('publibs.pfunc')
 
 vim.api.nvim_command('filetype plugin indent on')
 if vim.fn.has('vim_starting') == 1 then
@@ -41,26 +42,6 @@ end
 require('domain.keymaps')
 aucmd.load_autocmds()
 
-
+vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
+vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]
 --------------
-  -- VG {
-  --   loaded_gzip              = 1,
-  --   loaded_tar               = 1,
-  --   loaded_tarPlugin         = 1,
-  --   loaded_zip               = 1,
-  --   loaded_zipPlugin         = 1,
-  --   loaded_getscript         = 1,
-  --   loaded_getscriptPlugin   = 1,
-  --   loaded_vimball           = 1,
-  --   loaded_vimballPlugin     = 1,
-  --   loaded_matchit           = 1,
-  --   loaded_matchparen        = 1,
-  --   loaded_2html_plugin      = 1,
-  --   loaded_logiPat           = 1,
-  --   loaded_rrhelper          = 1,
-  --   loaded_netrw             = 1,
-  --   loaded_netrwPlugin       = 1,
-  --   loaded_netrwSettings     = 1,
-  --   loaded_netrwFileHandlers = 1,
-  -- }
--- end

@@ -9,26 +9,25 @@ local function init()
   end
   local use = packer.use
   packer.reset()
-  -- === no extra config and load on startup ===
+
+  -- === load on startup and config in lua/plugin or none ===
   use {
-    'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'junegunn/vim-peekaboo',
-    'kshenoy/vim-signature', 'romainl/vim-qf', 'junegunn/fzf.vim', 'godlygeek/tabular',
-    'tpope/vim-surround', 'tpope/vim-repeat', 'tpope/vim-commentary', 'tpope/vim-fugitive',
-    'tpope/vim-rhubarb', 'mhinz/vim-signify', 'junegunn/gv.vim', 'tpope/vim-eunuch',
-    'tpope/vim-scriptease', 'bfredl/nvim-luadev', 'monaqa/dial.nvim',
-    'kyazdani42/nvim-web-devicons', 'psliwka/vim-smoothie', 'tjdevries/colorbuddy.vim'
-  }
+    'tjdevries/astronauta.nvim', 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim',
+    'junegunn/vim-peekaboo', 'kshenoy/vim-signature', 'romainl/vim-qf', 'junegunn/fzf.vim',
+    'godlygeek/tabular', 'tpope/vim-surround', 'tpope/vim-repeat', 'tpope/vim-commentary',
+    'tpope/vim-fugitive', 'tpope/vim-rhubarb', 'junegunn/gv.vim', 'tpope/vim-eunuch',
+    'tpope/vim-scriptease', 'monaqa/dial.nvim', 'kyazdani42/nvim-web-devicons',
+    'tjdevries/colorbuddy.vim', 'liuchengxu/vim-which-key', 'lervag/wiki.vim',
+    'rhysd/clever-f.vim', 'pechorin/any-jump.vim', 'lewis6991/gitsigns.nvim',
+    'norcalli/nvim-colorizer.lua', 'glepnir/indent-guides.nvim',
+  } -- 'mhinz/vim-signify' 'psliwka/vim-smoothie'
 
   --    === apparatuses ===
-  use {'liuchengxu/vim-which-key', config = function() require('klooj.whichKey') end}
   use {'wbthomason/packer.nvim', opt = true}
-  use {'lervag/wiki.vim', config = function() require("ploog.wiki") end}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle', config = function() require('ploog.nvtree') end}
-  -- {'neomake/neomake', cmd = 'Neomake'}}
+  use {{'neomake/neomake', cmd = 'Neomake'}, {'bfredl/nvim-luadev', cmd = 'Luadev'}}
 
   --    === SCOUR ===
-  use {'rhysd/clever-f.vim', config = function() require('ploog.cleverf') end}
-  use {'pechorin/any-jump.vim', config = function() require('ploog.anyjump') end}
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end, requires = {
     'nvim-telescope/telescope-fzy-native.nvim', 'nvim-telescope/telescope-github.nvim',
     'nvim-telescope/telescope-symbols.nvim', 'nvim-telescope/telescope-fzf-writer.nvim',
@@ -42,7 +41,8 @@ local function init()
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
   -- use {'gyim/vim-boxdraw', opt = true}
 
-  --   === git ===
+    -- === git ===
+  -- use {'', config = function() require('ploog.gitsigns') end}
   -- use {'will133/vim-dirdiff', cmd = 'DirDiff',
     -- config = function()
       -- vim.cmd[[ let g:DirDiffExcludes = ".netrwhist, CVS,*.class,*.exe,*.swp,*.git,git*,*.DS_Store" ]]
@@ -60,29 +60,26 @@ local function init()
   use {'puremourning/vimspector', opt = true, requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}}
 
   --   ===  treesitter, ===
-  use {'nvim-treesitter/nvim-treesitter', config = function() require('klooj.treesitter') end,
-    requires = {'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
-      'nvim-treesitter/nvim-treesitter-textobjects', 'romgrk/nvim-treesitter-context'}}
+  use {'nvim-treesitter/nvim-treesitter', requires = {
+    'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
+    'nvim-treesitter/nvim-treesitter-textobjects', 'romgrk/nvim-treesitter-context'}}
   -- {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
 
   -- === completion, lsp, & snippets ===
-  use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = function() require('ploog.ultisnips') end}
-  use {'neovim/nvim-lspconfig', config = function() require('klooj.lsp_config') end,
-    requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
-  use {'nvim-lua/completion-nvim', config = function() require('klooj.completion') end, requires = 'aca/completion-tabnine'}
+  use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
+  use {'neovim/nvim-lspconfig', requires = {'tjdevries/nlua.nvim', 'nvim-lua/lsp-status.nvim'}}
+  use {'nvim-lua/completion-nvim', requires = 'aca/completion-tabnine'}
 
   --    === ui accoutrement ===
-  use {'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end}
   -- |> theme
-  use {'glepnir/zephyr-nvim', config = function() require('colorbuddy').colorscheme('zephyr') end}
+  use 'glepnir/zephyr-nvim'
   use {
-    {'ishan9299/modus-theme-vim', opt = true, config = function() require('colorbuddy').colorscheme('modus-vivendi') end},
-    {'christianchiarulli/nvcode-color-schemes.vim', opt = true, config = function() require('colorbuddy').colorscheme('snazzy') end},
-    {'romgrk/doom-one.vim', opt = true, config = function() require('colorbuddy').colorscheme('doom-one') end}}
+    {'ishan9299/modus-theme-vim', opt = true},
+    {'christianchiarulli/nvcode-color-schemes.vim', opt = true},
+    {'romgrk/doom-one.vim', opt = true}
+  }
   -- |> statusline & tabline
-  use {'glepnir/galaxyline.nvim', config = function() require('mood.vendiline') end}
-  use {'romgrk/barbar.nvim', config = function() require('mood.barbar') end}
-  use {'glepnir/indent-guides.nvim', config = function() require('ploog.indentGuide') end}
+  use {'glepnir/galaxyline.nvim', 'romgrk/barbar.nvim'}
 
   -- === filetype/syntax specific ===
   -- |> ansible
@@ -94,6 +91,7 @@ local function init()
   use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
   -- |> markdown
   use {'SidOfc/mkdx', config = function() require('klooj.markdown') end}
+  -- use {'SidOfc/mkdx', ft = {'markdown'}}
   use {'reedes/vim-pencil', ft = {'markdown'}}
   use {'itspriddle/vim-marked', ft = {'markdown'}}
   use {'plasticboy/vim-markdown', ft = {'markdown'}}
@@ -113,6 +111,11 @@ local plugins = setmetatable({}, {
 return plugins
 
 ---------------------------
+-- moved configs to lua/plugin
+  -- use {'', config = function() require("ploog.wiki") end}
+  -- use {'', config = function() require('ploog.cleverf') end}
+  -- use {'', config = function() require('ploog.anyjump') end}
+
 
   -- use {'neoclide/coc.nvim', branch = 'release', ft = {'markdown'},
     -- config = 'vim.g.coc_global_extensions = {"coc-markdownlint", "coc-json"}'}

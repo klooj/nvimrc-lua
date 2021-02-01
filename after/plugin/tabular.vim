@@ -24,6 +24,7 @@ AddTabularPattern! f_slashF /^[^\/]*\zs\//
 AddTabularPattern! f_space /^[^\ ]*\zs\ /
 AddTabularPattern! f_squirlyC /^[^}]*\zs}/
 AddTabularPattern! f_squirlyO /^[^{]*\zs{/
+AddTabularPattern! f_asterisk /^[^*]*\zs,/
 AddTabularPattern! asterisk /*/l1
 
 AddTabularPipeline! remove_leading_spaces /^ / map(a:lines, "substitute(v:val, '^ *', '', '')")

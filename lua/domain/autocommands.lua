@@ -44,7 +44,7 @@ function autocmd.load_autocmds()
     ft = {
       {"BufRead,BufNewFile","*.wiki","setf markdown"};
       {"FileType","json","set filetype=jsonc"};
-      {"FileType","markdown","lua require('klooj.md_keymaps')"};
+      -- {"FileType","markdown","lua require('klooj.md_keymaps')"};
       {"FileType","which_key","set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
     };
 

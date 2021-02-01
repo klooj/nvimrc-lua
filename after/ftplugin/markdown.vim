@@ -2,10 +2,10 @@
 
 let b:delimitMate_nesting_quotes = ['`']
 
-augroup mdlintonsave
-	au!
-	au BufWritePost *.md silent !markdownlint -f <afile> &>/dev/null
-augroup end
+" augroup mdlintonsave
+" 	au!
+" 	au BufWritePost *.md silent !markdownlint -f <afile> &>/dev/null
+" augroup end
 
 
 " nmap <buffer> <leader>mO :Obsidian<CR>
