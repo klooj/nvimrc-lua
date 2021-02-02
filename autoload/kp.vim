@@ -46,6 +46,26 @@ function! kp#padDelAbove() abort
 		call cursor(line("."), l:colsave)
 	end
 endfunction
+
+
+function! kp#searchr(index, ...)
+  let l:query = join(a:000, ' ')
+  if a:index == "all"
+    let l:which_index = '-a'
+  else
+    let l:which_index = '-i ' . a:index
+  endif
+  let l:cmd = 'searchr ' . l:which_index . " search -l 15 " . l:query . ""
+  let l:files = split(system(l:cmd), "\n")
+  let l:qffiles = []
+  for f in l:files
+    call add(l:qffiles, {'filename': f})
+  endfor
+  call setqflist(l:qffiles)
+  copen
+  cc
+endfunction
+
 "}}}
 
 " {{{ right align keyword

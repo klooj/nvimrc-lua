@@ -25,6 +25,5 @@ set_theme()
 vim.cmd[[hi! link colorcolumn cursorline]]
 vim.cmd[[hi! link cursorcolumn cursorline]]
 vim.cmd[[hi LineNr guifg=#824020]]
--- vim.cmd[[hi! LineNr guifg=#BB4422 ]]
 require('plugin.vendiline')
 require('plugin.barbar')

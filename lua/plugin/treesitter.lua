@@ -1,11 +1,11 @@
 -- mapping of user defined captures to highlight groups
--- local custom_captures = {
+local custom_captures = {
   -- highlight own capture @foo.bar with highlight group "Identifier", see :h nvim-treesitter-query-extensions
-  -- ['foo.bar'] = 'Identifier',
+  ['foo.bar'] = 'Identifier',
   -- ['TODO'] = 'error',
-  -- ['function.call'] = 'LuaFunctionCall',
-  -- ['function.bracket'] = 'Type',
--- }
+  ['function.call'] = 'LuaFunctionCall',
+  ['function.bracket'] = 'Type',
+}
 
 -- local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
 -- parser_config.bash.used_by = "zsh"
@@ -16,7 +16,7 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     use_languagetree = true,
     -- disable = {"json"},
-    -- custom_captures = custom_captures,
+    custom_captures = custom_captures,
   },
   indent = {
     enable = true
@@ -55,35 +55,35 @@ require('nvim-treesitter.configs').setup {
     },
   },
   -- syntax-aware textobjects
-  textobjects = {
-    enable = true,
-    -- disable = {},
-    keymaps = {
-      -- you can define your own textobjects directly here
-      ['iL'] = {
-        python = '(function_definition) @function',
-        -- cpp = '(function_definition) @function',
-        -- c = '(function_definition) @function',
-        -- java = '(method_declaration) @function',
-      },
-      --     -- or you use the queries from supported languages with textobjects.scm
-      ['aC'] = '@class.outer',
-      ['ac'] = '@conditional.outer',
-      ['ad'] = '@comment.outer',
-      ['ae'] = '@block.outer',
-      ['af'] = '@function.outer',
-      ['al'] = '@loop.outer',
-      ['am'] = '@call.outer',
-      ['as'] = '@statement.outer',
-      ['iC'] = '@class.inner',
-      ['ic'] = '@conditional.inner',
-      ['ie'] = '@block.inner',
-      ['if'] = '@function.inner',
-      ['il'] = '@loop.inner',
-      ['im'] = '@call.inner',
-      ['is'] = '@statement.inner',
-    },
-  },
+  -- textobjects = {
+  --   enable = true,
+  --   -- disable = {},
+  --   keymaps = {
+  --     -- you can define your own textobjects directly here
+  --     ['iL'] = {
+  --       python = '(function_definition) @function',
+  --       -- cpp = '(function_definition) @function',
+  --       -- c = '(function_definition) @function',
+  --       -- java = '(method_declaration) @function',
+  --     },
+  --     --     -- or you use the queries from supported languages with textobjects.scm
+  --     ['aC'] = '@class.outer',
+  --     ['ac'] = '@conditional.outer',
+  --     ['ad'] = '@comment.outer',
+  --     ['ae'] = '@block.outer',
+  --     ['af'] = '@function.outer',
+  --     ['al'] = '@loop.outer',
+  --     ['am'] = '@call.outer',
+  --     ['as'] = '@statement.outer',
+  --     ['iC'] = '@class.inner',
+  --     ['ic'] = '@conditional.inner',
+  --     ['ie'] = '@block.inner',
+  --     ['if'] = '@function.inner',
+  --     ['il'] = '@loop.inner',
+  --     ['im'] = '@call.inner',
+  --     ['is'] = '@statement.inner',
+  --   },
+  -- },
   playground = {
     enable = false,
   },

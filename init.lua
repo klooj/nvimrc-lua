@@ -1,4 +1,4 @@
--- In lua files,  use `<localleader>g` like `gf`
+-- In lua files,  use `<leader>;` like `gf`
 vim = vim
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')
@@ -42,6 +42,4 @@ end
 require('domain.keymaps')
 aucmd.load_autocmds()
 
-vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
-vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]
 --------------

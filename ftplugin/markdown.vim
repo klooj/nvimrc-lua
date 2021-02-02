@@ -1,5 +1,5 @@
-setl formatlistpat=^\s*\d\+[.\)]\s\+\|^\s*[*+~-]\s\+\|^\(\|[*#]\)\[^[^\]]\+\]:\s
-set comments =n:>
+" setl formatlistpat=^\s*\d\+[.\)]\s\+\|^\s*[*+~-]\s\+\|^\(\|[*#]\)\[^[^\]]\+\]:\s
+" set comments =n:>
 
 " map <Plug> <Plug>(mkdx-enter)
 " map <Plug> <Plug>(shift-mkdx-enter)

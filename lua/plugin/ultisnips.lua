@@ -1,7 +1,8 @@
 local opts = {
-  ExpandTrigger = "<c-;>",
-  JumpForwardTrigger = "<c-;>",
-  JumpBackwardTrigger = "<c-'>",
+  ListSnippets = "<C-l>",
+  ExpandTrigger = "<C-;>",
+  JumpForwardTrigger = "<C-;>",
+  JumpBackwardTrigger = "<C-'>",
   SnippetDirectories= {"UltiSnips", 'snips'}
 }
 

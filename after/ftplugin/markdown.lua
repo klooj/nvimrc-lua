@@ -1,19 +1,49 @@
--- these almost work 100% without affecting other maps, except unindent and normal mkdx-o
-vim.api.nvim_buf_set_keymap(0,'i','<M-CR>'     ,'<C-R>=mkdx#EnterHandler()<Cr>'       ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'i','<M-S-CR>'   ,'<C-R>=mkdx#ShiftEnterHandler()<Cr>'  ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'i','<M-S-Tab>'  ,'<C-O>:call mkdx#IndentHandler(0)<Cr>',{nowait = true})
-vim.api.nvim_buf_set_keymap(0,'i','<M-Tab>'    ,'<C-O>:call mkdx#IndentHandler(1)<Cr>',{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'n','<M-CR>'     ,':<C-U>call mkdx#OHandler()<Cr>'      ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'n','<M-S-CR>'   ,':<C-U>call mkdx#ShiftOHandler()<Cr>' ,{nowait = true  ,noremap = true})
+local nnoremap = vim.keymap.nnoremap
+local inoremap = vim.keymap.inoremap
+local xnoremap = vim.keymap.xnoremap
 
-vim.api.nvim_buf_set_keymap(0,'n','<leader>mpo',':MarkedOpen!<Cr>'                    ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'n','<leader>mpq',':MarkedQuit<Cr>'                     ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'n','<leader>mpt',':MarkedToggle<Cr>'                   ,{nowait = true  ,noremap = true})
-vim.api.nvim_buf_set_keymap(0,'n','<leader>mx' ,'<Plug>(mkdx-checkbox-next-n)'        ,{nowait = true})
+nnoremap{'<localleader>x' , function() vim.cmd[[ToggleCheckbox]] end, {nowait = true, buffer = true}}
+inoremap{ '<M-CR>', function() vim.cmd[[InsertNewBullet]] end, {nowait = true, buffer = true}}
 
-vim.api.nvim_buf_set_keymap(0,'v','<leader>mx' ,'<Plug>(mkdx-checkbox-next-v)'        ,{nowait = true})
+nnoremap{'<leader>mpo' , function() vim.cmd[[MarkedOpen!]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mpq' , function() vim.cmd[[MarkedQuit]]  end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mpt' , function() vim.cmd[[MarkedToggle]]end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mP'  , function() vim.cmd[[Prettier]]    end,{nowait = true, buffer = true}}
+
+nnoremap{'<leader>mhd' , function() vim.cmd[[HeaderDecrease]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mhi' , function() vim.cmd[[HeaderIncrease]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mha' , function() vim.cmd[[SetexToAtx]] end,{nowait = true, buffer = true}}
+xnoremap{'<leader>mha' , function() vim.cmd[[SetexToAtx]] end,{nowait = true, buffer = true}}
+
+nnoremap{'<leader>mt'  , function() vim.cmd[[TableFormat]] end,{nowait = true, buffer = true}}
+xnoremap{'<leader>mt'  , function() vim.cmd[[TableFormat]] end,{nowait = true, buffer = true}}
+
+nnoremap{'<leader>mfP'  , function() vim.cmd[[g/^/norm gqq]] end,{nowait = true, buffer = true}}
+
+nnoremap{'<leader>mcc' , function() vim.cmd[[WikiPageToc]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mch' , function() vim.cmd[[Toch]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mct' , function() vim.cmd[[Toct]] end,{nowait = true, buffer = true}}
+nnoremap{'<leader>mcv' , function() vim.cmd[[Tocv]] end,{nowait = true, buffer = true}}
+
+
+vim.g['prettier#autoformat_require_pragma'] = 0
+-- vim.g['prettier#autoformat_config_present'] = 1
+vim.g['prettier#exec_cmd_async'] = 1
+vim.g['prettier#quickfix_auto_focus'] = 0
+
 
 -----------
+-- these almost work 100% without affecting other maps, except unindent and normal mkdx-o
+-- vim.api.nvim_buf_set_keymap(0,'i','<M-S-CR>'   ,'<C-R>=mkdx#ShiftEnterHandler()<Cr>'  ,{nowait = true  ,noremap = true})
+-- vim.api.nvim_buf_set_keymap(0,'i','<M-S-Tab>'  ,'<C-O>:call mkdx#IndentHandler(0)<Cr>',{nowait = true})
+-- vim.api.nvim_buf_set_keymap(0,'i','<M-Tab>'    ,'<C-O>:call mkdx#IndentHandler(1)<Cr>',{nowait = true  ,noremap = true})
+-- vim.api.nvim_buf_set_keymap(0,'n','<M-CR>'     ,':<C-U>call mkdx#OHandler()<Cr>'      ,{nowait = true  ,noremap = true})
+-- vim.api.nvim_buf_set_keymap(0,'n','<M-S-CR>'   ,':<C-U>call mkdx#ShiftOHandler()<Cr>' ,{nowait = true  ,noremap = true})
+-- vim.api.nvim_buf_set_keymap(0,'n','<leader>mx' ,'<Plug>(mkdx-checkbox-next-n)'        ,{nowait = true})
+-- vim.api.nvim_buf_set_keymap(0,'v','<leader>mx' ,'<Plug>(mkdx-checkbox-next-v)'        ,{nowait = true})
+
+-- vim.api.nvim_buf_set_keymap(0,'i','<M-CR>'     ,'<C-R>=mkdx#EnterHandler()<Cr>'       ,{nowait = true  ,noremap = true})
+
 -- vim.g.which_key_map = {
 --   ['m'] = {
 --     ['-'] = 'checkbox previous'     ,

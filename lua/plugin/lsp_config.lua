@@ -24,13 +24,12 @@ local custom_attach = function(client)
     client.config.flags.allow_indent = true
   end
 
-  mapper('n', '<LocalLeader>g', 'vim.lsp.buf.definition()')
+  mapper('n', '<Leader>;', 'vim.lsp.buf.definition()')
 
   mapper('n', '<Leader>dn', 'vim.lsp.diagnostic.goto_next()')
   mapper('n', '<Leader>dp', 'vim.lsp.diagnostic.goto_prev()')
   mapper('n', '<Leader>dl', 'vim.lsp.diagnostic.show_line_diagnostics()')
 
-  -- mapper('n', '<LocalLocalLeader>dR', 'vim.lsp.buf.references()')
   mapper('n', '<Leader>dR', 'MyLspRename()')
 
   telescope_mapper('<Leader>dr', 'lsp_references', nil, true)
@@ -42,7 +41,7 @@ local custom_attach = function(client)
     mapper('n', 'K', 'vim.lsp.buf.hover()')
   end
 
-  mapper('i', '<c-l>', 'vim.lsp.buf.signature_help()')
+  mapper('i', '<c-h>', 'vim.lsp.buf.signature_help()')
 
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 end

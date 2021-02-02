@@ -191,6 +191,15 @@ function M.nvim_runtime()
   }
 end
 
+function M.search_wiki()
+  require('telescope').extensions.fzf_writer.staged_grep {
+    prompt_title = "|> ::wiki:: <|",
+    shorten_path = false,
+    cwd = "~/Desktop/wiki",
+    width = .70,
+    layout_strategy = 'horizontal',
+  }
+end
 -- see builtin.fd.opts
 function M.fd()
   require('telescope.builtin').fd()

@@ -14,7 +14,9 @@ local opts = {
 
 VG("which_key_", opts)
 
--- alias foo.pack="cds ~/.local/share/nvim/site/pack/packer"
+vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
+vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]
+
 vim.g.which_key_map = {
   [',']       = 'comment'              ,
   ['.']       = 'vimrc'                ,
@@ -134,17 +136,18 @@ vim.g.which_key_map = {
     ['H'] = 'help_tags'           ,
     ['i'] = {
       ['name'] = '+in .../',
-        ['d'] = 'dotfiles/'      ,
-        ['k'] = 'klooj/'         ,
-        ['n'] = 'FOONV/'         ,
+        ['d'] = 'dotfiles/'       ,
+        ['k'] = 'klooj/'          ,
+        ['n'] = 'FOONV/'          ,
         ['p'] = 'packer plugins/' ,
         ['v'] = 'nvim runtime/'   ,
-        ['z'] = 'zdots/'         ,
+        ['w'] = 'wiki'            ,
+        ['z'] = 'zdots/'          ,
     },
     ['l'] = {
       ['name'] = '+list',
       ['h'] = 'highlights'        ,
-      ['k'] = 'keymaps'             ,
+      ['k'] = 'keymaps'           ,
       ['m'] = 'marks'             ,
       ['o'] = 'old_files'         ,
       ['r'] = 'registers'         ,
@@ -186,7 +189,6 @@ vim.g.which_key_map = {
     },
     ['f'] = 'diff get left'       ,
     ['j'] = 'diff get right'      ,
-    ['L'] = 'lazy git'            ,
     ['l'] = 'log'                 ,
     ['m'] = 'merge tool'          ,
     ['p'] = 'pull'                ,
@@ -197,38 +199,38 @@ vim.g.which_key_map = {
     ['v'] = 'view commits'        ,
   },
   ['m'] = {
-    ['name'] = '+markdown',
-    ['-'] = 'checkbox previous'     ,
-    ['='] = 'checkbox next'         ,
-    [','] = 'CSV to table'          ,
-    ['/'] = 'italicize'             ,
-    ['`'] = 'wrap with inline code' ,
-    ['\''] = 'toggle quote'         ,
-    ['['] = 'promote header'        ,
-    [']'] = 'demote header'         ,
-    ['b'] = 'bold'                  ,
-    ['i'] = 'generate/update TOC'   ,
-    ['I'] = 'quickfix TOC'          ,
-    ['j'] = 'jump to header'        ,
-    ['k'] = 'toggle kbd shortcut'   ,
-    ['L'] = 'quickfix deadlinks'    ,
-    ['t'] = 'toggle checkBOX'       ,
-    ['lt'] = 'toggle checkLIST'     ,
-    ['ll'] = 'toggle list'          ,
-    ['ln'] = 'wrap link'            ,
-    ['O'] = 'Obsidian'              ,
-    ['s'] = 'strikethrough'         ,
+    ['name'] = '+markdown' ,
+    ['c'] = {
+      ['name'] = '+toc'    ,
+      ['c'] = 'toc'        ,
+      ['h'] = 'horizontal' ,
+      ['t'] = 'tab'        ,
+      ['v'] = 'vertical'   ,
+    },
+    ['h'] = {
+      ['name'] = '+header' ,
+      ['a'] = 'set to ATX' ,
+      ['d'] = 'decrease'   ,
+      ['i'] = 'increase'   ,
+    },
+    ['f'] = {
+      ['name'] = '+format' ,
+      ['P'] = 'all paragraphs',
+    },
+    ['t'] = 'Table Format'    ,
+    ['O'] = 'Obsidian'        ,
+    ['P'] = 'Prettier'        ,
     ['p'] = {
-      ['name'] = '+preview' ,
-      ['o'] = 'open'        ,
-      ['q'] = 'quit'        ,
-      ['t'] = 'toggle'      ,
+      ['name'] = '+preview'   ,
+      ['o'] = 'open'          ,
+      ['q'] = 'quit'          ,
+      ['t'] = 'toggle'        ,
     },
   },
   ['t'] = {
     ['name'] = '+tabularize'    ,
-    ['f'] = { ['name'] = '+first' },
-    ['R'] = { ['name'] = '+replace' },
+    ['f'] = { ['name'] = '+first' }   ,
+    ['R'] = { ['name'] = '+replace' } ,
   },
   ['q'] = {
     ['name'] = '+quickfix'    ,
@@ -248,10 +250,36 @@ vim.g.which_key_map = {
   },
   ['w'] = {
     ['name'] = '+wiki'    ,
+    ['/'] = 'search pages'         ,
+    ['?'] = 'search tags'          ,
+    ['\\'] = 'TOC'                 ,
+    ['b'] = 'graph backlinks'      ,
+    ['c'] = 'page TOC local'       ,
+    ['C'] = 'page TOC'             ,
+    ['D'] = 'delete page'          ,
+    ['e'] = 'export'               ,
+    ['g'] = 'graph in'             ,
+    ['G'] = 'graph out'            ,
+    ['i'] = 'index'                ,
+    ['J'] = 'JOURNAL index'        ,
+    ['j'] = 'journal'              ,
+    ['l'] = 'toggle link'          ,
+    ['P'] = 'journal copy to next' ,
+    ['R'] = 'wiki reload'          ,
+    ['r'] = 'page rename'          ,
+    ['S'] = 'journal to MONTH'     ,
+    ['s'] = 'journal to WEEK'      ,
+    ['T'] = 'tag reload'           ,
+    ['t'] = 'tag list'             ,
+    ['u'] = 'list uniq local'      ,
+    ['U'] = 'list uniq'            ,
+    ['W'] = 'wiki open'            ,
   },
 }
 
 vim.g.lo_key_map = {
+  ['<CR>'] = 'link split',
+}
 --   ['l'] = 'file info'           ,
 --   ['t'] = 'right align keyword' ,
 --   ['d'] = {
@@ -267,7 +295,6 @@ vim.g.lo_key_map = {
 --     ['t'] = 'type'                      ,
 --     ['T'] = 'plenary test file'         ,
 --   },
-}
 
 -- vim.b.md_key_map = {
 --   ['-'] = 'checkbox previous'     ,
@@ -297,3 +324,19 @@ vim.g.lo_key_map = {
 --     ['t'] = 'toggle'                  ,
 --   },
 -- }
+-- mkdx
+    -- ['-'] = 'checkbox previous'     ,
+    -- ['='] = 'checkbox next'         ,
+    -- [','] = 'CSV to table'          ,
+    -- ['/'] = 'italicize'             ,
+    -- ['`'] = 'wrap with inline code' ,
+    -- ['\''] = 'toggle quote'         ,
+    -- ['['] = 'promote header'        ,
+    -- [']'] = 'demote header'         ,
+
+    -- ['i'] = 'generate/update TOC'   ,
+    -- ['j'] = 'jump to header'        ,
+    -- ['k'] = 'toggle kbd shortcut'   ,
+    -- ['lt'] = 'toggle checkLIST'     ,
+    -- ['ll'] = 'toggle list'          ,
+    -- ['ln'] = 'wrap link'            ,

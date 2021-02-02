@@ -2,6 +2,7 @@ local global = require('domain.global')
 -- require("klooj.snippets")
 
 local opts = {
+  abbr_length = 30,
   auto_change_source = 1,
   disable_filetypes = {'TelescopePrompt'},
   enable_auto_hover = 1,
@@ -10,20 +11,33 @@ local opts = {
   enable_snippet = 'UltiSnips',
   -- enable_snippet = 'vim-vsnip',
   -- enable_snippet = 'snippets.nvim',
-  matching_ignore_case = 1,
+  -- matching_ignore_case = 1,
+  matching_smart_case = 1,
   matching_strategy_list = {'exact'},
+  menu_length = 0,
   tabnine_max_lines = 1000,
   tabnine_max_num_results = 3,
-  tabnine_priority = 99,
+  tabnine_priority = 10,
   tabnine_sort_by_details = 1,
   tabnine_tabnine_path = global.home .. '/.local/share/t9/3.2.28/TabNine',
   trigger_keyword_length = 2,
+  trigger_on_delete = 0,
+  sorting = 'length',
+
   chain_complete_list = {
     default = {
-      -- { complete_items = { 'path' }, triggered_only = {"/", "." } },
-      -- { complete_items = { 'tabnine', 'lsp' }},
-      { complete_items = {'path', 'lsp'}},
-      { complete_items = {'snippet','tabnine'}},
+      default = {
+        { complete_items = {'lsp', 'path', 'tabnine'}},
+        { complete_items = {'snippet'}},
+        { mode = '<c-p>'},
+        { mode = '<c-n>'}
+      },
+      comment = {
+        { complete_items = {'path', 'tabnine'}},
+      },
+    },
+    markdown = {
+      { complete_items = {'path', 'tabnine', 'snippet'}},
       { mode = '<c-p>'},
       { mode = '<c-n>'}
     }

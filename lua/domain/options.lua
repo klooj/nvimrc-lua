@@ -49,7 +49,7 @@ function options:load_options()
     complete       = ".,w,b,k,t";
     inccommand     = "split";
     grepformat     = "%f:%l:%c:%m,%f:%l:%m";
-    grepprg        = 'rg --hidden --vimgrep --smart-case --engine=auto --follow --no-heading --trim --';
+    grepprg        = 'rg --hidden --vimgrep --smart-case --engine=auto --follow --no-heading --trim -- ';
     breakat        = [[\ \ ;:,!?]];
     -- startofline    = false;
     whichwrap      = "<,>,[,],~,b";

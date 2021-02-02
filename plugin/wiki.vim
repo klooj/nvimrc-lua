@@ -19,23 +19,23 @@ let g:wiki_viewer = {
 			\}
 
 
-function MyToggleWiki(url, text) abort dict
-	return wiki#link#md#template(a:url . '.wiki',
-				\ empty(a:text) ? a:url : a:text)
-endfunction
+" function MyToggleWiki(url, text) abort dict
+" 	return wiki#link#md#template(a:url . '.wiki',
+" 				\ empty(a:text) ? a:url : a:text)
+" endfunction
 
-function MyToggleMd(url, text) abort dict
-	let l:url =substitute(a:url, '\.wiki$', '', '')
-	return wiki#link#wiki#template(l:url, a:text)
-endfunction
+" function MyToggleMd(url, text) abort dict
+" 	let l:url =substitute(a:url, '\.wiki$', '', '')
+" 	return wiki#link#wiki#template(l:url, a:text)
+" endfunction
 
-let g:wiki_link_toggles ={
-			\ 'md': 'MyToggleMd',
-			\ 'wiki': 'MyToggleWiki',
-			\ 'date': 'wiki#link#wiki#template',
-			\ 'shortcite': 'wiki#link#md#template',
-			\ 'url': 'wiki#link#md#template',
-			\}
+" let g:wiki_link_toggles ={
+" 			\ 'md': 'MyToggleMd',
+" 			\ 'wiki': 'MyToggleWiki',
+" 			\ 'date': 'wiki#link#wiki#template',
+" 			\ 'shortcite': 'wiki#link#md#template',
+" 			\ 'url': 'wiki#link#md#template',
+" 			\}
 
 let g:wiki_mappings_global = {
 			\ '<plug>(wiki-fzf-pages)'       : '<leader>w/'        ,

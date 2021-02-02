@@ -4,7 +4,7 @@ local function init()
     packer = require('packer')
     packer.init({
       disable_commands = true,
-      max_jobs = 45,
+      max_jobs = 50,
     })
   end
   local use = packer.use
@@ -19,7 +19,8 @@ local function init()
     'tpope/vim-scriptease', 'monaqa/dial.nvim', 'kyazdani42/nvim-web-devicons',
     'tjdevries/colorbuddy.vim', 'liuchengxu/vim-which-key', 'lervag/wiki.vim',
     'rhysd/clever-f.vim', 'pechorin/any-jump.vim', 'lewis6991/gitsigns.nvim',
-    'norcalli/nvim-colorizer.lua', 'glepnir/indent-guides.nvim',
+    'norcalli/nvim-colorizer.lua', 'glepnir/indent-guides.nvim', 'dkarter/bullets.vim',
+    'Raimondi/delimitMate',
   } -- 'mhinz/vim-signify' 'psliwka/vim-smoothie'
 
   --    === apparatuses ===
@@ -36,7 +37,6 @@ local function init()
   }}
 
   --   === treating text like objects ===
-  use {'Raimondi/delimitMate', config = function() require('ploog.delimit') end, event = 'InsertEnter *'}
   use {'ntpeters/vim-better-whitespace', event = 'InsertLeavePre *', config = function() require('ploog.whitespace') end}
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
   -- use {'gyim/vim-boxdraw', opt = true}
@@ -53,16 +53,16 @@ local function init()
   use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
     requires = {'tpope/vim-obsession', opt = true}, config = function() require('ploog.prosession') end}
   use {'mbbill/undotree', cmd = 'UndotreeToggle', config = function() require('ploog.undotree') end}
-  use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
+  -- use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
 
   --   === debug ===
   use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
   use {'puremourning/vimspector', opt = true, requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}}
 
   --   ===  treesitter, ===
-  use {'nvim-treesitter/nvim-treesitter', requires = {
-    'nvim-treesitter/nvim-treesitter-refactor', 'p00f/nvim-ts-rainbow',
-    'nvim-treesitter/nvim-treesitter-textobjects', 'romgrk/nvim-treesitter-context'}}
+  use {'nvim-treesitter/nvim-treesitter', requires = {'p00f/nvim-ts-rainbow',
+    'nvim-treesitter/nvim-treesitter-refactor', 'romgrk/nvim-treesitter-context'}}
+-- 'nvim-treesitter/nvim-treesitter-textobjects',
   -- {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
 
   -- === completion, lsp, & snippets ===
@@ -90,15 +90,15 @@ local function init()
   -- |>  python
   use {'psf/black', ft = {'python'}, requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}}
   -- |> markdown
-  use {'SidOfc/mkdx', config = function() require('klooj.markdown') end}
+  -- use 'SidOfc/mkdx'
   -- use {'SidOfc/mkdx', ft = {'markdown'}}
   use {'reedes/vim-pencil', ft = {'markdown'}}
   use {'itspriddle/vim-marked', ft = {'markdown'}}
   use {'plasticboy/vim-markdown', ft = {'markdown'}}
   -- |> json
   use {'elzr/vim-json', ft = {'json'}}
-  use {'prettier/vim-prettier', config = function() require('ploog.prettier') end,
-    ft = {'javascript', 'typescript', 'less', 'scss', 'css', 'json', 'graphql', 'markdown'}}
+  use {'prettier/vim-prettier', ft = {
+    'javascript', 'typescript', 'less', 'scss', 'css', 'json', 'graphql', 'markdown'}}
 end
 
 local plugins = setmetatable({}, {
