@@ -21,3 +21,6 @@ wiki/
 yarn.lock
 host_vars/
 group_vars/
+syntax/
+spell/
+snippets/
