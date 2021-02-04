@@ -191,15 +191,32 @@ function M.nvim_runtime()
   }
 end
 
-function M.search_wiki()
+function M.rgfz_wiki()
   require('telescope').extensions.fzf_writer.staged_grep {
-    prompt_title = "|> ::wiki:: <|",
-    shorten_path = false,
-    cwd = "~/Desktop/wiki",
+    prompt_title = "|> rg|fz: wiki ->",
+    shorten_path = true,
+    cwd = "~/Desktop/info",
     width = .70,
     layout_strategy = 'horizontal',
   }
 end
+
+function M.frecy_wiki()
+  require('telescope').extensions.frecency.frecency {
+    prompt_title = "|> frecy-wiki ++",
+    cwd = "~/Desktop/info",
+    theme = drop_list
+  }
+end
+
+function M.fd_wiki()
+  require('telescope.builtin').fd {
+    prompt_title = "<> fd wiki <>",
+    cwd = "~/Desktop/info",
+    theme = drop_list
+  }
+end
+
 -- see builtin.fd.opts
 function M.fd()
   require('telescope.builtin').fd()

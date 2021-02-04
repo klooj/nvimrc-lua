@@ -1,5 +1,5 @@
 local opts = {
-  disable_default_keybindings = 1,     -- Disable default any-jump keybindings (default: 0)
+  -- disable_default_keybindings = 1,     -- Disable default any-jump keybindings (default: 0)
   list_numbers = 1,                    -- Show line numbers in search rusults
   references_enabled = 1,              -- Auto search references
   grouping_enabled = 1,                -- Auto group results by filename
@@ -8,7 +8,7 @@ local opts = {
   search_prefered_engine = 'rg',       -- Prefered search engine: rg or ag
   results_ui_style = 'filename_first', -- Search results list styles: 'filename_first' | 'filename_last'
   remove_comments_from_results = 1,    -- Remove comments line from search results (default: 1)
-  ignored_files = {'*.tmp', '*.temp'}, -- Custom ignore files; default is: ['*.tmp', '*.temp']
+  -- ignored_files = {'*.tmp', '*.temp'}, -- Custom ignore files; default is: ['*.tmp', '*.temp']
 }
 
 VG("any_jump_", opts)

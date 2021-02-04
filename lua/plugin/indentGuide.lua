@@ -9,6 +9,7 @@ require('indent_guides').setup {
   exclude_filetypes = {
     'help',
     'markdown',
+    'wiki',
     'dashboard',
     'dashpreview',
     'startify',

@@ -27,10 +27,10 @@ local opts = {
   chain_complete_list = {
     default = {
       default = {
-        { complete_items = {'lsp', 'path', 'tabnine'}},
-        { complete_items = {'snippet'}},
-        { mode = '<c-p>'},
-        { mode = '<c-n>'}
+        { complete_items = {'lsp'}},
+        { complete_items = {'path', 'tabnine', 'snippet'}},
+        -- { mode = '<c-p>'},
+        -- { mode = '<c-n>'}
       },
       comment = {
         { complete_items = {'path', 'tabnine'}},
@@ -38,8 +38,8 @@ local opts = {
     },
     markdown = {
       { complete_items = {'path', 'tabnine', 'snippet'}},
-      { mode = '<c-p>'},
-      { mode = '<c-n>'}
+      -- { mode = '<c-p>'},
+      -- { mode = '<c-n>'}
     }
   }
 }

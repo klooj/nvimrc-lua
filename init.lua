@@ -4,7 +4,7 @@ local options = require('domain.options')
 local aucmd = require('domain.autocommands')
 
 local vg = vim.g
-function VG(name,opts)
+function VG(name, opts)
   for k,v in pairs(opts) do
     vg[name .. k] = v
   end
@@ -32,13 +32,13 @@ end
 disable_vplugs()
 leader_map()
 options:load_options()
-require('publibs.pfunc')
 
-vim.api.nvim_command('filetype plugin indent on')
+vim.cmd[[filetype plugin indent on]]
 if vim.fn.has('vim_starting') == 1 then
-  vim.api.nvim_command('syntax enable')
+  vim.cmd[[syntax enable]]
 end
 
+require('poob.pfunc')
 require('domain.keymaps')
 aucmd.load_autocmds()
 

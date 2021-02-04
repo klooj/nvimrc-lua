@@ -5,6 +5,12 @@ vim.g['pencil#textwidth'] = 80
 vim.g['pencil#cursorwrap'] = 0
 vim.g['pencil#joinspaces'] = 1
 
+-- prettier
+
+vim.g['prettier#autoformat_require_pragma'] = 0
+-- vim.g['prettier#autoformat_config_present'] = 1
+vim.g['prettier#exec_cmd_async'] = 1
+vim.g['prettier#quickfix_auto_focus'] = 0
 
 -- marked
 vim.g.marked_app = 'Marked'
@@ -18,17 +24,17 @@ local opts = {
   conceal_code_blocks = 0,
   edit_url_in = 'tab',
   emphasis_multiline = 0,
-  fenced_languages = {
-    viml = 'vim',
-    zsh  = 'sh',
-    lua  = 'lua'
-  },
+  -- fenced_languages = {
+  --   viml = 'vim',
+  --   zsh  = 'sh',
+  --   lua  = 'lua'
+  -- },
   folding_disabled = 1,
   follow_anchor = 1,
   frontmatter = 1,
   math = 1,
   new_list_item_indent = 0,
-  toc_autofit = 1,
+  -- toc_autofit = 1,
 }
 
 VG("vim_markdown_", opts)

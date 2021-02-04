@@ -162,7 +162,7 @@ function M.create_float_contents(contents, filetype,enter,modifiable,opts)
 end
 
 function M.create_float_window(contents,filetype,border,enter,modifiable,opts)
-  local _,_,border_option = make_border_option(contents,opts)
+  local _, _, border_option = make_border_option(contents,opts)
   local contents_option= border_option
   contents_option.width = border_option.width - 2
   contents_option.height = border_option.height - 2
@@ -236,7 +236,7 @@ function M.fancy_floating_markdown(contents, opts)
 
   -- Compute size of float needed to show (wrapped) lines
   opts.wrap_at = opts.wrap_at or (vim.wo["wrap"] and api.nvim_win_get_width(0))
-local width,_ = vim.lsp.util._make_floating_popup_size(stripped, opts)
+local width, _ = vim.lsp.util._make_floating_popup_size(stripped, opts)
 
   local win_width = vim.fn.winwidth(0)
   if #stripped[1] < win_width - 25 then

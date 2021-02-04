@@ -1,21 +1,11 @@
-local global = require('domain.global')
+local g = require('domain.global')
 local lspconfig = require('lspconfig')
-
--- === location of lua lsp installation (used in sumneko config below) ===
-local sumneko_binary
-local sumneko_root_path = global.home .. "gits/lua-language-server"
-if global.is_mac then
-  sumneko_binary = sumneko_root_path .. "/bin/macOS/lua-language-server"
-elseif global.is_linux then
-   sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-end
 
 -- === actions to perform when lsp attaches to a buffer ===
 local telescope_mapper = require('klooj.telescope.mappings')
 local mapper = function(mode, key, result)
   vim.api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
 end
-
 
 local custom_attach = function(client)
   if client.config.flags then
@@ -74,58 +64,58 @@ lspconfig.yamlls.setup {
   on_attach = custom_attach
 }
 
-if not global.is_pi then
-  require('nlua.lsp.nvim').setup(lspconfig, {
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-    on_attach = custom_attach,
-    globals = {
-      "vim", "Color", "c", "Group", "g", "s", "RELOAD",
-    },
-  })
+if not g.is_pi then
+require('nlua.lsp.nvim').setup(lspconfig, {
+  cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+  on_attach = custom_attach,
+  globals = {
+    "vim", "Color", "c", "Group", "g", "s", "RELOAD",
+  },
+})
 end
 
 -- === misc. lsp funcs and extras from @tjdevries ===
 function MyLspRename()
-  local current_word = vim.fn.expand("<cword>")
-  local plenary_window = require('plenary.window.float').percentage_range_window(0.5, 0.2)
-  vim.api.nvim_buf_set_option(plenary_window.bufnr, 'buftype', 'prompt')
-  vim.fn.prompt_setprompt(plenary_window.bufnr, string.format('Rename "%s" to > ', current_word))
-  vim.fn.prompt_setcallback(plenary_window.bufnr, function(text)
-    vim.api.nvim_win_close(plenary_window.win_id, true)
+local current_word = vim.fn.expand("<cword>")
+local plenary_window = require('plenary.window.float').percentage_range_window(0.5, 0.2)
+vim.api.nvim_buf_set_option(plenary_window.bufnr, 'buftype', 'prompt')
+vim.fn.prompt_setprompt(plenary_window.bufnr, string.format('Rename "%s" to > ', current_word))
+vim.fn.prompt_setcallback(plenary_window.bufnr, function(text)
+  vim.api.nvim_win_close(plenary_window.win_id, true)
 
-    if text ~= '' then
-      vim.schedule(function()
-        vim.api.nvim_buf_delete(plenary_window.bufnr, { force = true })
+  if text ~= '' then
+  vim.schedule(function()
+    vim.api.nvim_buf_delete(plenary_window.bufnr, { force = true })
 
-        vim.lsp.buf.rename(text)
-      end)
-    else
-      print("Nothing to rename!")
-    end
+    vim.lsp.buf.rename(text)
   end)
+  else
+  print("Nothing to rename!")
+  end
+end)
 
-  vim.cmd [[startinsert]]
+vim.cmd [[startinsert]]
 end
 
 local sign_decider
 if true then
-  sign_decider = function(bufnr)
-    local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
-    -- No buffer local variable set, so just enable by default
-    if not ok then
-      return true
-    end
-
-    return result
+sign_decider = function(bufnr)
+  local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
+  -- No buffer local variable set, so just enable by default
+  if not ok then
+  return true
   end
+
+  return result
+end
 else
-  -- LOL, alternate signs.
-  sign_decider = coroutine.wrap(function()
-    while true do
-      coroutine.yield(true)
-      coroutine.yield(false)
-    end
-  end)
+-- LOL, alternate signs.
+sign_decider = coroutine.wrap(function()
+  while true do
+  coroutine.yield(true)
+  coroutine.yield(false)
+  end
+end)
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

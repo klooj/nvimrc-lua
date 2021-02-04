@@ -1,4 +1,3 @@
-
 if has('win32')
   let s:os_sep = '\\'
 else

@@ -1,6 +1,6 @@
 -- the organization below is slowly deteriorating as I experiment with grouping items by layout rather than functionality
 
-local pbind    = require('publibs.plbind')
+local pbind    = require('poob.plbind')
 local map_cr   = pbind.map_cr     --  self.cmd = (":%s<CR>"):format(cmd_string)
 local map_cu   = pbind.map_cu     -- self.cmd = (":<C-u>%s<CR>"):format(cmd_string)
 local map_cmd  = pbind.map_cmd   -- self.cmd = cmd_string
@@ -52,8 +52,8 @@ function maps:load_whichKey_define()
     -- |> [A]dd lazy packs
     ["n|<Leader>Ac"] = map_cr([[source $FOONV/lazy/conf.vim ]]):with_noremap():with_silent()      ,
     ["n|<Leader>Ad"] = map_cr([[source $FOONV/lazy/dap.vim]]):with_noremap():with_silent()        ,
-    ["n|<Leader>Al"] = map_cr([[source $FOONV/lazy/luadev.vim]]):with_noremap():with_silent()     ,
     ["n|<Leader>Av"] = map_cr([[source $FOONV/lazy/vimspector.vim]]):with_noremap():with_silent() ,
+    ["n|<Leader>Ab"] = map_cr([[packadd vim-boxdraw]]):with_noremap():with_silent() ,
 
     -- |> [b]uffer
     ["n|<Leader>bb"] = map_cr("set scrollbind"):with_noremap():with_silent()                   ,
@@ -85,17 +85,15 @@ function maps:load_whichKey_define()
 
     -- |> [e]dit
     ["n|<Leader>e."] = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                  ,
-    ["n|<Leader>e;"] = map_cr("AnyJumpBack"):with_noremap()                               ,
     ["n|<Leader>ec"] = map_cr([[vsplit $FOONV/lua/plugin/completion.lua]]):with_noremap() ,
     ["n|<Leader>ee"] = map_cr("Telescope symbols"):with_noremap()                         ,
     ["n|<Leader>ek"] = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()    ,
     ["n|<Leader>eL"] = map_cr([[vsplit $FOONV/lua/plugin/lsp_config.lua]]):with_noremap() ,
     ["n|<Leader>ep"] = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()    ,
-    ["n|<Leader>et"] = map_cr([[vsplit ~/Desktop/wiki/todo.md]]):with_noremap()           ,
+    ["n|<Leader>et"] = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()           ,
     ["n|<Leader>ew"] = map_cr([[vsplit $FOONV/lua/plugin/whichKey.lua]]):with_noremap()   ,
 
     -- |> [f]ind (most of this is in lua/klooj/telesceope/init.lua )
-    ["n|<Leader>f;"] = map_cr("AnyJumpLastResults"):with_noremap()                                           ,
     ["n|<Leader>ff"] = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap() ,
     ["n|<Leader>fz"] = map_cr("lua require('telescope').extensions.fzf_writer.files()"):with_noremap()       ,
     ["n|<Leader>fZ"] = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()        ,

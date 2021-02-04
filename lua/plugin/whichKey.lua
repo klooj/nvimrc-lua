@@ -50,9 +50,9 @@ vim.g.which_key_map = {
   },
   ['A'] = {
     ['name'] = '+Add Package' ,
+    ['b'] = 'box draw'        ,
     ['c'] = 'load conf plug'  ,
     ['d'] = 'load DAP'        ,
-    ['l'] = 'load lua repl'   ,
     ['v'] = 'load vimspector' ,
   },
   ['b'] = {

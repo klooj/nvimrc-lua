@@ -1,14 +1,3 @@
-" let g:pencil#wrapModeDefault = 'soft'
-" let g:pencil#autoformat = 1
-
-" let g:pencil#map#suspend_af = 'K'   " default is no mapping
-" Using the above mapping, with Ko you’ll enter Insert mode with the cursor on a new line, but autoformat will suspend for that Insert. Using o by itself will retain autoformat.
-" let g:pencil#textwidth = 80
-
-" let g:pencil#joinspaces = 0     " 0=one_space (def), 1=two_spaces following punctuation
-" let g:pencil#cursorwrap = 0     " 0=disable, 1=enable (def)
-
-
 function! Prose()
 	packadd vim-pencil
 	call pencil#init()

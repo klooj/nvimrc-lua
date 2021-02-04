@@ -1,5 +1,5 @@
 local glob = require('domain.global')
-vim.g.wiki_root = glob.home .. 'Desktop/wiki'
+vim.g.wiki_root = glob.home .. 'Desktop/info'
 vim.g.wiki_filetypes = {'wiki', 'markdown', 'md'}
 vim.g.wiki_link_extension = '.md'
 vim.g.wiki_link_target_type = 'md'
@@ -13,9 +13,10 @@ vim.g.wiki_export = {
  ext = 'html',
  link_ext_replace = true,
  view = false,
- output= glob.home .. 'Desktop/wiki',
+ output = vim.g.wiki_root
 }
 
+-- make a keymap for the func below to trigger completion for wiki tags/files
 -- local mapper = function(mode, key, result)
 --   vim.api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
 -- end
