@@ -1,8 +1,17 @@
 scriptencoding utf-8
 " functions called by keymaps and rando utilities
 
+" Strip trailing empty newlines https://stackoverflow.com/a/45316845/13315047
+" ==================
+function kp#trimTrailingEmpty()
+	let lastLine = line('$')
+	let lastNonblankLine = prevnonblank(lastLine)
+	if lastLine > 0 && lastNonblankLine != lastLine
+		silent! execute lastNonblankLine + 1 . ',$delete _'
+	endif
+endfunction
 
-" add or remove blank lines; uses the same key combo in normal and insert modes
+" pad lines above or below cursor; uses the same key combo in normal and insert modes
 " ==============
 function! kp#padBelow() abort
 	call append(line("."), "")
@@ -47,21 +56,21 @@ endfunction
 " search engine using tantivy (rust)
 " ==============
 function! kp#searchr(index, ...)
-  let l:query = join(a:000, ' ')
-  if a:index == "all"
-    let l:which_index = '-a'
-  else
-    let l:which_index = '-i ' . a:index
-  endif
-  let l:cmd = 'searchr ' . l:which_index . " search -l 15 " . l:query . ""
-  let l:files = split(system(l:cmd), "\n")
-  let l:qffiles = []
-  for f in l:files
-    call add(l:qffiles, {'filename': f})
-  endfor
-  call setqflist(l:qffiles)
-  copen
-  cc
+	let l:query = join(a:000, ' ')
+	if a:index == "all"
+		let l:which_index = '-a'
+	else
+		let l:which_index = '-i ' . a:index
+	endif
+	let l:cmd = 'searchr ' . l:which_index . " search -l 15 " . l:query . ""
+	let l:files = split(system(l:cmd), "\n")
+	let l:qffiles = []
+	for f in l:files
+		call add(l:qffiles, {'filename': f})
+	endfor
+	call setqflist(l:qffiles)
+	copen
+	cc
 endfunction
 
 
@@ -172,6 +181,15 @@ endfunction
 
 
 " ----------
+" Save the current search and cursor position
+" let _s=@/
+" let l = line('.')
+" let c = col('.')
+
+" Restore the saved search and cursor position
+" let @/=_s
+" call cursor(l, c)
+" silent execute ':' . a:line2 . 's/' . l:space_pat . '//e'
 
 " {{{ right align keyword
 " for the line under the cursor, right align the final keyword string object
@@ -179,13 +197,13 @@ endfunction
 " can jump around a file using a makeshift TOC with '%'.
 " this hack is both over complicated and too simple, and I use it constantly.
 " function! kp#rightAlignEndword() abort
-"  let line = getline(".")
-"  let [header, link] = split(line, '^\s*.*\%(\k?\|\s\)\+\zs\s*')
-"  let header = substitute(header, '^\_s*\|\_s*$', '', 'g')
-"  let remainder = (&l:textwidth) - len(header) - len(link)
-"  let line = header.repeat(' ', remainder).link
-"  call setline(".", line)
-"  return
+"	let line = getline(".")
+"	let [header, link] = split(line, '^\s*.*\%(\k?\|\s\)\+\zs\s*')
+"	let header = substitute(header, '^\_s*\|\_s*$', '', 'g')
+"	let remainder = (&l:textwidth) - len(header) - len(link)
+"	let line = header.repeat(' ', remainder).link
+"	call setline(".", line)
+"	return
 " endfunction
 "}}}
 
@@ -194,7 +212,7 @@ endfunction
 " existing term before creating a new one.
 "function! kp#floaterm() abort
 " if !exists('g:loaded_floaterm')
-"  packadd vim-floaterm
+"	packadd vim-floaterm
 " endif
 " FloatermNew
 "endfunction

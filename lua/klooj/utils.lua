@@ -1,211 +1,104 @@
-local utils = {}
+local M = {}
 
-utils.filter_files = function(file_list)
-  local filtered_list = {}
-  local unique_strings = {}
-  local index = 1
-  for _, v in pairs(file_list) do
-    if unique_strings[v] == nil then
-      unique_strings[v] = index
-      filtered_list[index] = v
-      index = index + 1
-    end
-  end
-  return filtered_list
+--[[ lots of help from lua-users.org/wiki
+# iterate over all non-empty lines
+for line in str:gmatch("[^\r\n]+") do ... end
+
+# check if string is a repition of a pattern
+str:gsub(pat, "") == "
+## ... and satisfies a condition
+str:gsub(pat, function(s) return ok(s) and "" or "*" end) == ""
+## .. or of a pattern seperated by whitespace
+not str:gsub(pat, ""):find"%S"
+
+]]
+
+M.starts_with = function(str, start)
+	return str:sub(1, #start) == start
 end
 
-utils.icons = {}
-utils.icons.default_symbol = ''
-utils.icons.map = {
-  ai          = '',
-  apache      = '',
-  awk         = '',
-  bash        = '',
-  bat         = '',
-  bazel       = '',
-  bib         = '',
-  bmp         = '',
-  c           = '',
-  cc          = '',
-  clisp       = '',
-  clj         = '',
-  cljc        = '',
-  clojure     = '',
-  cmake       = '',
-  cobol       = '',
-  coffee      = ' ',
-  config      = '',
-  coq         = '',
-  cp          = '',
-  cpp         = '',
-  crystal     = '',
-  csh         = '',
-  csharp      = '',
-  css         = '',
-  cuda        = '',
-  cxx         = '',
-  cython      = '',
-  d           = '',
-  dart        = '',
-  db          = '',
-  diff        = '',
-  dockerfile  = '',
-  dump        = '',
-  edn         = '',
-  ejs         = '',
-  elisp       = '',
-  elixir      = '',
-  elm         = '',
-  erl         = '',
-  fish        = '',
-  fs          = '',
-  fsi         = '',
-  fsscript    = '',
-  fsx         = '',
-  gif         = '',
-  git         = '',
-  gnu         = '',
-  go          = '',
-  graphviz    = '',
-  h           = '',
-  hbs         = '',
-  hh          = '',
-  hpp         = '',
-  hrl         = '',
-  hs          = '',
-  htm         = '',
-  html        = '',
-  hxx         = '',
-  ico         = '',
-  idris       = '',
-  ini         = '',
-  j           = '',
-  jasmine     = '',
-  java        = '',
-  jl          = '',
-  jpeg        = '',
-  jpg         = '',
-  js          = '',
-  json        = '',
-  jsx         = '',
-  julia       = '⛬',
-  jupyter     = '',
-  kotlin      = '',
-  ksh         = '',
-  labview     = '',
-  less        = '',
-  lhs         = '',
-  lisp        = 'λ',
-  llvm        = '',
-  lsp         = 'λ',
-  lua         = '',
-  m           = '',
-  markdown    = '',
-  mathematica = '',
-  matlab      = '',
-  max         = '',
-  md          = '',
-  meson       = '',
-  ml          = '',
-  mli         = '',
-  mustache    = '',
-  nginx       = '',
-  nim         = '',
-  nix         = '',
-  nvcc        = '',
-  nvidia      = '',
-  octave      = '',
-  opencl      = '',
-  org         = '',
-  patch       = '',
-  perl6       = '',
-  php         = '',
-  pl          = '',
-  png         = '',
-  postgresql  = '',
-  pp          = '',
-  prolog      = '',
-  ps          = '',
-  ps1         = '',
-  psb         = '',
-  psd         = '',
-  py          = '',
-  pyc         = '',
-  pyd         = '',
-  pyo         = '',
-  python      = '',
-  rb          = '',
-  react       = '',
-  reason      = '',
-  rkt         = '',
-  rlib        = '',
-  rmd         = '',
-  rs          = '',
-  rss         = '',
-  ruby        = '',
-  rust        = '',
-  sass        = '',
-  scala       = '',
-  scheme      = 'λ',
-  scm         = 'λ',
-  scrbl       = '',
-  scss        = '',
-  sh          = '',
-  slim        = '',
-  sln         = '',
-  sql         = '',
-  styl        = '',
-  suo         = '',
-  svg         = '',
-  swift       = '',
-  t           = '',
-  tex         = '',
-  ts          = '',
-  tsx         = '',
-  twig        = '',
-  txt         = 'e',
-  typescript  = '',
-  vim         = '',
-  vue         = '﵂',
-  xul         = '',
-  yaml        = '',
-  yml         = '',
-  zsh         = '',
-}
-
--- Because these extensions are dumb and have symbols
-utils.icons.map['c++'] = ''
-utils.icons.map['f#'] = ''
-
-utils.icons.lookup = function(file_path)
-  local extension = utils.filename_extension(file_path)
-  return utils.icons.lookup_filetype(extension)
+M.ends_with = function(str, ending)
+	return ending == "" or str:sub(-#ending) == ending
 end
 
-utils.icons.lookup_filetype = function(filetype)
-  local icon = utils.icons.map[filetype]
-  if icon == nil then
-    icon = utils.icons.default_symbol
-  end
-
-  return icon
+M.from_file = function(fname)
+	return function()
+		local file = io.open(fname)
+		local data = "FAILED TO LOAD " .. fname
+		if file then
+			data = file:read "*a"
+			file:close()
+		end
+		return data
+	end
 end
 
-utils.filename_extension = function(file_path)
-  return file_path:match('%.(%w+)$') or ''
+KJ.from_file("foo.md")
+--[[ |> SORT TABLES
+example usage:
+for key, val in KJ.sorted_pairs(someTable) do
+print(key .. " : " .. val)
+end
+]]
+
+local __sortedx = function(t)
+	local orderedx = {}
+	for k in pairs(t) do
+		table.insert(orderedx, k)
+	end
+	table.sort(orderedx) -- change this to change the sorting algo used
+	return orderedx
 end
 
-utils.iconify = function(path)
-  return utils.icons.lookup(path) .. ' ' .. path
+local sorted_next = function(t, state)
+	local key = nil
+	if state == nil then
+		t.__ordered = __sortedx(t)
+		key = t.__ordered[1]
+	else
+		for i = 1, #t.__ordered do
+			if t.__ordered[i] == state then
+				key = t.__ordered[i+1]
+			end
+		end
+	end
+	if key then
+		return key, t[key]
+	end
+	t.__ordered = nil
+	return
 end
 
-utils.filter_and_iconify = function(file_list)
-  local result = {}
-  for _, path in ipairs(utils.filter_files(file_list)) do
-    table.insert(result, utils.iconify(path))
-  end
+M.sorted_pairs = function(t)
+	return sorted_next, t, nil
+end
+-- <|
 
-  return result
+return setmetatable({}, {
+	__index = function(_, k)
+		if M[k] then
+			return M[k]
+		end
+	end
+})
+
+----------------
+--[[
+M.filter_files = function(file_list)
+local filtered_list = {}
+local unique_strings = {}
+local index = 1
+for _, v in pairs(file_list) do
+if unique_strings[v] == nil then
+unique_strings[v] = index
+filtered_list[index] = v
+index = index + 1
+end
+end
+return filtered_list
 end
 
-return utils
+M.filename_extension = function(file_path)
+return file_path:match('%.(%w+)$') or ''
+end
+]]

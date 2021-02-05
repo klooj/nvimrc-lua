@@ -1,6 +1,6 @@
 local opts = {
   fallback_to_native_key = 1,
-  timeout                = 100,
+  timeout                = 300,
   ignore_invalid_key     = 1,
   run_map_on_popup       = 1,
   sep                    = '→',

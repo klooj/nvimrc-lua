@@ -114,7 +114,7 @@ function options:load_options()
 		foldenable		 = true;
 		foldexpr			 = 'nvim_treesitter#foldexpr()';
 		foldmethod		 = 'expr';
-		formatoptions  = "1jnrql";
+		formatoptions  = "1jnrl";
 		iskeyword			 = "@,48-57,_,192-255,-";
 		linebreak			 = true;
 		noexpandtab		 = true;
