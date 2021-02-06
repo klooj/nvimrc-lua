@@ -17,30 +17,30 @@ vim.g.marked_app = 'Marked'
 
 -- plasticboy
 local opts = {
-  anchorexpr = 'substitute(v:anchor, "-", " ", "g")', -- convert my-tag to my tag
-  auto_insert_bullets = 0,
-  autowrite = 1,
-  conceal = 2,
-  conceal_code_blocks = 0,
-  edit_url_in = 'tab',
-  emphasis_multiline = 0,
-  -- fenced_languages = {
-  --   viml = 'vim',
-  --   zsh  = 'sh',
-  --   lua  = 'lua'
-  -- },
-  folding_disabled = 1,
-  follow_anchor = 1,
-  frontmatter = 1,
-  math = 1,
-  new_list_item_indent = 0,
-  -- toc_autofit = 1,
+	anchorexpr = 'substitute(v:anchor, "-", " ", "g")', -- convert my-tag to my tag
+	auto_insert_bullets = 0,
+	autowrite = 1,
+	conceal = 2,
+	conceal_code_blocks = 0,
+	edit_url_in = 'tab',
+	emphasis_multiline = 0,
+	-- fenced_languages = {
+	--   viml = 'vim',
+	--   zsh  = 'sh',
+	--   lua  = 'lua'
+	-- },
+	folding_disabled = 1,
+	follow_anchor = 1,
+	frontmatter = 1,
+	math = 1,
+	new_list_item_indent = 0,
+	-- toc_autofit = 1,
 }
 
 VG("vim_markdown_", opts)
 
-  -- folding_level = 3,
-  -- no_extensions_in_markdown = 1,
+-- folding_level = 3,
+-- no_extensions_in_markdown = 1,
 
 
 --------------

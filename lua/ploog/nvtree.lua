@@ -1,6 +1,6 @@
 local opts = {
 	side = 'left',
-	width = 25,
+	width = 20,
 	ignore = { '.git', 'node_modules', '.cache', '.zwc', '.old', '.DS_Store' },
 	auto_open = 0,
 	auto_close = 0,

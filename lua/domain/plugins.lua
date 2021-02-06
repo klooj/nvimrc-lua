@@ -20,7 +20,7 @@ local function init()
 		'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
 		'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
 		'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-		'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'dkarter/bullets.vim'          ,
+		'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     ,
 	} -- 'mhinz/vim-signify' 'psliwka/vim-smoothie'
 
 	--    === apparatuses ===
@@ -43,7 +43,8 @@ local function init()
 			'nvim-telescope/telescope-github.nvim', 'nvim-telescope/telescope-symbols.nvim',
 			'nvim-telescope/telescope-fzf-writer.nvim',
 			{'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
-		}}
+		}
+	}
 
 	--   === treating text like objects ===
 	use {'ntpeters/vim-better-whitespace', event = 'InsertLeavePre *',
@@ -70,7 +71,8 @@ local function init()
 	use {'nvim-treesitter/nvim-treesitter',
 		requires = {'nvim-treesitter/nvim-treesitter-textobjects', 'p00f/nvim-ts-rainbow',
 			'nvim-treesitter/nvim-treesitter-refactor', 'romgrk/nvim-treesitter-context',
-	}}
+		}
+	}
 
 	-- === completion, lsp, & snippets ===
 	use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
@@ -85,8 +87,7 @@ local function init()
 		{'ishan9299/modus-theme-vim', opt = true},
 		{'Th3Whit3Wolf/spacebuddy', opt = true},
 	}
-	use 'glepnir/galaxyline.nvim'
-	use 'romgrk/barbar.nvim'
+	use {'glepnir/galaxyline.nvim', 'romgrk/barbar.nvim'}
 
 	-- === filetype/syntax specific ===
 	-- |> ansible
@@ -101,15 +102,12 @@ local function init()
 		requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
 	}
 	-- |> markdown
-	use {
-		-- {'dkarter/bullets.vim',     ft = {'markdown'}},
-		{'reedes/vim-pencil', config = function() require('plugin.markdown') end,  ft = {'markdown'}},
-		{'itspriddle/vim-marked',   ft = {'markdown'}},
-		{'plasticboy/vim-markdown', ft = {'markdown'}}
+	use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
+	use {'reedes/vim-pencil', config = function() require('ploog.markdown') end,
+		ft = {'markdown', 'wiki'}, requires = {'itspriddle/vim-marked', 'plasticboy/vim-markdown'}
 	}
 	-- |> json
-	use {'elzr/vim-json', ft = {'json'}}
-	use {'prettier/vim-prettier',
+	use {'prettier/vim-prettier', requires = 'elzr/vim-json',
 		ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}
 	}
 end

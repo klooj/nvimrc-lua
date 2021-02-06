@@ -5,7 +5,7 @@ local aucmd = require('domain.autocommands')
 
 local vg = vim.g
 function VG(name, opts)
-	for k,v in pairs(opts) do
+	for k, v in pairs(opts) do
 		vg[name .. k] = v
 	end
 end

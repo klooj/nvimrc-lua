@@ -19,7 +19,7 @@
     build_it: yes
     nv_dirs_mk: yes
 
-    git_key: "~/.ssh/{{ ansible_hostname }}_superSecretKey"
+    git_key: "~/.ssh/{{ ansible_hostname }}_git"
     git_method: ssh
 
     lsp_lua_lx: yes
@@ -37,5 +37,5 @@
     # group_vars: exe_make, exe_shell, exe_gem, install_cargos
 
   roles:
-    - klooj.nvim_build
+    - nvim_build
 ...
