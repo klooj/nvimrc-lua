@@ -6,12 +6,12 @@ This repo configures neovim for macOS, ubuntu, and raspberry OS with language se
 
 In the absence of meaningful instructions, here's a few points worth noting:
 
-- There is an ansible playbook that overlays this directory. If you have know the tiniest bit of ansible, you can run the play right from the root of this repo and it will build the nightly version of neovim on all the mac or debian based linux hosts of your choosing. Just make sure to populate the variables; see the page for info.
 - In lua files, <localleader>; is mapped the same way as gf in other files but uses the object definition instead of the path. So, 'gf' on require(some.file).
 - configured plugins:
   - tree-sitter, lsp, completion (using snippets, tabnine, & lsp)
   - telescope, which-key ...
   - barbar, galaxyline, and multiple themes specifically configured for treesitter
+- There is an ansible playbook that overlays this directory. If you have know the tiniest bit of ansible, you can run the play right from the root of this repo and it will build the nightly version of neovim on all the mac or debian based linux hosts of your choosing. Just make sure to populate the variables because they are mostly removed from this repo; see the [repo](https://klooj.github.io/nvim_build/) for more info.
 
 ## Layout
 
