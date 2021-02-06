@@ -28,13 +28,13 @@ In the absence of meaningful instructions, here's a few points worth noting:
 
 Ultimately, I'd like nvim to perform as a word processor with the same agile power it wields in traditional text editing. The next big hurdle is leveraging the power of pandoc and markdown without reinventing the wheel, combining some existing plugins with new resources to create an inituitive, unified interface for writing prose and code seamlessly.
 
-near term todo
+## todo
 
-[ ] instructions; maybe even a script, makefile, and/or dockerfile.
-[ ] explanation of language servers, pyenv, and other extras used. maybe just throw my daily build script in here?
-[ ] explanation of all the markdown & wiki features; prose mode
-[ ] finsh new statusline
-[ ] remove every file and folder that is not actively in use.
-[ ] finish snippets
-[x] fix tabnine completion
-[ ] create a better, centralized method for which-key
+- [ ] instructions; maybe even a script, makefile, and/or dockerfile.
+- [ ] explanation of language servers, pyenv, and other extras used. maybe just throw my daily build script in here?
+- [ ] explanation of all the markdown & wiki features; prose mode
+- [ ] finsh new statusline
+- [ ] remove every file and folder that is not actively in use.
+- [ ] finish snippets
+- [x] fix tabnine completion
+- [ ] create a better, centralized method for which-key
