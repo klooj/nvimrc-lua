@@ -100,8 +100,6 @@ function options:load_options()
 
 	self.bw_local		= {
 		-- concealcursor	= "niv";
-		-- foldmethod			= "indent";
-		-- foldmethod			= 'marker';
 		autoindent		 = true;
 		breakindent		 = true;
 		breakindentopt = "shift:-2,min:20";
@@ -112,8 +110,9 @@ function options:load_options()
 		eol						 = true;
 		fixeol				 = true;
 		foldenable		 = true;
-		foldexpr			 = 'nvim_treesitter#foldexpr()';
-		foldmethod		 = 'expr';
+		-- foldexpr			 = 'nvim_treesitter#foldexpr()';
+		-- foldmethod		 = 'expr';
+		foldmethod		 = 'indent';
 		formatoptions  = "1jnrl";
 		iskeyword			 = "@,48-57,_,192-255,-";
 		linebreak			 = true;
@@ -122,7 +121,7 @@ function options:load_options()
 		number				 = true;
 		relativenumber = true;
 		shiftwidth		 = 3;
-		signcolumn		 = 'auto:2-5';
+		signcolumn		 = 'auto:3-4';
 		smartindent		 = true;
 		softtabstop		 = -1;
 		synmaxcol			 = 2500;

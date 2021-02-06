@@ -103,7 +103,7 @@ local function init()
 	-- |> markdown
 	use {
 		-- {'dkarter/bullets.vim',     ft = {'markdown'}},
-		{'reedes/vim-pencil',       ft = {'markdown'}},
+		{'reedes/vim-pencil', config = function() require('plugin.markdown') end,  ft = {'markdown'}},
 		{'itspriddle/vim-marked',   ft = {'markdown'}},
 		{'plasticboy/vim-markdown', ft = {'markdown'}}
 	}
