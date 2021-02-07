@@ -1,5 +1,9 @@
 local g = require('domain.global')
 local lspconfig = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true;
+
+require'snippets'.use_suggested_mappings()
 
 -- === actions to perform when lsp attaches to a buffer ===
 local telescope_mapper = require('klooj.telescope.mappings')
@@ -18,7 +22,7 @@ local custom_attach = function(client)
   if client.config.flags then
     client.config.flags.allow_incremental_sync = true
     client.config.flags.allow_highlight = true
-    client.config.flags.allow_indent = true
+    -- client.config.flags.allow_indent = true
   end
 
   mapper('n', '<CR>', 'vim.lsp.buf.definition()')
@@ -30,7 +34,11 @@ local custom_attach = function(client)
   mapper('n', '<Leader>d[', 'require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()')
   mapper('n', '<Leader>dl', 'require("lspsaga.diagnostic").show_line_diagnostics()')
   mapper('n', '<Leader>df', 'require("lspsaga.provider").preview_definition()')
-
+  if client.resolved_capabilities.document_formatting then
+    mapper("n", "<Leader>dF", "vim.lsp.buf.formatting()")
+  elseif client.resolved_capabilities.document_range_formatting then
+    mapper("n", "<Leader>dF", "vim.lsp.buf.range_formatting()")
+  end
   telescope_mapper('<Leader>dr', 'lsp_references', nil, true)
   telescope_mapper('<Leader>dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
 
@@ -45,46 +53,72 @@ local custom_attach = function(client)
 
   -- mapper('i', '<c-h>', 'vim.lsp.buf.signature_help()')
 
-  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  -- vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 end
 
 -- === individual server configs ===
 lspconfig.vimls.setup {
   on_attach = custom_attach,
+  capabilities = capabilities,
   indexes = {
     gap = 50, -- index time gap between next file
     count = 6, -- count of files index at the same time
   }
 }
 lspconfig.bashls.setup {
+  capabilities = capabilities,
   on_attach = custom_attach
 }
 lspconfig.cmake.setup {
+  capabilities = capabilities,
   on_attach = custom_attach
 }
 lspconfig.jsonls.setup {
+  capabilities = capabilities,
   on_attach = custom_attach
 }
 lspconfig.jedi_language_server.setup {
+  capabilities = capabilities,
   on_attach = custom_attach
 }
 lspconfig.r_language_server.setup {
+  capabilities = capabilities,
   on_attach = custom_attach
 }
 lspconfig.yamlls.setup {
+  capabilities = capabilities,
   filetypes = {"yaml", "yml"},
   on_attach = custom_attach
 }
 
 if not g.is_pi then
-  require('nlua.lsp.nvim').setup(lspconfig, {
+  lspconfig.sumneko_lua.setup {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
     on_attach = custom_attach,
-    globals = {
-      "vim", "Color", "c", "Group", "g", "s", "R",
+    capabilities = capabilities,
+    runtime = {
+      version = 'LuaJIT',
+      path = vim.split(package.path, ';'),
     },
-  })
+    diagnostics = {
+      globals = {"vim"}
+    },
+    workspace = {
+      library = {
+        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      },
+    },
+  }
 end
+
+  -- require('nlua.lsp.nvim').setup(lspconfig, {
+  --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+  --   on_attach = custom_attach,
+  --   globals = {
+  --     "vim", "Color", "c", "Group", "g", "s", "R",
+  --   },
+  -- })
 
 --[==[ benched in favor of lspsaga
 -- === misc. lsp funcs and extras from @tjdevries ===

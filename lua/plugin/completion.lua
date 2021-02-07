@@ -8,9 +8,9 @@ local opts = {
   enable_auto_hover = 1,
   enable_auto_paren = 1,
   enable_auto_popup = 1,
-  enable_snippet = 'UltiSnips',
+  -- enable_snippet = 'UltiSnips',
   -- enable_snippet = 'vim-vsnip',
-  -- enable_snippet = 'snippets.nvim',
+  enable_snippet = 'snippets.nvim',
   -- matching_ignore_case = 1,
   matching_smart_case = 1,
   matching_strategy_list = {'exact'},
@@ -26,23 +26,28 @@ local opts = {
 
   chain_complete_list = {
     default = {
-      default = {
-        { complete_items = {'lsp'}},
-        { complete_items = {'path', 'tabnine', 'snippet'}},
-        -- { mode = '<c-p>'},
-        -- { mode = '<c-n>'}
-      },
-      comment = {
-        { complete_items = {'path', 'tabnine'}},
-      },
+      { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
+      { mode = '<c-p>'},
+      { mode = '<c-n>'},
     },
-    markdown = {
-      { complete_items = {'path', 'tabnine', 'snippet'}},
-      -- { mode = '<c-p>'},
-      -- { mode = '<c-n>'}
-    }
-  }
+  },
 }
+    -- default = {
+    --   default = {
+    --     { complete_items = {'lsp'}},
+    --     { complete_items = {'path', 'tabnine', 'snippet'}},
+    --     { mode = '<c-p>'},
+    --     { mode = '<c-n>'}
+    --   },
+    --   comment = {
+    --     { complete_items = {'path', 'tabnine'}},
+    --   },
+    -- },
+    -- markdown = {
+    --   { complete_items = {'path', 'tabnine', 'snippet'}},
+    --   -- { mode = '<c-p>'},
+    --   -- { mode = '<c-n>'}
+    -- }
 
 VG("completion_", opts)
 

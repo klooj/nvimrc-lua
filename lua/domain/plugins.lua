@@ -20,7 +20,7 @@ local function init()
     'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
     'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     ,
+    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'
   } -- 'mhinz/vim-signify' 'psliwka/vim-smoothie'
 
   --    === apparatuses ===
@@ -71,17 +71,13 @@ local function init()
   use {'nvim-treesitter/nvim-treesitter',
     requires = {'nvim-treesitter/nvim-treesitter-textobjects',
       'nvim-treesitter/nvim-treesitter-refactor', 'romgrk/nvim-treesitter-context',
-    }
+    } --'p00f/nvim-ts-rainbow',
   }
- -- 'p00f/nvim-ts-rainbow',
   -- === completion, lsp, & snippets ===
-  use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
-  use {'neovim/nvim-lspconfig', requires = {
-    'tjdevries/nlua.nvim', 'glepnir/lspsaga.nvim', 'nvim-lua/lsp-status.nvim'
-    }
-  }
+  -- use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
+  use {'neovim/nvim-lspconfig',  'glepnir/lspsaga.nvim', 'norcalli/snippets.nvim'}
   use {'nvim-lua/completion-nvim', requires = 'aca/completion-tabnine'}
-
+-- 'tjdevries/nlua.nvim',
   --    === ui accoutrement ===
   use {
     {'glepnir/zephyr-nvim', opt = true},

@@ -36,7 +36,6 @@ function maps:load_whichKey_define()
     ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,
     ["n|<Leader><Left>"]  = map_cr("BufferMoveNext"):with_noremap():with_silent()           ,
     ["n|<Leader><Right>"] = map_cr("BufferMovePrevious"):with_noremap():with_silent()       ,
-
     -- |> [a]ctions
     ["n|<Leader>a#"] = map_cmd(":py3 import vim, random; vim.current.line += str(random.randint(0,9))<CR><esc>A"):with_noremap():with_silent(),
     ["n|<Leader>ac"] = map_cr("ColorizerToggle"):with_noremap():with_silent() ,
@@ -233,9 +232,11 @@ self.vim= {
     ["i|<S-TAB>"] = map_cmd([[pumvisible() ? "\<C-p>" : "<Plug>(completion_smart_s_tab)"]]):with_expr():with_silent(),
     ["n|<TAB>"]   = map_cr("BufferNext"):with_noremap():with_silent()          , --barbar
     ["n|<S-TAB>"] = map_cr("BufferPrevious"):with_noremap():with_silent()      ,
-    ["i|<C-j>"]   = map_cmd("<Plug>(completion_next_source)"):with_silent()    ,
-    ["i|<C-k>"]   = map_cmd("<Plug>(completion_prev_source)"):with_silent()    ,
+    ["i|<C-'>"]   = map_cmd("<Plug>(completion_next_source)"):with_silent()    ,
+    ["i|<C-;>"]   = map_cmd("<Plug>(completion_prev_source)"):with_silent()    ,
     ["i|<CR>"]    = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
+    -- ["i|<C-;>"]   = map_cr("lua require('snippets').expand_or_advance(-1)"):with_noremap():with_silent(),
+    -- ["i|<C-'>"]   = map_cr("lua require('snippets').advance(1)"):with_noremap():with_silent(),
 
     -- ["n|<CR>"]    = map_cmd('gf'):with_silent():with_noremap(),
 
