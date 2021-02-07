@@ -6,7 +6,7 @@ local opts = {
 	sep                    = '→',
 	display_names          = {['<CR>'] = '↵', ['<TAB>'] = '⇆'},
 	hspace                 = 2,
-	flatten                = 1,
+	-- flatten                = 1,
 	align_by_seperator     = 1,
 	use_floating_win       = 1,
 	position               = 'botright',
@@ -16,6 +16,8 @@ VG("which_key_", opts)
 
 vim.cmd[[call which_key#register('<Space>', "g:which_key_map")]]
 vim.cmd[[call which_key#register('\\', "g:lo_key_map")]]
+
+vim.cmd[==[let g:lo_key_map = [] ]==]
 
 vim.g.which_key_map = {
 	[',']       = 'comment'              ,

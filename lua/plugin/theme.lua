@@ -22,30 +22,22 @@ M.snazz = function(opts)
   opts = opts or {}
   setmetatable(opts, {__index = {pack = nil, transp = g.seeThrough}})
   local repo = false
-
   if not opts.theme then
     error("need to specify a theme. optionally, pack name and transparency")
-
   elseif opts.pack == 'local' then
     repo = false
-
   elseif not opts.pack then
     repo = opts.theme
-
   elseif opts.pack then
     repo = opts.pack
   end
-
   if repo then
     vim.cmd('packadd ' .. repo)
   end
-
   require('colorbuddy').colorscheme(opts.theme)
-
   vim.cmd[[hi! link colorcolumn cursorline]]
   vim.cmd[[hi! link cursorcolumn cursorline]]
   vim.cmd[[hi LineNr guifg=#824020]]
-
   if opts.transp then
     M.seeThrough()
   end

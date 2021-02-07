@@ -24,7 +24,7 @@ function autocmd.load_autocmds()
 			{"BufWritePre","MERGE_MSG","setlocal noundofile"};
 			{"BufWritePre","*.tmp","setlocal noundofile"};
 			{"BufWritePre","*.bak","setlocal noundofile"};
-			{"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
+			-- {"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
 			{"BufEnter","~/Desktop/info/journal/*.wiki","call kp#Stamp()"};
 			{"BufWritePre","*.md,*.wiki",'call kp#trimTrailingEmpty()'};
 			{"BufEnter","*","setl fo=jnrl1c fo-=o sts=-1"};

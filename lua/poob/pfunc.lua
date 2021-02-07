@@ -21,14 +21,15 @@ Snazz = function(...)
 	require('plugin.theme').snazz(...)
 end
 
-LWK = function(t)
-	t = t or {}
-	local ll = 	require('klooj.wk').ll
-	for k, v in pairs(ll) do
-		t[k] = v
-	end
-	VG('lo_key_map', t)
-end
+-- LWK = function(t)
+-- 	vim.g.lo_key_map = ""
+-- 	t = t or {}
+-- 	local ll = 	require('klooj.wk').ll
+-- 	for k, v in pairs(ll) do
+-- 		t[k] = v
+-- 	end
+-- 	VG('lo_key_map', t)
+-- end
 
 -- KJ = function()
 -- 	require('klooj.utils')

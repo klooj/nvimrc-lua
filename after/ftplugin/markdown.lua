@@ -47,16 +47,20 @@ xnoremap{ll .. 'b' , function() vc[[SelectBulletText]]     end, {nowait = true, 
 xnoremap{ll .. 'r' , function() vc[[RenumberSelection]]    end, {nowait = true, buffer = true}}
 
 
-lmaps = {
-	c = 'SelectCheckbox',
-	C = 'SelectCheckboxInside',
-	b = 'SelectBulletText',
-	B = 'SelectBullet',
-	r = 'RenumberList',
-	[']'] = 'BulletDemote',
-	['['] = 'BulletPromote',
-}
-LWK(lmaps)
+-- lmaps = {
+-- 	['c'] = 'SelectCheckbox',
+-- 	['C'] = 'SelectCheckboxInside',
+-- 	['b'] = 'SelectBulletText',
+-- 	['B'] = 'SelectBullet',
+-- 	['r'] = 'RenumberList',
+-- 	['x'] = 'ToggleCheckbox',
+-- 	[']'] = 'BulletDemote',
+-- 	['['] = 'BulletPromote',
+-- }
+-- vim.g.lo_key_map = {}
+-- VG('lo_key_map', lmaps)
+-- vc[[call which_key#register('\\', "g:lo_key_map")]]
+-- require('klooj.wk').lwk(lmaps)
 
 -----------
 -- nno{,,[[]],{}}
