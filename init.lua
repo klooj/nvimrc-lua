@@ -1,6 +1,6 @@
 -- In lua files,  use `<CR>` as you would `gf`
-vim = vim
 local options = require('domain.options')
+require('domain.global')
 local aucmd = require('domain.autocommands')
 
 local vg = vim.g

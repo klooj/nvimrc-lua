@@ -20,8 +20,14 @@ local function init()
     'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
     'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'
-  } -- 'mhinz/vim-signify' 'psliwka/vim-smoothie'
+    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , ' norcalli/snippets.nvim'      ,
+    'neovim/nvim-lspconfig'      , 'glepnir/lspsaga.nvim'     , 'klooj/nlua.nvim'              ,
+    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'p00f/nvim-ts-rainbow'         ,
+     'reedes/vim-pencil'         , 'plasticboy/vim-markdown'  , 'klooj/bullets.vim'            ,
+    'nvim-lua/completion-nvim'   , 'aca/completion-tabnine'   , 'klooj/vim-checkbox'           ,
+    'nvim-treesitter/nvim-treesitter'          , 'nvim-treesitter/nvim-treesitter-textobjects' ,
+    'nvim-treesitter/nvim-treesitter-refactor' , 'romgrk/nvim-treesitter-context'              ,
+  } --
 
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
@@ -67,24 +73,12 @@ local function init()
     requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}
   }
 
-  --   ===  treesitter, ===
-  use {'nvim-treesitter/nvim-treesitter',
-    requires = {'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-refactor', 'romgrk/nvim-treesitter-context',
-    } --'p00f/nvim-ts-rainbow',
-  }
-  -- === completion, lsp, & snippets ===
-  -- use {'SirVer/ultisnips', requires = 'honza/vim-snippets'}
-  use {'neovim/nvim-lspconfig',  'glepnir/lspsaga.nvim', 'norcalli/snippets.nvim'}
-  use {'nvim-lua/completion-nvim', requires = 'aca/completion-tabnine'}
--- 'tjdevries/nlua.nvim',
   --    === ui accoutrement ===
   use {
     {'glepnir/zephyr-nvim', opt = true},
     {'ishan9299/modus-theme-vim', opt = true},
     {'Th3Whit3Wolf/spacebuddy', opt = true},
   }
-  use {'glepnir/galaxyline.nvim', 'romgrk/barbar.nvim'}
 
   -- === filetype/syntax specific ===
   -- |> ansible
@@ -98,11 +92,13 @@ local function init()
   use {'psf/black', ft = {'python'},
     requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
   }
+
   -- |> markdown
-  use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
-  use {'reedes/vim-pencil', config = function() require('ploog.markdown') end,
-    ft = {'markdown', 'wiki'}, requires = {'itspriddle/vim-marked', 'plasticboy/vim-markdown'}
-  }
+  -- use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
+  -- use {'reedes/vim-pencil', config = function() require('ploog.markdown') end,
+    -- ft = {'markdown', 'wiki'}, requires = {'itspriddle/vim-marked', 'plasticboy/vim-markdown'}
+  -- }
+    use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
   -- |> json
   use {'prettier/vim-prettier', requires = 'elzr/vim-json',
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}

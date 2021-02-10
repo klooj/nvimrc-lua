@@ -121,7 +121,7 @@ function options:load_options()
     number         = true;
     relativenumber = true;
     shiftwidth     = 3;
-    signcolumn     = 'yes:3';
+    signcolumn     = 'yes:2';
     smartindent    = true;
     softtabstop    = -1;
     synmaxcol      = 2500;

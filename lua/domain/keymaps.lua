@@ -28,6 +28,7 @@ function maps:load_whichKey_define()
     ["n|<LocalLeader>"]    = map_cu("silent WhichKey '\\'"):with_noremap():with_silent()            ,
     ["v|<LocalLeader>"]    = map_cu("silent WhichKeyVisual '\\'"):with_noremap():with_silent()      ,
     ["n|<leader><leader>"] = map_cmd([[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]]):with_noremap():with_expr(),
+    -- ["n|<LocalLeader>x"]   = map_cr("ToggleCheckbox"):with_noremap(),
 
     ["n|<Leader>,"]       = map_cr("Commentary"):with_noremap():with_silent()               ,
     ["x|<Leader>,"]       = map_cr("'<,'>Commentary"):with_noremap():with_silent()          ,

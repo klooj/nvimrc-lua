@@ -56,6 +56,8 @@ M.default_theme = function()
       pack = 'zephyr-nvim'
     }
   end
+  require('ploog.vendiline')
+  require('ploog.barbar')
 end
 
 --[[
