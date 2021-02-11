@@ -26,7 +26,7 @@ local opts = {
 
   chain_complete_list = {
     default = {
-      { complete_items = { 'tabnine', 'path', 'snippet', 'lsp' }},
+      { complete_items = {'lsp', 'tabnine', 'path', 'snippet'}},
       { mode = '<c-p>'},
       { mode = '<c-n>'},
     },

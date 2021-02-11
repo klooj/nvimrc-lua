@@ -1,6 +1,6 @@
 local g = require('domain.global')
 local lspconfig = require('lspconfig')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 require('snippets').use_suggested_mappings()
 
@@ -11,12 +11,7 @@ local mapper = function(mode, key, result)
 end
 
 -- === lspsaga config ===
-local saga = require('lspsaga')
-saga.init_lsp_saga {
-  finder_action_keys = {
-    open = 'o', vsplit = 'v', split = 's', quit = 'q'
-  },
-}
+-- local saga = require('lspsaga')
 
 --[[  === custom attach function ===
 Any time a file is opened that matches the type of a language server configured below,
@@ -26,8 +21,6 @@ follow the pattern <leader>d
 ]]
 local custom_attach = function(client)
   -- |> configs applying to all clients
-  capabilities = capabilities
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
   -- if client.config.flags then
     -- client.config.flags.allow_incremental_sync = true
     -- client.config.flags.allow_highlight = true
@@ -66,67 +59,127 @@ local custom_attach = function(client)
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 end
 
--- === individual server configs ===
-lspconfig.vimls.setup {
-  on_attach = custom_attach,
-  capabilities = capabilities,
-  indexes = {
-    gap = 50, -- index time gap between next file
-    count = 6, -- count of files index at the same time
-  }
-}
-lspconfig.bashls.setup {
-  on_attach = custom_attach
-}
-lspconfig.cmake.setup {
-  on_attach = custom_attach
-}
-lspconfig.jsonls.setup {
-  on_attach = custom_attach
-}
-lspconfig.jedi_language_server.setup {
-  -- capabilities = capabilities,
-  on_attach = custom_attach
-}
-lspconfig.r_language_server.setup {
-  -- capabilities = capabilities,
-  on_attach = custom_attach
-}
-lspconfig.yamlls.setup {
-  -- capabilities = capabilities,
-  filetypes = {"yaml", "yml"},
-  on_attach = custom_attach
-}
+local noFuss = { 'bashls', 'cmake', 'jsonls', 'jedi_language_server', 'r_language_server', 'yamlls', 'vimls'}
+for _, lsp in ipairs(noFuss) do
+  lspconfig[lsp].setup { on_attach = custom_attach }
+end
 
 if not g.is_pi then
-  -- lspconfig.sumneko_lua.setup {
+  -- require('nlua.lsp.nvim').setup(require('lspconfig'), {
   --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
   --   on_attach = custom_attach,
-  --   -- capabilities = capabilities,
-  --   runtime = {
-  --     version = 'LuaJIT',
-  --     path = vim.split(package.path, ';'),
-  --   },
-  --   diagnostics = {
-  --     globals = {"vim"}
-  --   },
-  --   workspace = {
-  --     library = {
-  --       [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-  --       [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-  --     },
-  --   },
-  -- }
--- end
-    require('nlua.lsp.nvim').setup(lspconfig, {
+  -- })
+  lspconfig.sumneko_lua.setup {
+    cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+    on_attach = custom_attach,
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'LuaJIT',
+          path = {
+            '?.lua',
+            '?/init.lua',
+            vim.fn.expand('~/.luarocks/share/lua/5.1/?.lua'),
+            vim.fn.expand('~/.luarocks/share/lua/5.1/?/init.lua'),
+            vim.split(package.path, ';'),
+          }
+        },
+        diagnostics = {
+          globals = {"vim"}
+        },
+        telemetry = {
+          enable = false
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            [vim.fn.expand('~/.luarocks/share/lua/5.1')] = true,
+          },
+          makePreload = 1000,
+          preloadFileSize = 300,
+        },
+      },
+    },
+  }
+end
+
+require('lspsaga').init_lsp_saga {
+  finder_action_keys = {
+    open = 'o', vsplit = 'v', split = 's', quit = 'q'
+  },
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -- require('nlua.lsp.nvim').setup(lspconfig, {
     --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
-      on_attach = custom_attach,
+      -- on_attach = custom_attach,
     --   globals = {
     --     "vim", "Color", "c", "Group", "g", "s", "R",
     --   },
-    })
-end
-require('plenary.job')
+    -- })
+-- end
+-- require('plenary.job')
+
+
+-- === individual server configs ===
+-- lspconfig.vimls.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+--   indexes = {
+--     gap = 50, -- index time gap between next file
+--     count = 6, -- count of files index at the same time
+--   }
+-- }
+-- lspconfig.bashls.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+-- }
+-- lspconfig.cmake.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+-- }
+-- lspconfig.jsonls.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+-- }
+-- lspconfig.jedi_language_server.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+-- }
+-- lspconfig.r_language_server.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+-- }
+-- lspconfig.yamlls.setup {
+--   on_attach = custom_attach,
+--   -- capabilities = capabilities,
+--   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+--   filetypes = {"yaml", "yml"},
+-- }
+
+
+
+
+
+
 --[==[ benched in favor of lspsaga
 -- === misc. lsp funcs and extras from @tjdevries ===
   -- telescope_mapper('<Leader>da', 'lsp_code_actions', nil, true)

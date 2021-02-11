@@ -25,4 +25,4 @@ syntax/
 spell/
 snippets/
 role.yml
-package.json
+package-lock.json

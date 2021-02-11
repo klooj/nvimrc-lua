@@ -1,4 +1,4 @@
--- mostly copied from glepnir/nvim
+-- largely copied from glepnir/nvim
 local global    = {}
 local home      = os.getenv("HOME")
 local foonv     = os.getenv("FOONV")
@@ -9,6 +9,7 @@ local sep       = '/'
 local os_name   = vim.loop.os_uname().sysname
 local arch_type = vim.loop.os_uname().machine
 
+-- local neko = vim.fn.stdpath('cache') .. "/nlua/sumneko_lua/lua-language-server"
 local neko = home .. sep .. "gits/lua-language-server"
 local py3 = home .. sep .. ".pyenv/versions/neovim3.9/bin/python3"
 local npm = xdg .. sep .. "nvm/versions/node/v14.15.1/bin/neovim-node-host"
