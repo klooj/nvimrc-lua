@@ -2,7 +2,6 @@
 local options = require('domain.options')
 -- require('domain.global')
 local aucmd = require('domain.autocommands')
-
 local vg = vim.g
 function VG(name, opts)
   for k, v in pairs(opts) do

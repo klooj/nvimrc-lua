@@ -66,12 +66,28 @@ end
 
 if not g.is_pi then
   -- require('nlua.lsp.nvim').setup(require('lspconfig'), {
-  --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
-  --   on_attach = custom_attach,
-  -- })
+    --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+    --   on_attach = custom_attach,
+    -- })
+  local function get_lua_runtime()
+    local result = {};
+    for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+      local lua_path = path .. "/lua/";
+      if vim.fn.isdirectory(lua_path) then
+        result[lua_path] = true
+      end
+    end
+    result[vim.fn.expand("$VIMRUNTIME/lua")] = true
+    result[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+    result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
+
+    return result;
+  end
+
   lspconfig.sumneko_lua.setup {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
     on_attach = custom_attach,
+    filetypes = {"lua"},
     settings = {
       Lua = {
         runtime = {
@@ -85,30 +101,29 @@ if not g.is_pi then
           }
         },
         diagnostics = {
-          globals = {"vim"}
+          globals = {"vim"},
+          enable = true,
+          disable = "trailing-space"
         },
         telemetry = {
           enable = false
         },
         workspace = {
-          library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-            [vim.fn.expand('~/.luarocks/share/lua/5.1')] = true,
-          },
-          makePreload = 1000,
-          preloadFileSize = 300,
+          library = get_lua_runtime(),
+          makePreload = 2000,
+          preloadFileSize = 1000,
         },
       },
     },
   }
 end
 
-require('lspsaga').init_lsp_saga {
-  finder_action_keys = {
-    open = 'o', vsplit = 'v', split = 's', quit = 'q'
-  },
-}
+
+  require('lspsaga').init_lsp_saga {
+    finder_action_keys = {
+      open = 'o', vsplit = 'v', split = 's', quit = 'q'
+    },
+  }
 
 
 
@@ -122,129 +137,129 @@ require('lspsaga').init_lsp_saga {
 
 
 
-    -- require('nlua.lsp.nvim').setup(lspconfig, {
+  -- require('nlua.lsp.nvim').setup(lspconfig, {
     --   cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
-      -- on_attach = custom_attach,
+    -- on_attach = custom_attach,
     --   globals = {
-    --     "vim", "Color", "c", "Group", "g", "s", "R",
-    --   },
-    -- })
--- end
--- require('plenary.job')
+      --     "vim", "Color", "c", "Group", "g", "s", "R",
+      --   },
+      -- })
+      -- end
+      -- require('plenary.job')
 
 
--- === individual server configs ===
--- lspconfig.vimls.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
---   indexes = {
---     gap = 50, -- index time gap between next file
---     count = 6, -- count of files index at the same time
---   }
--- }
--- lspconfig.bashls.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
--- }
--- lspconfig.cmake.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
--- }
--- lspconfig.jsonls.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
--- }
--- lspconfig.jedi_language_server.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
--- }
--- lspconfig.r_language_server.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
--- }
--- lspconfig.yamlls.setup {
---   on_attach = custom_attach,
---   -- capabilities = capabilities,
---   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
---   filetypes = {"yaml", "yml"},
--- }
-
-
-
+      -- === individual server configs ===
+      -- lspconfig.vimls.setup {
+        --   on_attach = custom_attach,
+        --   -- capabilities = capabilities,
+        --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+        --   indexes = {
+          --     gap = 50, -- index time gap between next file
+          --     count = 6, -- count of files index at the same time
+          --   }
+          -- }
+          -- lspconfig.bashls.setup {
+            --   on_attach = custom_attach,
+            --   -- capabilities = capabilities,
+            --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+            -- }
+            -- lspconfig.cmake.setup {
+              --   on_attach = custom_attach,
+              --   -- capabilities = capabilities,
+              --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+              -- }
+              -- lspconfig.jsonls.setup {
+                --   on_attach = custom_attach,
+                --   -- capabilities = capabilities,
+                --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+                -- }
+                -- lspconfig.jedi_language_server.setup {
+                  --   on_attach = custom_attach,
+                  --   -- capabilities = capabilities,
+                  --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+                  -- }
+                  -- lspconfig.r_language_server.setup {
+                    --   on_attach = custom_attach,
+                    --   -- capabilities = capabilities,
+                    --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+                    -- }
+                    -- lspconfig.yamlls.setup {
+                      --   on_attach = custom_attach,
+                      --   -- capabilities = capabilities,
+                      --   -- capabilities.textDocument.completion.completionItem.snippetSupport = true,
+                      --   filetypes = {"yaml", "yml"},
+                      -- }
 
 
 
---[==[ benched in favor of lspsaga
--- === misc. lsp funcs and extras from @tjdevries ===
-  -- telescope_mapper('<Leader>da', 'lsp_code_actions', nil, true)
-  -- mapper('n', '<Leader>dR', 'MyLspRename()')
-function MyLspRename()
-  local current_word = vim.fn.expand("<cword>")
-  local plenary_window = require('plenary.window.float').percentage_range_window(0.5, 0.2)
-  vim.api.nvim_buf_set_option(plenary_window.bufnr, 'buftype', 'prompt')
-  vim.fn.prompt_setprompt(plenary_window.bufnr, string.format('Rename "%s" to > ', current_word))
-  vim.fn.prompt_setcallback(plenary_window.bufnr, function(text)
-    vim.api.nvim_win_close(plenary_window.win_id, true)
 
-    if text ~= '' then
-      vim.schedule(function()
-        vim.api.nvim_buf_delete(plenary_window.bufnr, { force = true })
 
-        vim.lsp.buf.rename(text)
-      end)
-    else
-      print("Nothing to rename!")
-    end
-  end)
 
-  vim.cmd [[startinsert]]
-end
-]==]
+                      --[==[ benched in favor of lspsaga
+                      -- === misc. lsp funcs and extras from @tjdevries ===
+                      -- telescope_mapper('<Leader>da', 'lsp_code_actions', nil, true)
+                      -- mapper('n', '<Leader>dR', 'MyLspRename()')
+                      function MyLspRename()
+                        local current_word = vim.fn.expand("<cword>")
+                        local plenary_window = require('plenary.window.float').percentage_range_window(0.5, 0.2)
+                        vim.api.nvim_buf_set_option(plenary_window.bufnr, 'buftype', 'prompt')
+                        vim.fn.prompt_setprompt(plenary_window.bufnr, string.format('Rename "%s" to > ', current_word))
+                        vim.fn.prompt_setcallback(plenary_window.bufnr, function(text)
+                          vim.api.nvim_win_close(plenary_window.win_id, true)
 
--- local sign_decider
--- if true then
---   sign_decider = function(bufnr)
---     local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
---     -- No buffer local variable set, so just enable by default
---     if not ok then
---       return true
---     end
+                          if text ~= '' then
+                            vim.schedule(function()
+                              vim.api.nvim_buf_delete(plenary_window.bufnr, { force = true })
 
---     return result
---   end
--- else
---   -- LOL, alternate signs.
---   sign_decider = coroutine.wrap(function()
---     while true do
---       coroutine.yield(true)
---       coroutine.yield(false)
---     end
---   end)
--- end
+                              vim.lsp.buf.rename(text)
+                            end)
+                          else
+                            print("Nothing to rename!")
+                          end
+                        end)
 
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---     underline = true,
---     virtual_text = true,
---     signs = sign_decider,
---     update_in_insert = false,
---   }
--- )
+                        vim.cmd [[startinsert]]
+                      end
+                      ]==]
 
---[[
-local nvim_status = require('lsp-status')
-local status = require('klooj.lsp_status')
-local completion = require('completion')
+                      -- local sign_decider
+                      -- if true then
+                      --   sign_decider = function(bufnr)
+                        --     local ok, result = pcall(vim.api.nvim_buf_get_var, bufnr, 'show_signs')
+                        --     -- No buffer local variable set, so just enable by default
+                        --     if not ok then
+                        --       return true
+                        --     end
 
-Turn on status.
-status.activate()
-completion.on_attach(client)
-status.on_attach(client)
-sumneko_command = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-]]
+                        --     return result
+                        --   end
+                        -- else
+                        --   -- LOL, alternate signs.
+                        --   sign_decider = coroutine.wrap(function()
+                          --     while true do
+                          --       coroutine.yield(true)
+                          --       coroutine.yield(false)
+                          --     end
+                          --   end)
+                          -- end
+
+                          -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+                          --   vim.lsp.diagnostic.on_publish_diagnostics, {
+                            --     underline = true,
+                            --     virtual_text = true,
+                            --     signs = sign_decider,
+                            --     update_in_insert = false,
+                            --   }
+                            -- )
+
+                            --[[
+                            local nvim_status = require('lsp-status')
+                            local status = require('klooj.lsp_status')
+                            local completion = require('completion')
+
+                            Turn on status.
+                            status.activate()
+                            completion.on_attach(client)
+                            status.on_attach(client)
+                            sumneko_command = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
+                            ]]

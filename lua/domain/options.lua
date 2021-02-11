@@ -1,6 +1,5 @@
 local global = require('domain.global')
 local pbind = require('poob.plbind')
-local vim = vim
 local options = setmetatable({}, { __index = { global_local = {},window_local = {} } })
 
 

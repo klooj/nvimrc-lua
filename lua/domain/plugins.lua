@@ -10,7 +10,6 @@ local function init()
   local use = packer.use
   packer.reset()
 
-  use {'neovim/nvim-lspconfig', config = function() require('plugin.lsp_config') end, requires = 'glepnir/lspsaga.nvim'}
   -- === load on startup and config in lua/plugin or none ===
   use {
     'nvim-lua/popup.nvim'        , 'nvim-lua/plenary.nvim'    , 'tjdevries/astronauta.nvim'    ,
@@ -21,14 +20,15 @@ local function init()
     'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
     'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , ' norcalli/snippets.nvim'      ,
+    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'norcalli/snippets.nvim'       ,
     'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'p00f/nvim-ts-rainbow'         ,
-    'reedes/vim-pencil'          , 'plasticboy/vim-markdown'  , 'klooj/bullets.vim'            ,
+    'reedes/vim-pencil'          , 'plasticboy/vim-markdown'  , 'dkarter/bullets.vim'          ,
     'nvim-lua/completion-nvim'   , 'aca/completion-tabnine'   , 'klooj/vim-checkbox'           ,
     'nvim-treesitter/nvim-treesitter'          , 'nvim-treesitter/nvim-treesitter-textobjects' ,
     'nvim-treesitter/nvim-treesitter-refactor' , 'romgrk/nvim-treesitter-context'              ,
   } -- 'klooj/nlua.nvim'              ,
 
+  use {'neovim/nvim-lspconfig', config = function() require('plugin.lsp_config') end, requires = 'glepnir/lspsaga.nvim'}
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',

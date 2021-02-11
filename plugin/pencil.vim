@@ -10,7 +10,8 @@ function! Prose()
 
 	" force top correction on most recent misspelling
 	nnoremap <buffer> <localleader>s [s1z=<c-o>
-	" inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
+	nnoremap <buffer> <localleader>x :ToggleCheckbox<CR>
+" inoremap <buffer> <c-s> <c-g>u<Esc>[s1z=`]A<c-g>u
 
 	" replace common punctuation
 	" iabbrev <buffer> -- –
