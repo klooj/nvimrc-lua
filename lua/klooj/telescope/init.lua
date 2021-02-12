@@ -97,12 +97,17 @@ require('telescope').setup {
         ["<C-[>"] = actions.move_selection_prev,
         ["<tab>"] = actions.add_selection,
         ["<C-q>"] = actions.send_to_qflist,
-        ["<C-Q>"] = actions.send_to_qflist,
+        -- ["<C-Q>"] = actions.send_to_qflist,
+        -- ["<c-k>"] = actions.move_selection_next,
+        -- ["<c-j>"] = actions.move_selection_prev,
       },
     },
   },
   extensions = {
-    fzy_native = { override_generic_sorter = true, override_file_sorter = true },
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true
+    },
     fzf_writer = {
       use_highlighter = true,
       minimum_grep_characters  = 3,
@@ -110,7 +115,7 @@ require('telescope').setup {
     },
     frecency = {
       show_scores = true,
-      ignore_patterns = {"*.git/*", "*/tmp/*"},
+      ignore_patterns = {"*.git/*", "*/tmp/*", "node_modules/*", "package-lock*"},
     }
   },
   file_sorter = hostfs,

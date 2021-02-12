@@ -1,6 +1,5 @@
--- use `<CR>` as you would `gf`
+-- if the lsp attaches, use `<CR>` as you would `gf`
 local options = require('domain.options')
--- require('domain.global')
 local aucmd = require('domain.autocommands')
 local vg = vim.g
 function VG(name, opts)
@@ -37,6 +36,7 @@ if vim.fn.has('vim_starting') == 1 then
   vim.cmd[[syntax enable]]
 end
 
+require('domain.global')
 require('poob.pfunc')
 require('domain.keymaps')
 aucmd.load_autocmds()

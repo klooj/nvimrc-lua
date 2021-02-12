@@ -20,6 +20,7 @@ function rhs_options:new()
       noremap = false,
       silent = false,
       expr = false,
+      nowait = false,
     }
   }
   setmetatable(instance,self)
@@ -59,6 +60,11 @@ end
 
 function rhs_options:with_expr()
   self.options.expr = true
+  return self
+end
+
+function rhs_options:with_nowait()
+  self.options.nowait = true
   return self
 end
 

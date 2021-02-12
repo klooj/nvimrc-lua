@@ -5,6 +5,14 @@ local l = [[<leader>]]
 local ll = [[<localleader>]]
 local vc = vim.cmd
 
+
+vc[[hi mkdLink guifg=#32D0B0 gui=underline]]
+vc[[hi htmlH2 guibg=#703070 guifg=#ea8548 gui=italic]]
+vc[[hi htmlH3 guibg=#307070 guifg=#ea8548 gui=italic]]
+vc[[hi htmlH4 guibg=#707070 guifg=#ea8548 gui=italic]]
+vc[[hi htmlH5 guibg=#502020 guifg=#ea8548 gui=italic]]
+-- vc[[hi htmlH6 guibg=#307070]]
+
 vc[[setl nofoldenable]]
 
 inoremap{ '<M-CR>', function() vc[[InsertNewBullet]]  end, {nowait = true, buffer = true}}

@@ -1,3 +1,5 @@
+-- for snippets.nvim
+
 require('plenary.reload').reload_module("nlua")
 require('plenary.reload').reload_module("snippets")
 

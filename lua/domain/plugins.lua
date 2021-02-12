@@ -20,15 +20,42 @@ local function init()
     'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
     'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'norcalli/snippets.nvim'       ,
-    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'p00f/nvim-ts-rainbow'         ,
-    'reedes/vim-pencil'          , 'plasticboy/vim-markdown'  , 'dkarter/bullets.vim'          ,
-    'nvim-lua/completion-nvim'   , 'aca/completion-tabnine'   , 'klooj/vim-checkbox'           ,
-    'nvim-treesitter/nvim-treesitter'          , 'nvim-treesitter/nvim-treesitter-textobjects' ,
-    'nvim-treesitter/nvim-treesitter-refactor' , 'romgrk/nvim-treesitter-context'              ,
-  } -- 'klooj/nlua.nvim'              ,
+    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
+    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       ,
+    'reedes/vim-pencil'          , 'plasticboy/vim-markdown'  ,
+  }
 
-  use {'neovim/nvim-lspconfig', config = function() require('plugin.lsp_config') end, requires = 'glepnir/lspsaga.nvim'}
+  --    === SCOUR ===
+  use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
+    requires = {'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',
+      'nvim-telescope/telescope-github.nvim', 'nvim-telescope/telescope-symbols.nvim',
+      'nvim-telescope/telescope-fzf-writer.nvim',
+      {'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
+    }
+  }
+
+  -- === completion, lsp, treesitter ===
+  use {'nvim-treesitter/nvim-treesitter', config = function() require('ploog.treesitter') end,
+    requires = {'nvim-treesitter/nvim-treesitter-textobjects' , 'romgrk/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-refactor' , 'p00f/nvim-ts-rainbow'}
+  }
+  use {'nvim-lua/completion-nvim', config = function() require('ploog.completion') end,
+    requires = 'aca/completion-tabnine'
+  }
+  use {'neovim/nvim-lspconfig', config = function() require('ploog.lsp_config') end,
+    requires = 'glepnir/lspsaga.nvim'
+  }
+  -- 'klooj/nlua.nvim'
+  use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
+    requires = 'honza/vim-snippets'
+  }
+
+  -- use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'}}
+  -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
+  -- use 'norcalli/snippets.nvim'
+  -- config = 'require("klooj.ansibleSnips")'}
+
+  use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',
@@ -41,15 +68,6 @@ local function init()
   use {'gyim/vim-boxdraw', opt = true}
   use {'pechorin/any-jump.vim', config = function() require('ploog.anyjump') end,
     cmd = {'AnyJump', 'AnyJumpVisual', 'AnyJumpBack', 'AnyJumpLastResults'}
-  }
-
-  --    === SCOUR ===
-  use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
-    requires = {'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',
-      'nvim-telescope/telescope-github.nvim', 'nvim-telescope/telescope-symbols.nvim',
-      'nvim-telescope/telescope-fzf-writer.nvim',
-      {'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
-    }
   }
 
   --   === treating text like objects ===
@@ -89,9 +107,8 @@ local function init()
   -- |>  R
   use {'jalvesaq/Nvim-R', ft = {'R'}}
   -- |>  python
-  use {'psf/black', ft = {'python'},
-    requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
-  }
+  use {'psf/black', ft = {'python'}}
+    -- requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
 
   -- |> markdown
   -- use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
@@ -151,8 +168,6 @@ return plugins
 -- end, requires = {
 --   {'aca/completion-tabnine', after = 'completion-nvim'}
 -- }}
--- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
--- use {'SirVer/ultisnips', requires = 'honza/vim-snippets', config = 'require("ploog.ultisnips")'}
 -- use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
 -- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
 

@@ -9,10 +9,7 @@ nnoremap <buffer> q <cmd>q<cr>
 " after/plugin/ftplugin/help.vim
 " --------------
 
-" TODO(stream): We chould turn this into a plugin to make writing vim help
-" text easier. There's a lot of stuff that would be nice for it.
-
-
+" from tjdevries:
 
 " TODO: When refactoring this, consider just using `:right`...
 "       That seems much simpler and better.

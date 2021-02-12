@@ -38,6 +38,7 @@ function global:load_variables()
     self.sumneko_binary = neko .. "/bin/macOS/lua-language-server"
   elseif arch_type:find("armv") then
     self.is_pi = true
+    self.is_linux = true
   elseif os_name == 'Linux' then
     self.is_linux = true
     self.sumneko_binary = neko .. "/bin/Linux/lua-language-server"

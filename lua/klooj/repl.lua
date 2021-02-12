@@ -1,3 +1,5 @@
+-- from tjdevries
+
 -- this needs updating for different repls, i think
 package.loaded['klooj.repl'] = nil
 

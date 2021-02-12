@@ -1,3 +1,4 @@
+-- this doesn't work. it was an attempt at a dynamically updating localleader whichkey popup
 local M = {}
 local maps
 -- local should_reload = true

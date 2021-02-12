@@ -1,9 +1,3 @@
-if has('win32')
-  let s:os_sep = '\\'
-else
-  let s:os_sep = '/'
-endif
-
 function! tj#join_lines() abort
   if &filetype == 'vim'
     if getline(line('.') + 1) =~ '^\s*\\'

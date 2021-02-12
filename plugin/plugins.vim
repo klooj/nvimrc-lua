@@ -12,6 +12,16 @@ command! PackerCompile packadd packer.nvim | lua require('domain.plugins').compi
 command! -nargs=* Searchr call kp#searchr(<f-args>)
 
 map <NOP> <Plug>(Prettier)
-map <Plug>(Prettier) <NOP>
-" map <Plug> <Plug>(mkdx-unindent)
-" map <Plug> <Plug>(mkdx-indent)
+
+function GetHLinfo()
+   echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")
+endfunction
+
+nnoremap <leader><f1> :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+nnoremap <leader><f2> :call GetHLinfo()
+nnoremap <leader><f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+nnoremap <leader><f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+
+" nnoremap <leader><f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+" \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+" \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<cr>

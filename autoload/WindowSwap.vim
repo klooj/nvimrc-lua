@@ -1,4 +1,3 @@
-
 " taken from https://github.com/wesQ3/vim-windowswap
 
 let s:markedWinNum = []
@@ -82,21 +81,4 @@ function! WindowSwap#IsWindowMarked(tab,win)
    else
       return 0
    endif
-endfunction
-
-function! WindowSwap#DeprecationNotice()
-   if g:windowswap_mapping_deprecation_notice
-      echom "This default mapping is deprecated and will be removed in the future. Please see :help windowswap-functions."
-      return
-   endif
-endfunction
-
-function! WindowSwap#DeprecatedMark()
-   call WindowSwap#DeprecationNotice()
-   call WindowSwap#MarkWindowSwap()
-endfunction
-
-function! WindowSwap#DeprecatedDo()
-   call WindowSwap#DeprecationNotice()
-   call WindowSwap#DoWindowSwap()
 endfunction

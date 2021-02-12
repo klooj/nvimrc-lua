@@ -1,19 +1,28 @@
+-- local nnoremap = vim.keymap.nnoremap
+-- local ll = [[<localleader>]]
+-- local vc = vim.cmd
+
 local opts = {
-	checkbox_markers = '○◐✗',
+	checkbox_markers = ' ○◐✗',
 	-- checkbox_markers = ' .oX',
-	enabled_file_types = {'markdown', 'wiki', 'text', 'scratch', 'gitcommit'},
+	-- enabled_file_types = {'markdown', 'wiki', 'text', 'scratch', 'gitcommit'},
 	-- mapping_leader = '<localleader>',
 	set_mappings = 0,
 }
+
+-- nnoremap{ll .. 'x' , function() vc[[ToggleCheckbox]] end, {nowait = true , buffer = true}}
+
+vim.cmd[[nnoremap <localleader>x :ToggleCheckbox<CR>]]
+
 VG("bullets_", opts)
 
 -- defaults
 -- checkbox_partials_toggle = 1,
+  -- nested_checkboxes = 1,
 -- delete_last_bullet_if_empty = 1,
 -- enable_in_empty_buffers = 0,
 -- renumber_on_change = 1,
 -- pad_right = 1,
--- nested_checkboxes = 1,
 -- line_spacing = 1,  -- this is 0, use 2 for 1
 
 --[[

@@ -21,6 +21,7 @@ M.ends_with = function(str, ending)
 	return ending == "" or str:sub(-#ending) == ending
 end
 
+-- KJ.from_file("foo.md")
 M.from_file = function(fname)
 	return function()
 		local file = io.open(fname)
@@ -33,7 +34,7 @@ M.from_file = function(fname)
 	end
 end
 
-KJ.from_file("foo.md")
+
 --[[ |> SORT TABLES
 example usage:
 for key, val in KJ.sorted_pairs(someTable) do

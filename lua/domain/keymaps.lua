@@ -236,17 +236,15 @@ self.vim= {
     ["i|<C-'>"]   = map_cmd("<Plug>(completion_next_source)"):with_silent()    ,
     ["i|<C-;>"]   = map_cmd("<Plug>(completion_prev_source)"):with_silent()    ,
     ["i|<CR>"]    = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
+
     -- ["i|<C-;>"]   = map_cr("lua require('snippets').expand_or_advance(-1)"):with_noremap():with_silent(),
     -- ["i|<C-'>"]   = map_cr("lua require('snippets').advance(1)"):with_noremap():with_silent(),
-
-    -- ["n|<CR>"]    = map_cmd('gf'):with_silent():with_noremap(),
 
     -- text: sort, indent, caps, visual "drag and drop"
     ["x|<"]     = map_cmd('<gv'):with_noremap()                 ,
     ["x|>"]     = map_cmd('>gv'):with_noremap()                 ,
     ["n|<C-<>"] = map_cr("SidewaysLeft"):with_noremap()         , -- " ctrl + left/right to move args around
     ["n|<C->>"] = map_cr("SidewaysRight"):with_noremap()        ,
-    -- ["x|<F8>"]       = map_cmd(":sort i<C-R>"):with_noremap()     ,
     ["x|<F8>"]  = map_cr("sort i"):with_noremap()               ,
     ["x|<S-k>"] = map_cmd(":move '<-2<CR>gv-gv"):with_noremap() , -- " Move selected line / block of text in visual mode
     ["x|<S-j>"] = map_cmd(":move '>+2<CR>gv-gv"):with_noremap() , -- " shift + k to move up; shift + j to move down
@@ -301,8 +299,17 @@ end
 load_maps()
 
 ----------------------------------
---[[ these still need doing
+--[===[ these still need doing
 nnoremap <Leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
+
+compe:
+    -- ["i|<C-'>"]   = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr():with_silent()    ,
+    -- ["i|<C-;>"]   = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr():with_silent()    ,
+    -- ["i|<CR>"]    = map_cmd([[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]]):with_noremap():with_expr():with_nowait(),
+    -- ["i|<C-Space>"]   = map_cmd([[compe#complete()]]):with_expr():with_silent()    ,
+    -- ["i|<C-e>"]   = map_cmd([[compe#close()]]):with_expr():with_silent()    ,
+
+
 
 this is from rainbow plugin suggestions:
 The following keymappings will help you to check the syntax name and definitions under the cursor, add them to your vimrc and restart vim:
@@ -312,7 +319,6 @@ nnoremap <f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> 
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<cr>
 nnoremap <f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 nnoremap <f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
-]]
 
     -- ["n|<"]     = map_cmd('<<'):with_noremap()                  ,
     -- ["n|>"]     = map_cmd('>>'):with_noremap()                  ,
@@ -332,3 +338,4 @@ nnoremap <f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')
 -- ["n|<F2>"]      = map_cr("call kp#floaterm()"):with_noremap(),
 -- ["n|<F3>"]      = map_cr("FloatermToggle"):with_noremap(),
 -- ["n|<F4>"]      = map_cr("FloatermNext"):with_noremap(),
+]===]
