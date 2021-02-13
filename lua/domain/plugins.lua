@@ -22,7 +22,6 @@ local function init()
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
     'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
     'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       ,
-    'reedes/vim-pencil'          , 'plasticboy/vim-markdown'  ,
   }
 
   --    === SCOUR ===
@@ -59,7 +58,6 @@ local function init()
   -- use 'norcalli/snippets.nvim'
   -- config = 'require("klooj.ansibleSnips")'}
 
-  use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',
@@ -115,11 +113,13 @@ local function init()
     -- requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
 
   -- |> markdown
-  -- use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
-  -- use {'reedes/vim-pencil', config = function() require('ploog.markdown') end,
-    -- ft = {'markdown', 'wiki'}, requires = {'itspriddle/vim-marked', 'plasticboy/vim-markdown'}
-  -- }
-    use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
+  use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
+  use {'reedes/vim-pencil', requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical', 'itspriddle/vim-marked'},
+    -- ft = {'markdown', 'wiki'},
+  } -- 'reedes/vim-pencil', 'plasticboy/vim-markdown', 'reedes/vim-lexical'
+-- config = function() require('ploog.markdown') end,
+
+  use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
   -- |> json
   use {'prettier/vim-prettier', requires = 'elzr/vim-json',
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}

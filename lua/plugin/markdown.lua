@@ -1,12 +1,20 @@
--- pencil
+local global = require('domain.global')
+-- pencil see also plugin/pencil.vim
 vim.g['pencil#wrapModeDefault'] = 'soft'
 vim.g['pencil#autoformat'] = 1
 vim.g['pencil#textwidth'] = 80
 vim.g['pencil#cursorwrap'] = 0
 vim.g['pencil#joinspaces'] = 1
 
--- prettier
+-- lexical
+vim.g['lexical#spelllang'] = {'en_us'}
+vim.g['lexical#thesaurus'] = {global.home .. '.config/thesaurus/mthesaur.txt'}
+vim.g['lexical#spellfile'] = {global.cache_dir .. "spell/en.uft-8.add"}
+vim.g['lexical#spell_key'] = '<localleader>s'
+vim.g['lexical#thesaurus_key'] = '<localleader>t'
+vim.g['lexical#dictionary_key'] = '<localleader>d'
 
+-- prettier
 vim.g['prettier#autoformat_require_pragma'] = 0
 -- vim.g['prettier#autoformat_config_present'] = 1
 vim.g['prettier#exec_cmd_async'] = 1

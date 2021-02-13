@@ -11,6 +11,7 @@ function kp#trimTrailingEmpty()
 	endif
 endfunction
 
+
 " pad lines above or below cursor; uses the same key combo in normal and insert modes
 " ==============
 function! kp#padBelow() abort

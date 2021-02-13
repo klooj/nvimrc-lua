@@ -1,3 +1,4 @@
+local global = require('domain.global')
 local nnoremap = vim.keymap.nnoremap
 local inoremap = vim.keymap.inoremap
 local xnoremap = vim.keymap.xnoremap
@@ -5,6 +6,8 @@ local l = [[<leader>]]
 local ll = [[<localleader>]]
 local vc = vim.cmd
 
+vim.fn['pencil#init']()
+vim.fn['lexical#init']()
 
 vc[[hi mkdLink guifg=#32D0B0 gui=underline]]
 vc[[hi htmlH2 guibg=#703070 guifg=#ea8548 gui=italic]]
@@ -13,11 +16,17 @@ vc[[hi htmlH4 guibg=#707070 guifg=#ea8548 gui=italic]]
 vc[[hi htmlH5 guibg=#502020 guifg=#ea8548 gui=italic]]
 -- vc[[hi htmlH6 guibg=#307070]]
 
+vc[[iabbrev <buffer> << «]]
+vc[[iabbrev <buffer> >> »]]
 vc[[setl nofoldenable]]
 
 inoremap{ '<M-CR>', function() vc[[InsertNewBullet]]  end, {nowait = true, buffer = true}}
 inoremap{ '<C-T>', function() vc[[BulletDemote]]      end, {nowait = true, buffer = true}}
 inoremap{ '<C-D>', function() vc[[BulletPromote]]     end, {nowait = true, buffer = true}}
+
+nnoremap{'Q', 'gqap', {buffer = true}}
+xnoremap{'Q', 'gq', {buffer = true}}
+nnoremap{ll .. 'Q', 'vapJgqap', {buffer = true}}
 
 nnoremap{l .. 'mcc' , function() vc[[WikiPageToc]]    end, {nowait = true , buffer = true}}
 nnoremap{l .. 'mch' , function() vc[[Toch]]           end, {nowait = true , buffer = true}}

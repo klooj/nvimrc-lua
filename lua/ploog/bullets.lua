@@ -12,7 +12,7 @@ local opts = {
 
 -- nnoremap{ll .. 'x' , function() vc[[ToggleCheckbox]] end, {nowait = true , buffer = true}}
 
-vim.cmd[[nnoremap <localleader>x :ToggleCheckbox<CR>]]
+-- vim.cmd[[nnoremap <localleader>x :ToggleCheckbox<CR>]]
 
 VG("bullets_", opts)
 
