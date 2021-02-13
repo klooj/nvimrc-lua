@@ -78,6 +78,7 @@ function maps:load_whichKey_define()
     ["n|<Leader>bon"] = map_cr("set number!"):with_noremap():with_silent()                                    ,
 
     -- |> [d]ebug
+    ["n|<Leader>d?"]  = map_cr("lua print(vim.inspect(vim.lsp.buf_get_clients()))"):with_noremap():with_silent() ,
     ["n|<Leader>dM"]  = map_cr("Neomake"):with_noremap():with_silent() ,
     ["n|<Leader>ddo"] = map_cr("Luadev"):with_noremap():with_silent()  ,
     ["n|<Leader>ddl"] = map_cmd("<Plug>(Luadev-RunLine)")              ,
@@ -86,10 +87,10 @@ function maps:load_whichKey_define()
 
     -- |> [e]dit
     ["n|<Leader>e."] = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                  ,
-    ["n|<Leader>ec"] = map_cr([[vsplit $FOONV/lua/plugin/completion.lua]]):with_noremap() ,
+    ["n|<Leader>ec"] = map_cr([[vsplit $FOONV/lua/ploog/completion.lua]]):with_noremap() ,
     ["n|<Leader>ee"] = map_cr("Telescope symbols"):with_noremap()                         ,
     ["n|<Leader>ek"] = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()    ,
-    ["n|<Leader>eL"] = map_cr([[vsplit $FOONV/lua/plugin/lsp_config.lua]]):with_noremap() ,
+    ["n|<Leader>eL"] = map_cr([[vsplit $FOONV/lua/ploog/lsp_config.lua]]):with_noremap() ,
     ["n|<Leader>ep"] = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()    ,
     ["n|<Leader>et"] = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()           ,
     ["n|<Leader>ew"] = map_cr([[vsplit $FOONV/lua/plugin/whichKey.lua]]):with_noremap()   ,
