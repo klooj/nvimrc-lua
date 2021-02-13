@@ -104,10 +104,6 @@ local setup_sumneko = function()
         runtime = {
           version = 'LuaJIT',
           path = KJ.table_unique(vim.split(package.path, ';'))
-            -- '?.lua',
-            -- '?/init.lua',
-            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?.lua'),
-            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?/init.lua'),
         },
         diagnostics = {
           globals = {"vim"},
@@ -119,6 +115,7 @@ local setup_sumneko = function()
         },
         workspace = {
           library = get_lua_runtime(),
+          },
           makePreload = 2000,
           preloadFileSize = 1000,
         },
@@ -130,6 +127,11 @@ end
 if not g.is_pi then
   setup_sumneko()
 end
+
+            -- '?.lua',
+            -- '?/init.lua',
+            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?.lua'),
+            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?/init.lua'),
 
 -- local function preview_location_callback(_, _, result)
 --   if result == nil or vim.tbl_isempty(result) then
