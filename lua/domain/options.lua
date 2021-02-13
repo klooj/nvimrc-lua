@@ -26,7 +26,7 @@ function options:load_options()
     cmdheight      = 2;
     cmdwinheight   = 7;
     complete       = ".,w,b,k,t";
-    completeopt    = "menuone,noselect,noinsert";
+    completeopt    = "menuone,noselect"; -- noinsert
     diffopt        = "filler,closeoff,iwhite,internal,algorithm:patience";
     directory      = global.cache_dir .. "swag/";   -- for swap file
     display        = "lastline";

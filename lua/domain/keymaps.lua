@@ -230,14 +230,18 @@ self.vim= {
     ["n|<M-h>"] = map_cmd('<C-W>5>'):with_noremap():with_silent() ,
     ["n|<M-l>"] = map_cmd('<C-W>5<'):with_noremap():with_silent() ,
     -- tab: completion magic and buffers
-    ["i|<TAB>"]   = map_cmd([[pumvisible() ? "\<C-n>" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
-    ["i|<S-TAB>"] = map_cmd([[pumvisible() ? "\<C-p>" : "<Plug>(completion_smart_s_tab)"]]):with_expr():with_silent(),
-    ["n|<TAB>"]   = map_cr("BufferNext"):with_noremap():with_silent()          , --barbar
-    ["n|<S-TAB>"] = map_cr("BufferPrevious"):with_noremap():with_silent()      ,
-    ["i|<C-'>"]   = map_cmd("<Plug>(completion_next_source)"):with_silent()    ,
-    ["i|<C-;>"]   = map_cmd("<Plug>(completion_prev_source)"):with_silent()    ,
-    ["i|<CR>"]    = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
+    ["n|<TAB>"]     = map_cr("BufferNext"):with_noremap():with_silent()                    , --barbar
+    ["n|<S-TAB>"]   = map_cr("BufferPrevious"):with_noremap():with_silent()                ,
+    -- ["i|<TAB>"]     = map_cmd([[pumvisible() ? "\<C-n>" : v:lua.check_back_space() ? "\<TAB>" : completion#trigger_completion()]]):with_expr():with_silent(),
+    -- ["i|<S-TAB>"]   = map_cmd([[pumvisible() ? "\<C-p>" : "<Plug>(completion_smart_s_tab)"]]):with_expr():with_silent(),
+    -- compe
+    ["i|<C-Space>"] = map_cmd([[compe#complete()]]):with_expr():with_silent() ,
+    ["i|<CR>"]      = map_cmd([[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]]):with_noremap():with_expr():with_nowait(),
+    ["i|<C-e>"]     = map_cmd([[compe#close()]]):with_expr():with_silent()    ,
+    ["i|<C-'>"]     = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr():with_silent() ,
+    ["i|<C-;>"]     = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr():with_silent() ,
 
+    -- ["i|<CR>"]    = map_cmd([[pumvisible() ? complete_info()["selected"] != "-1" ?"\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>":(delimitMate#WithinEmptyPair() ? "\<Plug>delimitMateCR" : "\<CR>")]]):with_expr(),
     -- ["i|<C-;>"]   = map_cr("lua require('snippets').expand_or_advance(-1)"):with_noremap():with_silent(),
     -- ["i|<C-'>"]   = map_cr("lua require('snippets').advance(1)"):with_noremap():with_silent(),
 
@@ -303,12 +307,10 @@ load_maps()
 --[===[ these still need doing
 nnoremap <Leader>dl <cmd>lua vim.lsp.diagnostic.set_loclist()<CR>
 
-compe:
-    -- ["i|<C-'>"]   = map_cmd([[compe#scroll({ 'delta': -4 })]]):with_expr():with_silent()    ,
-    -- ["i|<C-;>"]   = map_cmd([[compe#scroll({ 'delta': +4 })]]):with_expr():with_silent()    ,
-    -- ["i|<CR>"]    = map_cmd([[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]]):with_noremap():with_expr():with_nowait(),
-    -- ["i|<C-Space>"]   = map_cmd([[compe#complete()]]):with_expr():with_silent()    ,
-    -- ["i|<C-e>"]   = map_cmd([[compe#close()]]):with_expr():with_silent()    ,
+
+completion.nvim:
+    -- ["i|<C-'>"]   = map_cmd("<Plug>(completion_next_source)"):with_silent()    ,
+    -- ["i|<C-;>"]   = map_cmd("<Plug>(completion_prev_source)"):with_silent()    ,
 
 
 

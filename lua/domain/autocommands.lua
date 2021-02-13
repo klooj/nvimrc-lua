@@ -27,7 +27,7 @@ function autocmd.load_autocmds()
       {"BufEnter","~/Desktop/info/journal/*.wiki","call kp#Stamp()"};
       {"BufWritePre","*.md,*.wiki",'call kp#trimTrailingEmpty()'};
       {"BufEnter","*","setl fo=jnrl1c fo-=o sts=-1"};
-      {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
+      -- {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
     };
 
     wins = {

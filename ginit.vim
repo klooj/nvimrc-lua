@@ -1,4 +1,5 @@
 set guifont="JetBrainsMono\ Nerd\ Font"
+set fo=jnrl1c fo-=o sts=-1
 lua << EOF
 Snazz{
 	theme = 'zephyr',

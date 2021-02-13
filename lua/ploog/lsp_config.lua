@@ -2,9 +2,11 @@ local g = require('domain.global')
 local lspconfig = require('lspconfig')
 local api = vim.api
 local format = require('klooj.format')
-local completion = require('completion')
+-- local completion = require('completion')
+local KJ = require('klooj.utils')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local saga = require('lspsaga')
 saga.init_lsp_saga {
@@ -33,7 +35,6 @@ local custom_attach = function(client)
     -- client.config.flags.allow_indent = true
   end
 
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   if client.resolved_capabilities.document_formatting then
     format.lsp_before_save()
@@ -42,7 +43,7 @@ local custom_attach = function(client)
     mapper("n", "<Leader>dF", "vim.lsp.buf.range_formatting()")
   end
 
-  completion.on_attach(client)
+  -- completion.on_attach(client)
 
   -- |> keymaps
   mapper('n', '<CR>', 'vim.lsp.buf.definition()')
@@ -69,12 +70,13 @@ end
 
 local noFuss = {'bashls', 'cmake', 'jsonls', 'jedi_language_server', 'r_language_server', 'yamlls', 'vimls'}
 for _, lsp in ipairs(noFuss) do
-  lspconfig[lsp].setup { on_attach = custom_attach }
+  lspconfig[lsp].setup {capabilities = capabilities, on_attach = custom_attach }
 end
 
 
 local get_lua_runtime = function()
-  local result = {};
+  local result = {}
+  local sorted_rt = {}
 
   for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
     local lua_path = path .. "/lua/";
@@ -87,25 +89,25 @@ local get_lua_runtime = function()
   result[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
   result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
 
-  return result;
+  sorted_rt = KJ.table_unique(result)
+  return sorted_rt;
 end
 
 local setup_sumneko = function()
   lspconfig.sumneko_lua.setup {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+    capabilities = capabilities,
     on_attach = custom_attach,
     filetypes = {"lua"},
     settings = {
       Lua = {
         runtime = {
           version = 'LuaJIT',
-          path = {
-            '?.lua',
-            '?/init.lua',
-            vim.fn.expand('~/.luarocks/share/lua/5.1/?.lua'),
-            vim.fn.expand('~/.luarocks/share/lua/5.1/?/init.lua'),
-            vim.split(package.path, ';'),
-          }
+          path = KJ.table_unique(vim.split(package.path, ';'))
+            -- '?.lua',
+            -- '?/init.lua',
+            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?.lua'),
+            -- vim.fn.expand('~/.luarocks/share/lua/5.1/?/init.lua'),
         },
         diagnostics = {
           globals = {"vim"},

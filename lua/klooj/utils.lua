@@ -75,6 +75,26 @@ M.sorted_pairs = function(t)
 end
 -- <|
 
+-- Count the number of times a value occurs in a table
+M.table_count = function(t, item)
+  local count = 0
+  for _, x in pairs(t) do
+    if item == x then count = count + 1 end
+  end
+  return count
+end
+
+-- remove duplicates from list-style table; not for key=value
+M.table_unique = function(t)
+  local newtable = {}
+  for _, x in ipairs(t) do
+    if(M.table_count(newtable, x) == 0) then
+      newtable[#newtable+1] = x
+    end
+  end
+  return newtable
+end
+
 return setmetatable({}, {
 	__index = function(_, k)
 		if M[k] then

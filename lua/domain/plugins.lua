@@ -34,24 +34,28 @@ local function init()
     }
   }
 
-  -- === completion, lsp, treesitter ===
+  -- === completion, lsp, snippets, treesitter ===
   use {'nvim-treesitter/nvim-treesitter', config = function() require('ploog.treesitter') end,
     requires = {'nvim-treesitter/nvim-treesitter-textobjects' , 'romgrk/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-refactor' , 'p00f/nvim-ts-rainbow'}
   }
-  use {'nvim-lua/completion-nvim', config = function() require('ploog.completion') end,
-    requires = 'aca/completion-tabnine'
-  }
+
+  use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'}}
+  -- use {'nvim-lua/completion-nvim', config = function() require('ploog.completion') end,
+    -- requires = 'aca/completion-tabnine'
+  -- }
+
   use {'neovim/nvim-lspconfig', config = function() require('ploog.lsp_config') end,
     requires = 'glepnir/lspsaga.nvim'
-  }
-  -- 'klooj/nlua.nvim'
-  use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
-    requires = 'honza/vim-snippets'
-  }
+  }  -- 'klooj/nlua.nvim'
 
-  -- use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'}}
-  -- use {'hrsh7th/vim-vsnip', requires = 'hrsh7th/vim-vsnip-integ', config = 'require("ploog.vsnip")'}
+  -- use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
+    -- requires = 'honza/vim-snippets'
+  -- }
+
+  use {'hrsh7th/vim-vsnip',  config = 'require("ploog.vsnip")',
+    requires = {'hrsh7th/vim-vsnip-integ'}
+  }
   -- use 'norcalli/snippets.nvim'
   -- config = 'require("klooj.ansibleSnips")'}
 

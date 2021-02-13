@@ -1,10 +1,10 @@
 require('gitsigns').setup {
 	signs = { --⎟
-		add          = {hl = '', text = '〉', numhl='GitSignsAddNr'},
-		change       = {hl = '', text = '⎨ ', numhl='GitSignsChangeNr'},
-		delete       = {hl = '', text = '〈', numhl='GitSignsDeleteNr'},
-		topdelete    = {hl = '', text = '◀︎ ', numhl='GitSignsDeleteNr'},
-		changedelete = {hl = '', text = '∓ ', numhl='GitSignsChangeNr'},
+		add          = {hl = 'diffAdded', text = '〉', numhl='GitSignsAddNr'},
+		change       = {hl = 'diffChanged', text = '⎨ ', numhl='GitSignsChangeNr'},
+		delete       = {hl = 'diffRemoved', text = '〈', numhl='GitSignsDeleteNr'},
+		topdelete    = {hl = 'diffRemoved', text = '◀︎ ', numhl='GitSignsDeleteNr'},
+		changedelete = {hl = 'diffIndexLine', text = '∓ ', numhl='GitSignsChangeNr'},
 	},
 	numhl = false,
 	keymaps = {
@@ -18,8 +18,8 @@ require('gitsigns').setup {
 		['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
 	},
 	watch_index = {
-		interval = 200
+		interval = 500
 	},
-	sign_priority = 6,
+	sign_priority = 1,
 	status_formatter = nil, -- Use default
 }

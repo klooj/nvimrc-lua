@@ -9,8 +9,8 @@ local M = {
 
 function M.enable_fold()
   if vim.o.runtimepath:find('nvim-treesitter') then
-    vim.api.nvim_command('set foldmethod=expr')
-    vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+    vim.cmd('set foldmethod=expr')
+    vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
   end
 end
 
