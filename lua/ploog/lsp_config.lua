@@ -118,7 +118,6 @@ local setup_sumneko = function()
           },
           makePreload = 2000,
           preloadFileSize = 1000,
-        },
       },
     },
   }
