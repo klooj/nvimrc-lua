@@ -52,7 +52,7 @@ local custom_attach = function(client)
   mapper('n', '<Leader>d]', 'require("lspsaga.diagnostic").lsp_jump_diagnostic_next()')
   mapper('n', '<Leader>d[', 'require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()')
   mapper('n', '<Leader>dl', 'require("lspsaga.diagnostic").show_line_diagnostics()')
-  mapper('n', '<Leader>df', 'require("lspsaga.provider").preview_definition()')
+  mapper('n', '<Leader>dp', 'require("lspsaga.provider").preview_definition()')
 
   telescope_mapper('<Leader>dr', 'lsp_references', nil, true)
   telescope_mapper('<Leader>dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
@@ -62,8 +62,8 @@ local custom_attach = function(client)
   mapper('n', '<leader>ds' ,'require("lspsaga.signaturehelp").signature_help()')
   mapper('n', '<leader>dR' ,'require("lspsaga.rename").rename()')
   mapper('n', 'K'          ,'require("lspsaga.hover").render_hover_doc()')
-  mapper('n', '<C-S>'      ,'require("lspsaga.hover").smart_scroll_hover(1)')
-  mapper('n', '<C-A>'      ,'require("lspsaga.hover").smart_scroll_hover(-1)')
+  mapper('n', '<C-0>'      ,'require("lspsaga.hover").smart_scroll_hover(1)')
+  mapper('n', '<C-9>'      ,'require("lspsaga.hover").smart_scroll_hover(-1)')
 
   vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 end

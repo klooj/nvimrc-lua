@@ -10,10 +10,10 @@ require('nvim-treesitter.configs').setup {
       ['function.bracket'] = 'Type',
     }
   },
-  -- indent = {
-    -- enable = true,
+  indent = {
+    enable = true,
     -- disable = {'zsh'}
-  -- },
+  },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -36,17 +36,17 @@ require('nvim-treesitter.configs').setup {
     smart_rename = {
       enable = true,
       keymaps = { -- mapping to rename reference under cursor
-        smart_rename = '<localleader>tr',
+        smart_rename = '<leader>Tr',
       },
     },
     navigation = {
       enable = true,
       keymaps = {
-        goto_definition = '<localleader>td',
-        goto_next_usage = '<localleader>tn',
-        goto_previous_usage = '<localleader>tp',
-        list_definitions = '<localleader>tl',
-        list_definitions_toc = '<localleader>tL',
+        goto_definition = '<leader>Td',
+        goto_next_usage = '<leader>T]',
+        goto_previous_usage = '<leader>T[',
+        list_definitions = '<leader>Tl',
+        list_definitions_toc = '<leader>Tc',
       },
     },
   },
@@ -83,8 +83,8 @@ require('nvim-treesitter.configs').setup {
     lsp_interop = {
       enable = true,
       peek_definition_code = {
-        ["<localleader>tf"] = "@function.outer",
-        ["<localleader>tF"] = "@class.outer",
+        ["<leader>Tp"] = "@function.outer",
+        ["<leader>TP"] = "@class.outer",
       },
     },
   },

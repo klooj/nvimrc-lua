@@ -68,7 +68,7 @@ function options:load_options()
     sidescrolloff  = 3;
     smartcase      = true;
     smarttab       = true;
-    spellfile      = global.cache_dir .. "spell/en.uft-8.add";
+    spellfile      = global.foonv .. "spell/en.utf-8.add";
     splitbelow     = true;
     splitright     = true;
     swapfile       = true;

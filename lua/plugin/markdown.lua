@@ -9,7 +9,7 @@ vim.g['pencil#joinspaces'] = 1
 -- lexical
 vim.g['lexical#spelllang'] = {'en_us'}
 vim.g['lexical#thesaurus'] = {global.home .. '.config/thesaurus/mthesaur.txt'}
-vim.g['lexical#spellfile'] = {global.cache_dir .. "spell/en.uft-8.add"}
+vim.g['lexical#spellfile'] = {global.foonv .. "spell/en.utf-8.add"}
 vim.g['lexical#spell_key'] = '<localleader>s'
 vim.g['lexical#thesaurus_key'] = '<localleader>t'
 vim.g['lexical#dictionary_key'] = '<localleader>d'

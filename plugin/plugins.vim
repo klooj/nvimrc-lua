@@ -11,6 +11,8 @@ command! PackerCompile packadd packer.nvim | lua require('domain.plugins').compi
 
 command! -nargs=* Searchr call kp#searchr(<f-args>)
 
+let g:abolish_save_file = expand("$FOONV/after/plugin/abolish.vim")
+
 map <NOP> <Plug>(Prettier)
 
 function GetHLinfo()

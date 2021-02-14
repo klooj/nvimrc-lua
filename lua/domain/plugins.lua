@@ -21,8 +21,9 @@ local function init()
     'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
     'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
-    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       ,
+    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'tpope/vim-abolish'            ,
   }
+-- Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
 
   --    === SCOUR ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
