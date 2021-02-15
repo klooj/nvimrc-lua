@@ -1,10 +1,19 @@
 -- COMPE
+-- vim.g.loaded_compe_treesitter = true
+vim.g.loaded_compe_snippets_nvim = true
+-- vim.g.loaded_compe_spell = true
+vim.g.loaded_compe_tags = true
+vim.g.loaded_compe_ultisnips = true
+vim.g.loaded_compe_vim_lsc = true
+vim.g.loaded_compe_vim_lsp = true
+vim.g.loaded_compe_nvim_lua = true
+
 require('compe').setup {
   enabled = true,
   autocomplete = true,
   debug = false,
   min_length = 2,
-  preselect = 'enable',
+  preselect = 'always',
   throttle_time = 80,
   source_timeout = 200,
   incomplete_delay = 400,

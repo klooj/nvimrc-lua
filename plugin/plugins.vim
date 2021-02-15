@@ -15,14 +15,11 @@ let g:abolish_save_file = expand("$FOONV/after/plugin/abolish.vim")
 
 map <NOP> <Plug>(Prettier)
 
-function GetHLinfo()
-   echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")
-endfunction
-
-nnoremap <leader><f1> :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
-nnoremap <leader><f2> :call GetHLinfo()
-nnoremap <leader><f3> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
-nnoremap <leader><f4> :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+" highlight info (put in Treesitter group)
+nnoremap <leader>T1 :echo synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
+nnoremap <leader>T2 :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">")<CR>
+nnoremap <leader>T3 :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+nnoremap <leader>T4 :exec 'syn list '.synIDattr(synID(line('.'), col('.'), 0), 'name')<cr>
 
 " nnoremap <leader><f2> :echo ("hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 " \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"

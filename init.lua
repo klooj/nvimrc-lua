@@ -1,4 +1,3 @@
-vim = vim
 -- if the lsp attaches, use `<CR>` as you would `gf`
 local options = require('domain.options')
 local aucmd = require('domain.autocommands')

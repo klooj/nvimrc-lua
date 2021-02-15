@@ -8,6 +8,7 @@ local vc = vim.cmd
 
 vim.fn['pencil#init']()
 vim.fn['lexical#init']()
+vim.fn['kpmd#abolish']()
 
 vc[[syn match myExCapitalWords +\<\w*[A-Z]\S*\>+ contains=@NoSpell]]
 vc[[setl nofoldenable]]

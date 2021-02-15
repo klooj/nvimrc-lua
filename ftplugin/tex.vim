@@ -1,0 +1,1 @@
+nnoremap gt :TexlabForwardSearch<CR>

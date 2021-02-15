@@ -8,6 +8,7 @@ local function init()
     })
   end
   local use = packer.use
+  -- local use_rocks = packer.use_rocks
   packer.reset()
 
   -- === load on startup and config in lua/plugin or none ===
@@ -35,7 +36,7 @@ local function init()
   }
 
   -- === completion, lsp, snippets, treesitter ===
-  use {'nvim-treesitter/nvim-treesitter', config = function() require('ploog.treesitter') end,
+  use {'nvim-treesitter/nvim-treesitter', config = [[require('ploog.treesitter')]],
     requires = {'nvim-treesitter/nvim-treesitter-textobjects' , 'romgrk/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-refactor' , 'p00f/nvim-ts-rainbow'}
   }
@@ -45,7 +46,7 @@ local function init()
     -- requires = 'aca/completion-tabnine'
   -- }
 
-  use {'neovim/nvim-lspconfig', config = function() require('ploog.lsp_config') end,
+  use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
     requires = 'glepnir/lspsaga.nvim'
   }  -- 'klooj/nlua.nvim'
 
@@ -53,7 +54,7 @@ local function init()
     -- requires = 'honza/vim-snippets'
   -- }
 
-  use {'hrsh7th/vim-vsnip',  config = 'require("ploog.vsnip")',
+  use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
     requires = {'hrsh7th/vim-vsnip-integ'}
   }
   -- use 'norcalli/snippets.nvim'
@@ -62,30 +63,33 @@ local function init()
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',
-    config = function() require('ploog.nvtree') end
+    config = [[require('ploog.nvtree')]],
   }
   use {
     {'neomake/neomake', cmd = 'Neomake'},
     {'bfredl/nvim-luadev', cmd = 'Luadev'}
   }
   use {'gyim/vim-boxdraw', opt = true}
-  use {'pechorin/any-jump.vim', config = function() require('ploog.anyjump') end,
+  use {'pechorin/any-jump.vim', config = [[require('ploog.anyjump')]],
     cmd = {'AnyJump', 'AnyJumpVisual', 'AnyJumpBack', 'AnyJumpLastResults'}
   }
 
   --   === treating text like objects ===
   use {'ntpeters/vim-better-whitespace', event = 'InsertLeavePre *',
-    config = function() require('ploog.whitespace') end
+    config = [[require('ploog.whitespace')]]
   }
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
+  use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
+  use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
+  -- use { 'tpope/vim-abolish', cmd = {'Abolish', 'Subvert'}}
 
   --   === setup, startup, syntax, session ===
   use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
     requires = {'tpope/vim-obsession', opt = true},
-    config = function() require('ploog.prosession') end
+    config = [[require('ploog.prosession')]]
   }
   use {'mbbill/undotree', cmd = 'UndotreeToggle',
-    config = function() require('ploog.undotree') end
+    config = [[require('ploog.undotree')]]
   }
 
   --   === debug ===
@@ -103,7 +107,7 @@ local function init()
 
   -- === filetype/syntax specific ===
   -- |> ansible
-  use {'pearofducks/ansible-vim', config = function() require('ploog.ansible') end,
+  use {'pearofducks/ansible-vim', config = [[require('ploog.ansible')]],
     ft = {'yaml', 'yaml.ansible', 'yml'}
   }
   use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}
@@ -114,7 +118,7 @@ local function init()
     -- requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
 
   -- |> markdown
-  use {'dkarter/bullets.vim', config = function() require('ploog.bullets') end}
+  use {'dkarter/bullets.vim', config = [[require('ploog.bullets')]]}
   use {'reedes/vim-pencil', requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical', 'itspriddle/vim-marked'},
     -- ft = {'markdown', 'wiki'},
   } -- 'reedes/vim-pencil', 'plasticboy/vim-markdown', 'reedes/vim-lexical'

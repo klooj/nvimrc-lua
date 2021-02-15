@@ -73,6 +73,25 @@ for _, lsp in ipairs(noFuss) do
   lspconfig[lsp].setup {capabilities = capabilities, on_attach = custom_attach }
 end
 
+-- lspconfig.texlab.setup {
+--   settings = {
+--     latex = {forwardSearch = {executable = 'zathura', args = {'%f'}}}
+--   },
+--   commands = {
+--     TexlabForwardSearch = {
+--       function()
+--         local pos = vim.api.nvim_win_get_cursor(0)
+--         local params = {
+--           textDocument = {uri = vim.uri_from_bufnr(0)},
+--           position = {line = pos[1] - 1, character = pos[2]}
+--         }
+--         vim.lsp.buf_request(0, 'textDocument/forwardSearch', params,
+--                         function(err, _, _, _) if err then error(tostring(err)) end end)
+--       end,
+--       description = 'Run synctex forward search'
+--     }
+--   }
+-- }
 
 local get_lua_runtime = function()
   local result = {}

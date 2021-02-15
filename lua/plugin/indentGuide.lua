@@ -18,6 +18,7 @@ require('indent_guides').setup {
     'floaterm',
     'term',
     'start',
+    "which_key",
   },
   even_colors = {
     bg = '#080032',
