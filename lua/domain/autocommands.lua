@@ -26,6 +26,7 @@ function autocmd.load_autocmds()
       -- {"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
       {"BufEnter","~/Desktop/info/journal/*.wiki","call kp#Stamp()"};
       {"BufWritePre","*.md,*.wiki",'call kp#trimTrailingEmpty()'};
+      {"BufEnter", "*.wiki", [[setl nowrap]]},
       {"BufEnter","*","setl fo=jnrl1c fo-=o sts=-1"};
       -- {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
     };
