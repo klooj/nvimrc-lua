@@ -34,9 +34,7 @@ Ultimately, I'd like nvim to perform as a word processor with the same agile pow
 
 - [ ] instructions; maybe even a script, makefile, and/or dockerfile.
 - [ ] explanation of language servers, pyenv, and other extras used. maybe just throw my daily build script in here?
-- [ ] explanation of all the markdown & wiki features; prose mode
-- [ ] finsh new statusline
+- [ ] explanation of all the markdown & wiki features
 - [ ] remove every file and folder that is not actively in use.
 - [ ] finish snippets
-- [x] fix tabnine completion
 - [ ] create a better, centralized method for which-key
