@@ -1,3 +1,4 @@
+local g = require("domain.global")
 local packer = nil
 local function init()
   if packer == nil then
@@ -17,14 +18,12 @@ local function init()
     'junegunn/vim-peekaboo'      , 'kshenoy/vim-signature'    , 'romainl/vim-qf'               ,
     'junegunn/fzf.vim'           , 'tpope/vim-commentary'     , 'tpope/vim-eunuch'             ,
     'godlygeek/tabular'          , 'tpope/vim-surround'       , 'tpope/vim-repeat'             ,
-    'tpope/vim-fugitive'         , 'tpope/vim-rhubarb'        , 'junegunn/gv.vim'              ,
     'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
-    'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'lervag/wiki.vim'              ,
+    'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'tpope/vim-fugitive'           ,
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
     'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
     'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'tpope/vim-abolish'            ,
   }
--- Abolish {despa,sepe}rat{e,es,ed,ing,ely,ion,ions,or}  {despe,sepa}rat{}
 
   --    === SCOUR ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
@@ -46,28 +45,50 @@ local function init()
     -- requires = 'aca/completion-tabnine'
   -- }
 
-  use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
-    requires = 'glepnir/lspsaga.nvim'
-  }  -- 'klooj/nlua.nvim'
-
-  -- use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
-    -- requires = 'honza/vim-snippets'
-  -- }
-
   use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
     requires = {'hrsh7th/vim-vsnip-integ'}
   }
+  -- use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
+    -- requires = 'honza/vim-snippets'
+  -- }
   -- use 'norcalli/snippets.nvim'
   -- config = 'require("klooj.ansibleSnips")'}
 
+  if not g.is_pi then
+    use {'lervag/wiki.vim', 'tpope/vim-rhubarb', 'junegunn/gv.vim'}
+    use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
+      requires = 'glepnir/lspsaga.nvim'
+    }  -- 'klooj/nlua.nvim'
+
+    use {
+      {'neomake/neomake', cmd = 'Neomake'},
+      {'bfredl/nvim-luadev', cmd = 'Luadev'}
+    }
+    use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
+
+    -- |> ansible
+    use {'pearofducks/ansible-vim', config = [[require('ploog.ansible')]],
+      ft = {'yaml', 'yaml.ansible', 'yml'}
+    }
+    use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}
+
+    -- |>  R
+    use {'jalvesaq/Nvim-R', ft = {'R'}}
+
+    -- |>  python
+    use {'psf/black', config = [[require('ploog.black')]], ft = {'python'}}
+
+    if g.is_mac then
+      use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
+    end
+
+  -- use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
+
+  end
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',
     config = [[require('ploog.nvtree')]],
-  }
-  use {
-    {'neomake/neomake', cmd = 'Neomake'},
-    {'bfredl/nvim-luadev', cmd = 'Luadev'}
   }
   use {'gyim/vim-boxdraw', opt = true}
   use {'pechorin/any-jump.vim', config = [[require('ploog.anyjump')]],
@@ -79,9 +100,6 @@ local function init()
     config = [[require('ploog.whitespace')]]
   }
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
-  use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
-  use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
-  -- use { 'tpope/vim-abolish', cmd = {'Abolish', 'Subvert'}}
 
   --   === setup, startup, syntax, session ===
   use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
@@ -106,25 +124,12 @@ local function init()
   }
 
   -- === filetype/syntax specific ===
-  -- |> ansible
-  use {'pearofducks/ansible-vim', config = [[require('ploog.ansible')]],
-    ft = {'yaml', 'yaml.ansible', 'yml'}
-  }
-  use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}
-  -- |>  R
-  use {'jalvesaq/Nvim-R', ft = {'R'}}
-  -- |>  python
-  use {'psf/black', ft = {'python'}}
-    -- requires = {'tjdevries/py_package.nvim', 'tjdevries/apyrori.nvim'}
-
   -- |> markdown
   use {'dkarter/bullets.vim', config = [[require('ploog.bullets')]]}
-  use {'reedes/vim-pencil', requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical', 'itspriddle/vim-marked'},
-    -- ft = {'markdown', 'wiki'},
-  } -- 'reedes/vim-pencil', 'plasticboy/vim-markdown', 'reedes/vim-lexical'
--- config = function() require('ploog.markdown') end,
+  use {'reedes/vim-pencil', requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical'},
+    ft = {'markdown', 'wiki'},
+  }
 
-  use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
   -- |> json
   use {'prettier/vim-prettier', requires = 'elzr/vim-json',
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}

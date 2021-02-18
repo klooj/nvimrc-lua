@@ -9,6 +9,7 @@ github3.py
 jedi
 jedi-language-server
 jinja2
+matplotlib
 msgpack
 neovim
 neovim-remote
