@@ -1,6 +1,6 @@
 # nvim on lua
 
-!(screenshot.png)
+(screenshot.png)
 
 This repo configures neovim for macOS, ubuntu, and raspberry OS with language servers, tree-sitter, and completion, and it is written almost entirely in lua. I am fairly new to lua, nvim, and coding generally so if you stumble upon this repo, consider the source; try learning from my mistakes rather than following my lead. That being said, this setup is working fabulously for my modest programming needs. I have been sloppy about keeping track of attributions, but assume that nothing is original and most every file here originally came from [@tjdevries](https://github.com/tjdevries) or [@glepnir](https://github.com/glepnir).
 
