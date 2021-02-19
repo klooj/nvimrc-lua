@@ -2,8 +2,8 @@
 -- vim.g.loaded_compe_treesitter = true
 vim.g.loaded_compe_snippets_nvim = true
 -- vim.g.loaded_compe_spell = true
-vim.g.loaded_compe_tags = true
-vim.g.loaded_compe_ultisnips = true
+-- vim.g.loaded_compe_tags = true
+-- vim.g.loaded_compe_ultisnips = true
 vim.g.loaded_compe_vim_lsc = true
 vim.g.loaded_compe_vim_lsp = true
 vim.g.loaded_compe_nvim_lua = true
@@ -25,11 +25,12 @@ require('compe').setup {
     path = true,
     buffer = true,
     calc = true,
-    vsnip = true,
+    -- vsnip = true,
     nvim_lsp = true,
     -- nvim_lua = true,
     spell = true,
-    -- tags = true,
+    tags = true,
+    ultisnips = true,
     -- snippets_nvim = true,
     -- tabnine = true,
     treesitter = true,

@@ -19,6 +19,7 @@ require('indent_guides').setup {
     'term',
     'start',
     "which_key",
+    "sagahover",
   },
   even_colors = {
     bg = '#080032',

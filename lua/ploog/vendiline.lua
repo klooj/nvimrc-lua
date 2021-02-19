@@ -7,6 +7,7 @@ local fi         = require('galaxyline.provider_fileinfo')
 local gls        = gl.section
 local background = vim.o.bg
 local colors
+local dg         = require('galaxyline.provider_diagnostic')
 
 gl.short_line_list = {'NvimTree'}
 
@@ -27,8 +28,8 @@ end
 
 local icn = {
   sl = {
-    r = "",
-    l = ""
+    r = " ",
+    l = " ",
   },
 }
 
@@ -100,68 +101,30 @@ gls.left[1] = {
 gls.left[2] = {
   ViMode = {
     provider = function()
-      local fsize = fi.get_file_size()
       local fname = fi.get_current_file_name()
       local ficn  = fi.get_file_icon()
       vim.api.nvim_command('hi GalaxyViMode guibg='..mode_color[vim.fn.mode()])
-      return string.format("%s%s%s", ficn, fname, fsize)
+      return string.format("%s%s ", ficn, fname)
     end,
     condition = buffer_not_empty,
   },
 }
 
 gls.left[3] = {
-  GitIcon = {
-    provider = function() return ' ' end,
-    condition = buffer_not_empty,
-    highlight = {colors.orange,colors.bg_active},
+  FileSep = {
+    provider = function() return icn.sl.r end,
+    highlight = {colors.purple, colors.blue_active},
+    condition = function()
+      if dg.get_diagnostic_error() or dg.get_diagnostic_warn() or dg.get_diagnostic_hint() or dg.get_diagnostic_info() then
+        return true
+      else
+        return false
+      end
+    end
   }
 }
 
 gls.left[4] = {
-  GitBranch = {
-    provider = 'GitBranch',
-    condition = buffer_not_empty,
-    highlight = {colors.fg_active,colors.bg_active},
-  }
-}
-
-gls.left[5] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = checkwidth,
-    icon = ' ',
-    highlight = {colors.cyan_active,colors.bg_active},
-  }
-}
-
-gls.left[6] = {
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = checkwidth,
-    icon = '  ',
-    highlight = {colors.yellow_active,colors.bg_active},
-  }
-}
-
-gls.left[7] = {
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = checkwidth,
-    icon = '  ',
-    highlight = {colors.red_active,colors.bg_active},
-  }
-}
-
-gls.left[8] = {
-  LeftEnd = {
-    provider = function() return icn.sl.r end,
-    condition = buffer_not_empty,
-    highlight = {colors.bg_active, colors.bg_main,}
-  }
-}
-
-gls.right[1] = {
   DiagnosticError = {
     provider = 'DiagnosticError',
     icon = '  ',
@@ -169,7 +132,7 @@ gls.right[1] = {
   }
 }
 
-gls.right[2] = {
+gls.left[5] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
@@ -177,7 +140,7 @@ gls.right[2] = {
   }
 }
 
-gls.right[3] = {
+gls.left[6] = {
   DiagnosticHint = {
     provider = 'DiagnosticHint',
     icon = '   ',
@@ -186,18 +149,86 @@ gls.right[3] = {
   }
 }
 
-gls.right[4] = {
+gls.left[7] = {
+  DiagSep = {
+    provider = function() return icn.sl.r end,
+    highlight = {colors.blue_active, colors.bg_active},
+    condition = function()
+      if dg.get_diagnostic_error() or dg.get_diagnostic_warn() or dg.get_diagnostic_hint() or dg.get_diagnostic_info() then
+        return true
+      else
+        return false
+      end
+    end
+  }
+}
+
+gls.left[8] = {
+  GitIcon = {
+    provider = function() return ' ' end,
+    condition = buffer_not_empty,
+    highlight = {colors.orange,colors.bg_active},
+  }
+}
+
+gls.left[9] = {
+  GitBranch = {
+    provider = 'GitBranch',
+    condition = buffer_not_empty,
+    highlight = {colors.fg_active,colors.bg_active},
+  }
+}
+
+gls.left[10] = {
+  DiffAdd = {
+    provider = 'DiffAdd',
+    condition = checkwidth,
+    icon = ' ',
+    highlight = {colors.cyan_active,colors.bg_active},
+  }
+}
+
+gls.left[11] = {
+  DiffModified = {
+    provider = 'DiffModified',
+    condition = checkwidth,
+    icon = '  ',
+    highlight = {colors.yellow_active,colors.bg_active},
+  }
+}
+
+gls.left[12] = {
+  DiffRemove = {
+    provider = 'DiffRemove',
+    condition = checkwidth,
+    icon = '  ',
+    highlight = {colors.red_active,colors.bg_active},
+  }
+}
+
+gls.left[13] = {
+  LeftEnd = {
+    provider = function() return icn.sl.r end,
+    condition = buffer_not_empty,
+    highlight = {colors.bg_active, colors.bg_main,}
+  }
+}
+
+-- RIGHT SIDE
+
+gls.right[1] = {
   LineInfo = {
     provider = function()
       vim.api.nvim_command('hi GalaxyLineInfo guibg='..mode_color[vim.fn.mode()])
+      local fsize = fi.get_file_size()
       local lcol = fi.line_column()
       local ltot = vim.fn.line('$')
-      return string.format("%s/%s", lcol, ltot)
+      return string.format("%s/%s %s", lcol, ltot, fsize)
     end,
     condition = buffer_not_empty,
   },
 }
-gls.right[5] = {
+gls.right[2] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow_active,colors.purple},

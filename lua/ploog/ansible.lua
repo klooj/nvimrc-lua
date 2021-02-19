@@ -16,6 +16,8 @@ VG("ansible_", opts)
   -- local tasks_main = vim.cmd[[expand("<cfile>") . "/tasks/main.yml"]]
   -- local found_role_path = vim.cmd[[findfile(l:tasks_main, l:role_paths)]]
 
+-- local scan = require'plenary.scandir`
+-- scan.scan_dir('.', { hidden = true, depth = 2 })
 
 -- end
 -- " vim-plug example

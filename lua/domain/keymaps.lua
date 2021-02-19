@@ -32,6 +32,7 @@ function maps:load_whichKey_define()
 
     ["n|<Leader>,"]       = map_cr("Commentary"):with_noremap():with_silent()               ,
     ["x|<Leader>,"]       = map_cr("'<,'>Commentary"):with_noremap():with_silent()          ,
+    ["n|<Leader>;"]       = map_cmd(":%s:::g<Left><Left><Left>"):with_noremap()             ,
     ["n|<Leader>."]       = map_cr([[vsplit $FOONV/init.lua]]):with_noremap():with_silent() ,
     ["n|<Leader>\\"]      = map_cr("NvimTreeToggle"):with_noremap():with_silent()           ,
     ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,

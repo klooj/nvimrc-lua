@@ -45,8 +45,10 @@ function autocmd.load_autocmds()
       {"BufRead,BufNewFile","*.wiki","setf markdown"};
       {"FileType","json","set filetype=jsonc"};
       {"FileType","which_key","set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
+      {"BufRead,BufNewFile", "*/{playbooks,plays}/*.{yaml,yml}", "set filetype=yaml.ansible"},
+      -- {"FileType", "yaml.ansible", "lua require('compe').setup {source = {ultisnips = true}}"},
+-- call compe#setup({'source': extend({'ultisnips': v:true}, g:compe.source)}, 0)"},
     };
-
     yank = {
       {"TextYankPost",[[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]};
     };

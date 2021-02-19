@@ -12,7 +12,7 @@ local function init()
   -- local use_rocks = packer.use_rocks
   packer.reset()
 
-  -- === load on startup and config in lua/plugin or none ===
+  -- === load on startup and either config in lua/plugin or none ===
   use {
     'nvim-lua/popup.nvim'        , 'nvim-lua/plenary.nvim'    , 'tjdevries/astronauta.nvim'    ,
     'junegunn/vim-peekaboo'      , 'kshenoy/vim-signature'    , 'romainl/vim-qf'               ,
@@ -25,7 +25,7 @@ local function init()
     'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'tpope/vim-abolish'            ,
   }
 
-  --    === SCOUR ===
+  --    === telescope ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
     requires = {'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',
       'nvim-telescope/telescope-github.nvim', 'nvim-telescope/telescope-symbols.nvim',
@@ -34,37 +34,49 @@ local function init()
     }
   }
 
-  -- === completion, lsp, snippets, treesitter ===
+  -- === treesitter ===
   use {'nvim-treesitter/nvim-treesitter', config = [[require('ploog.treesitter')]],
     requires = {'nvim-treesitter/nvim-treesitter-textobjects' , 'romgrk/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-refactor' , 'p00f/nvim-ts-rainbow'}
   }
 
+  -- === completion ===
   use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'}}
   -- use {'nvim-lua/completion-nvim', config = function() require('ploog.completion') end,
     -- requires = 'aca/completion-tabnine'
   -- }
 
-  use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
-    requires = {'hrsh7th/vim-vsnip-integ'}
-  }
-  -- use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end,
+  -- === snippets ===
+  -- use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
+    -- requires = {'hrsh7th/vim-vsnip-integ'}
+  -- }
+  use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end}
     -- requires = 'honza/vim-snippets'
   -- }
   -- use 'norcalli/snippets.nvim'
   -- config = 'require("klooj.ansibleSnips")'}
 
+  -- === for everybody but raspberry pi's ===
   if not g.is_pi then
     use {'lervag/wiki.vim', 'tpope/vim-rhubarb', 'junegunn/gv.vim'}
+
+    use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
+
+    use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
+      requires = {'tpope/vim-obsession', opt = true},
+      config = [[require('ploog.prosession')]]
+    }
+
+    -- |> lsp
     use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
       requires = 'glepnir/lspsaga.nvim'
     }  -- 'klooj/nlua.nvim'
 
+    -- |> make and debug
     use {
       {'neomake/neomake', cmd = 'Neomake'},
       {'bfredl/nvim-luadev', cmd = 'Luadev'}
     }
-    use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
 
     -- |> ansible
     use {'pearofducks/ansible-vim', config = [[require('ploog.ansible')]],
@@ -85,6 +97,7 @@ local function init()
   -- use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
 
   end
+
   --    === apparatuses ===
   use {'wbthomason/packer.nvim', opt = true}
   use {'kyazdani42/nvim-tree.lua', cmd = 'NvimTreeToggle',
@@ -102,10 +115,6 @@ local function init()
   use {'AndrewRadev/sideways.vim', cmd = {'SidewaysLeft', 'SidewaysRight'}}
 
   --   === setup, startup, syntax, session ===
-  use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
-    requires = {'tpope/vim-obsession', opt = true},
-    config = [[require('ploog.prosession')]]
-  }
   use {'mbbill/undotree', cmd = 'UndotreeToggle',
     config = [[require('ploog.undotree')]]
   }
