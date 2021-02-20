@@ -29,7 +29,7 @@ require('compe').setup {
     nvim_lsp = true,
     -- nvim_lua = true,
     spell = true,
-    tags = true,
+    -- tags = true,
     ultisnips = true,
     -- snippets_nvim = true,
     -- tabnine = true,

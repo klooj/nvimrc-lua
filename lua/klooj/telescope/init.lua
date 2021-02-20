@@ -144,7 +144,7 @@ function M.edit_neovim()
     shorten_path = false,
     cwd = "~/.config/nvim",
     width = .25,
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -153,7 +153,7 @@ function M.edit_zsh()
     shorten_path = false,
     cwd = "~/.dotfiles/zdots",
     prompt = "|> ::zdots:: <| ",
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -162,7 +162,7 @@ function M.edit_dots()
     shorten_path = false,
     cwd = "~/.dotfiles",
     prompt = "|> ::dotfiles:: <| ",
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -172,7 +172,7 @@ function M.edit_klooj()
     shorten_path = false,
     cwd = "~/.config/nvim/lua/klooj",
     width = .25,
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -182,7 +182,7 @@ function M.edit_ploog()
     shorten_path = false,
     cwd = "~/.config/nvim/lua/klooj",
     width = .25,
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -192,7 +192,7 @@ function M.nvim_runtime()
     shorten_path = false,
     cwd = "~/.local/share/nvim",
     width = .50,
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
   }
 end
 
@@ -218,6 +218,14 @@ function M.fd_wiki()
   require('telescope.builtin').fd {
     prompt_title = "<> fd wiki <>",
     cwd = "~/Desktop/info",
+    theme = drop_list
+  }
+end
+
+function M.fd_home()
+  require('telescope.builtin').fd {
+    prompt_title = "♾️  HOME ♾️ ",
+    cwd = "~/",
     theme = drop_list
   }
 end

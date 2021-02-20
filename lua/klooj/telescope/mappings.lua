@@ -42,13 +42,14 @@ map_tele('<leader>fGs', 'git_status')
 --
 map_tele('<leader>fh', 'command_history')
 map_tele('<leader>fH', 'help_tags')
--- |>i for 'in foo/'
+-- |>i for in [foo]
 map_tele('<leader>fid', 'edit_dots')
+map_tele('<leader>fih', 'fd_home')
 map_tele('<leader>fik', 'edit_klooj')
 map_tele('<leader>fin', 'edit_neovim')
 map_tele('<leader>fip', 'installed_plugins')
 map_tele('<leader>fiv', 'nvim_runtime')
-map_tele('<leader>fiw', 'search_wiki')
+map_tele('<leader>fiw', 'fd_wiki')
 map_tele('<leader>fiz', 'edit_zsh')
 -- |>l for list
 map_tele('<leader>flh', 'highlights')

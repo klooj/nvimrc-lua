@@ -90,6 +90,9 @@ local function init()
     -- |>  python
     use {'psf/black', config = [[require('ploog.black')]], ft = {'python'}}
 
+    -- |> c
+    use {'rhysd/vim-clang-format', ft = {'c'}, config = [[require('ploog.clangd')]]}
+
     if g.is_mac then
       use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
     end
@@ -143,6 +146,8 @@ local function init()
   use {'prettier/vim-prettier', requires = 'elzr/vim-json',
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}
   }
+
+
 end
 
 local plugins = setmetatable({}, {

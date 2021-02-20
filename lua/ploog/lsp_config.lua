@@ -29,10 +29,13 @@ follow the pattern <leader>d
 ]]
 local custom_attach = function(client)
   -- |> configs applying to all clients
+  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
   if client.config.flags then
-    client.config.flags.allow_incremental_sync = true
+    if filetype ~= 'c' then
+      client.config.flags.allow_incremental_sync = true
+    end
     -- client.config.flags.allow_highlight = true
-    -- client.config.flags.allow_indent = true
+    client.config.flags.allow_indent = true
   end
 
 
@@ -73,26 +76,20 @@ for _, lsp in ipairs(noFuss) do
   lspconfig[lsp].setup {capabilities = capabilities, on_attach = custom_attach }
 end
 
--- lspconfig.texlab.setup {
---   settings = {
---     latex = {forwardSearch = {executable = 'zathura', args = {'%f'}}}
---   },
---   commands = {
---     TexlabForwardSearch = {
---       function()
---         local pos = vim.api.nvim_win_get_cursor(0)
---         local params = {
---           textDocument = {uri = vim.uri_from_bufnr(0)},
---           position = {line = pos[1] - 1, character = pos[2]}
---         }
---         vim.lsp.buf_request(0, 'textDocument/forwardSearch', params,
---                         function(err, _, _, _) if err then error(tostring(err)) end end)
---       end,
---       description = 'Run synctex forward search'
---     }
---   }
--- }
 
+lspconfig.clangd.setup {
+  cmd = {
+    "clangd",
+    "--background-index",
+    "--suggest-missing-includes",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
+  },
+  on_attach = custom_attach,
+  capabilities = capabilities,
+}
+
+-- SUMNEKO
 local get_lua_runtime = function()
   local result = {}
   local sorted_rt = {}
@@ -145,6 +142,27 @@ end
 if not g.is_pi then
   setup_sumneko()
 end
+
+--------
+-- lspconfig.texlab.setup {
+--   settings = {
+--     latex = {forwardSearch = {executable = 'zathura', args = {'%f'}}}
+--   },
+--   commands = {
+--     TexlabForwardSearch = {
+--       function()
+--         local pos = vim.api.nvim_win_get_cursor(0)
+--         local params = {
+--           textDocument = {uri = vim.uri_from_bufnr(0)},
+--           position = {line = pos[1] - 1, character = pos[2]}
+--         }
+--         vim.lsp.buf_request(0, 'textDocument/forwardSearch', params,
+--                         function(err, _, _, _) if err then error(tostring(err)) end end)
+--       end,
+--       description = 'Run synctex forward search'
+--     }
+--   }
+-- }
 
 -- '?.lua',
 -- '?/init.lua',
