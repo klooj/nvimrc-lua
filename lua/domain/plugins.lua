@@ -59,15 +59,9 @@ local function init()
 
   -- === for everybody but raspberry pi's ===
   if not g.is_pi then
+
     use {'lervag/wiki.vim', 'tpope/vim-rhubarb', 'junegunn/gv.vim'}
-
     use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
-
-    -- use {'dhruvasagar/vim-prosession', requires = {'tpope/vim-obsession'}, config = [[require('ploog.prosession')]] }
-    -- use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
-    --   requires = {'tpope/vim-obsession', opt = true},
-    --   config = [[require('ploog.prosession')]]
-    -- }
 
     -- |> lsp
     use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
@@ -98,9 +92,6 @@ local function init()
     if g.is_mac then
       use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
     end
-
-  -- use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
-
   end
 
   --    === apparatuses ===
@@ -140,15 +131,14 @@ local function init()
   -- === filetype/syntax specific ===
   -- |> markdown
   use {'dkarter/bullets.vim', config = [[require('ploog.bullets')]]}
-  use {'reedes/vim-pencil', requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical'},
-    ft = {'markdown', 'wiki'},
+  use {'reedes/vim-pencil', ft = {'markdown', 'wiki'},
+    requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical'},
   }
 
   -- |> json
   use {'prettier/vim-prettier', requires = 'elzr/vim-json',
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}
   }
-
 
 end
 
@@ -162,6 +152,16 @@ local plugins = setmetatable({}, {
 return plugins
 
 ---------------------------
+
+-- use {'lervag/vimtex', config = [[require('ploog.vimtex')]], ft = {'tex'}}
+
+-- use {'dhruvasagar/vim-prosession', requires = {'tpope/vim-obsession'}, config = [[require('ploog.prosession')]] }
+-- use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
+--   requires = {'tpope/vim-obsession', opt = true},
+--   config = [[require('ploog.prosession')]]
+-- }
+
+
 -- treesitter
 -- 'nvim-treesitter/nvim-treesitter-textobjects',
 -- {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
