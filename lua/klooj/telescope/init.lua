@@ -64,7 +64,7 @@ require('telescope').setup {
 
     prompt_prefix        = ' 🌜 ',
     prompt_position      = "top",
-    winblend             = 0,
+    winblend             = 20,
     width                = 0.85,
     preview_cutoff       = 200,
     results_height       = 1,
@@ -76,7 +76,7 @@ require('telescope').setup {
         preview_width  = 0.6,
       },
       vertical   = {
-        width_padding    = 0.05,
+        width_padding    = 0.02,
         height_padding   = 1,
         preview_height   = 0.7,
       }
@@ -91,10 +91,10 @@ require('telescope').setup {
     mappings = {
       i = {
         ["<C-x>"] = false,
-        ["<C-s>"] = actions.goto_file_selection_split,
+        ["<C-s>"] = actions.select_horizontal,
         ["<esc>"] = actions.close,
         ["<C-]>"] = actions.move_selection_next,
-        ["<C-[>"] = actions.move_selection_prev,
+        ["<C-[>"] = actions.move_selection_previous,
         ["<tab>"] = actions.add_selection,
         ["<C-q>"] = actions.send_to_qflist,
         -- ["<C-Q>"] = actions.send_to_qflist,

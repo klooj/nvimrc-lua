@@ -1,6 +1,6 @@
 # nvim on lua
-
-![screenshot](screenshot.png)
+!(screen1.png)
+!(screenshot.png)
 
 This repo configures neovim for macOS, ubuntu, and raspberry OS with language servers, tree-sitter, and completion, and it is written almost entirely in lua. I am fairly new to lua, nvim, and coding generally so if you stumble upon this repo, consider the source; try learning from my mistakes rather than following my lead. That being said, this setup is working fabulously for my modest programming needs. I have been sloppy about keeping track of attributions, but assume that nothing is original and most every file here originally came from [@tjdevries](https://github.com/tjdevries) or [@glepnir](https://github.com/glepnir).
 
@@ -34,7 +34,9 @@ Ultimately, I'd like nvim to perform as a word processor with the same agile pow
 
 - [ ] instructions; maybe even a script, makefile, and/or dockerfile.
 - [ ] explanation of language servers, pyenv, and other extras used. maybe just throw my daily build script in here?
-- [ ] explanation of all the markdown & wiki features
+- [ ] explanation of all the markdown & wiki features; prose mode
+- [ ] finsh new statusline
 - [ ] remove every file and folder that is not actively in use.
 - [ ] finish snippets
+- [x] fix tabnine completion
 - [ ] create a better, centralized method for which-key

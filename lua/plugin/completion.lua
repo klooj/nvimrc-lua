@@ -43,12 +43,12 @@ local t = function(str)
 end
 
 local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
+  local col = vim.fn.col('.') - 1
+  if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+    return true
+  else
+    return false
+  end
 end
 
 -- Use (s-)tab to:
@@ -57,8 +57,8 @@ end
 _G.tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
+  -- elseif vim.fn.call("vsnip#available", {1}) == 1 then
+    -- return t "<Plug>(vsnip-expand-or-jump)"
   elseif check_back_space() then
     return t "<Tab>"
   else
@@ -68,8 +68,8 @@ end
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
+  -- elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
+    -- return t "<Plug>(vsnip-jump-prev)"
   else
     return t "<S-Tab>"
   end
@@ -131,11 +131,11 @@ vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- VG("completion_", opts)
 
 -- if not vim.g.loaded_completion_tabnine then
-  -- vim.cmd [[ packadd completion-nvim completion-tabnine ]]
+-- vim.cmd [[ packadd completion-nvim completion-tabnine ]]
 -- end
 
-    -- default = {
-    --   { complete_items = {'lsp', 'tabnine', 'path', 'snippet'}},
-    --   { mode = '<c-p>'},
-    --   { mode = '<c-n>'},
-    -- },
+-- default = {
+--   { complete_items = {'lsp', 'tabnine', 'path', 'snippet'}},
+--   { mode = '<c-p>'},
+--   { mode = '<c-n>'},
+-- },

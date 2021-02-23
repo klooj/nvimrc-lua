@@ -23,6 +23,7 @@ vim.cmd[==[let g:lo_key_map = [] ]==]
 vim.g.which_key_map = {
   [',']       = 'comment'              ,
   ['.']       = 'vimrc'                ,
+  [';']       = 'substitute'           ,
   ['<Left>']  = 'move buffer next'     ,
   ['<Right>'] = 'move buffer previous' ,
   ['=']       = 'balance windows'      ,

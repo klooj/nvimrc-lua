@@ -19,7 +19,6 @@
     "yarn": "^1.22.10"
   },
   "description": "modal editor",
-  "devDependencies": {},
   "directories": {
     "doc": "doc",
     "example": "examples"

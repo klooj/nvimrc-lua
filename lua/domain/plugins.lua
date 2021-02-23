@@ -23,6 +23,7 @@ local function init()
     'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
     'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
     'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'tpope/vim-abolish'            ,
+    'AndrewRadev/splitjoin.vim'  , 'glepnir/dashboard-nvim'   ,
   }
 
   --    === telescope ===
@@ -62,10 +63,11 @@ local function init()
 
     use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
 
-    use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
-      requires = {'tpope/vim-obsession', opt = true},
-      config = [[require('ploog.prosession')]]
-    }
+    -- use {'dhruvasagar/vim-prosession', requires = {'tpope/vim-obsession'}, config = [[require('ploog.prosession')]] }
+    -- use {'dhruvasagar/vim-prosession', cmd = 'Prosession',
+    --   requires = {'tpope/vim-obsession', opt = true},
+    --   config = [[require('ploog.prosession')]]
+    -- }
 
     -- |> lsp
     use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
