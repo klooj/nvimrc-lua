@@ -106,15 +106,15 @@ local get_lua_runtime = function()
   result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
 
   sorted_rt = KJ.table_unique(result)
-  return sorted_rt;
+  return sorted_rt
 end
 
-local setup_sumneko = function()
+if not g.is_pi then
   lspconfig.sumneko_lua.setup {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
     capabilities = capabilities,
     on_attach = custom_attach,
-    filetypes = {"lua"},
+    -- filetypes = {"lua"},
     settings = {
       Lua = {
         runtime = {
@@ -122,16 +122,14 @@ local setup_sumneko = function()
           path = KJ.table_unique(vim.split(package.path, ';'))
         },
         diagnostics = {
-          globals = {
-            [[vim]],
-          },
-          -- enable = true,
+          enable = true,
           disable = "trailing-space",
+          globals = {'vim'},
         },
         telemetry = {
           enable = false
         },
-        workspace = { library = get_lua_runtime() },
+        workspace = {library = get_lua_runtime()},
         makePreload = 2000,
         preloadFileSize = 1000,
       },
@@ -139,9 +137,6 @@ local setup_sumneko = function()
   }
 end
 
-if not g.is_pi then
-  setup_sumneko()
-end
 
 --------
 -- lspconfig.texlab.setup {

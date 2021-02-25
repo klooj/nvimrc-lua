@@ -1,10 +1,9 @@
 require('indent_guides').setup {
-  indent_guide_size = 1,
-  indent_levels = 30,
-  -- indent_pretty_guides = true,
-  indent_soft_pattern = '\\s',
-  indent_space_guides = true,
-  indent_start_level = 1,
+  -- indent_guide_size = 1,
+  -- indent_levels = 30,
+  -- indent_soft_pattern = '\\s',
+  -- indent_space_guides = true,
+  -- indent_start_level = 1,
   indent_tab_guides = true,
   exclude_filetypes = {
     'help',
@@ -20,20 +19,22 @@ require('indent_guides').setup {
     'start',
     "which_key",
     "sagahover",
-  },
-  even_colors = {
-    bg = '#080032',
-    fg = '#200213',
-  },
-  odd_colors = {
-    bg = '#200213',
-    -- bg = '#050112',
-    -- bg = '#200152',
-    -- fg = '#300105',
-    fg = '#080032',
+    'sagasignature',
   },
 }
 
+  -- indent_pretty_guides = true,
+  -- even_colors = {
+  --   bg = '#080032',
+  --   fg = '#200213',
+  -- },
+  -- odd_colors = {
+  --   bg = '#200213',
+  --   -- bg = '#050112',
+  --   -- bg = '#200152',
+  --   -- fg = '#300105',
+  --   fg = '#080032',
+  -- },
 -- fg = '#403010',
 -- bg = '#705030',
 -- fg = '#705030',
