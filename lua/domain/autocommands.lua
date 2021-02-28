@@ -24,10 +24,11 @@ function autocmd.load_autocmds()
       {"BufWritePre","*.tmp","setlocal noundofile"};
       {"BufWritePre","*.bak","setlocal noundofile"};
       -- {"BufRead","*","lua require('klooj.selfunc').enable_fold()"};
-      {"BufEnter","~/Desktop/info/journal/*.wiki","call kp#Stamp()"};
-      {"BufWritePre","*.md,*.wiki",'call kp#trimTrailingEmpty()'};
-      {"BufEnter", "*.wiki", [[setl nowrap]]},
-      {"BufEnter","*","setl fo=jnrl1c fo-=o sts=-1"};
+      {"BufEnter","~/Desktop/info/journal/*.wiki",[[call kp#Stamp()]]};
+      {"BufWritePre","*.md,*.wiki",[[call kp#trimTrailingEmpty()]]};
+      {"BufEnter", "*.wiki", "setl nowrap"},
+      {"BufEnter","*","setl fo=jnrl1c sts=-1"};
+      {"BufRead,BufNewFile,WinEnter", "*", "set fo-=o"};
       -- {"BufRead,BufNewFile","*",[[if (&buftype != "prompt") && (&buftype != "nofile") | lua require('completion').on_attach()]]};
     };
 
@@ -38,11 +39,11 @@ function autocmd.load_autocmds()
       -- Highlight current line  in focused window only
       {"WinEnter,BufEnter,InsertLeave","*",[[if ! &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal cursorline | endif]]};
       {"WinLeave,BufLeave,InsertEnter","*",[[if &cursorline && &filetype !~# '^(dashboard|start)' && ! &pvw | setlocal nocursorline | endif]]};
-      {"Syntax",[[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! link extTodo Todo]]};
+      -- {"Syntax",[[* syn match extTodo "\<\(NOTE\|HACK\|BAD\|TODO\):\?" containedin=.*Comment.* | hi! link extTodo Todo]]};
     };
 
     ft = {
-      {"BufRead,BufNewFile","*.wiki","setf markdown"};
+      -- {"BufRead,BufNewFile","*.wiki","setf markdown"};
       {"FileType","json","set filetype=jsonc"};
       {"FileType","which_key","set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
       {"BufRead,BufNewFile", "*/{playbooks,plays}/*.{yaml,yml}", "set filetype=yaml.ansible"},

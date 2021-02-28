@@ -35,7 +35,7 @@ function options:load_options()
     errorbells     = true;
     fileencoding   = "utf-8";
     fileformats    = "unix,mac,dos";
-    foldlevelstart = 2;
+    -- foldlevelstart = 2;
     grepformat     = "%f:%l:%c:%m,%f:%l:%m";
     grepprg        = 'rg --hidden --vimgrep --smart-case --engine=auto --follow --no-heading --trim -- ';
     helpheight     = 12;
@@ -108,7 +108,8 @@ function options:load_options()
     cursorline     = true;
     eol            = true;
     fixeol         = true;
-    foldenable     = true;
+    nofoldenable   = true;
+    -- foldenable     = false;
     -- foldexpr      = 'nvim_treesitter#foldexpr()';
     -- foldmethod    = 'expr';
     foldmethod     = 'indent';

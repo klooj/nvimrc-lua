@@ -1,25 +1,16 @@
-local g = require('domain.global')
+local format    = require('klooj.format')
+local g         = require('domain.global')
+local KJ        = require('klooj.utils')
 local lspconfig = require('lspconfig')
-local api = vim.api
-local format = require('klooj.format')
--- local completion = require('completion')
-local KJ = require('klooj.utils')
+local saga      = require('lspsaga')
+-- local api = vim.api
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local saga = require('lspsaga')
 saga.init_lsp_saga {
-  finder_action_keys = {
-    open = 'o', vsplit = 'v', split = 's', quit = 'q'
-  },
+  finder_action_keys = { open = 'o', vsplit = 'v', split = 's', quit = 'q' },
 }
-
--- === mapping funcs used in custom attach
-local telescope_mapper = require('klooj.telescope.mappings')
-local mapper = function(mode, key, result)
-  api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
-end
 
 --[[  === custom attach function ===
 Any time a file is opened that matches the type of a language server configured below,
@@ -28,49 +19,55 @@ to do keymappings that are only relevant in conjunction with an lsp. most of the
 follow the pattern <leader>d
 ]]
 local custom_attach = function(client)
+  -- completion.on_attach(client)
+
+  local nrmap = vim.keymap.nnoremap
+  local xrmap = vim.keymap.xnoremap
+  -- local irmap = vim.keymap.inoremap
+  local l     = [[<Leader>]]
+  local telescope_mapper = require('klooj.telescope.mappings')
+
   -- |> configs applying to all clients
   local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
   if client.config.flags then
     if filetype ~= 'c' then
       client.config.flags.allow_incremental_sync = true
     end
-    -- client.config.flags.allow_highlight = true
+    client.config.flags.allow_highlight = false
     client.config.flags.allow_indent = true
   end
 
 
   if client.resolved_capabilities.document_formatting then
     format.lsp_before_save()
-    mapper("n", "<Leader>dF", "vim.lsp.buf.formatting()")
+    nrmap{l .. "dF", function() vim.lsp.buf.formatting() end, {nowait = true, buffer = true}}
   elseif client.resolved_capabilities.document_range_formatting then
-    mapper("n", "<Leader>dF", "vim.lsp.buf.range_formatting()")
+    nrmap{l .. "dF", function() vim.lsp.buf.range_formatting() end, {nowait = true, buffer = true}}
   end
 
-  -- completion.on_attach(client)
 
-  -- |> keymaps
-  mapper('n', '<CR>', 'vim.lsp.buf.definition()')
-  mapper('n', 'gh', 'require("lspsaga.provider").lsp_finder()')
+  -- |> keymaps are all prefixed by leader
+  telescope_mapper(l .. 'dr', 'lsp_references', nil, true)
+  telescope_mapper(l .. 'dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
 
-  mapper('n', '<Leader>d]', 'require("lspsaga.diagnostic").lsp_jump_diagnostic_next()')
-  mapper('n', '<Leader>d[', 'require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()')
-  mapper('n', '<Leader>dl', 'require("lspsaga.diagnostic").show_line_diagnostics()')
-  mapper('n', '<Leader>dp', 'require("lspsaga.provider").preview_definition()')
+  nrmap{'<CR>'   , function() vim.lsp.buf.definition() end                                , {nowait = true, buffer = true}}
+  nrmap{'gh'     , function() require("lspsaga.provider").lsp_finder() end                , {nowait = true, buffer = true}}
+  nrmap{l .. 'd]', function() require('lspsaga.diagnostic').lsp_jump_diagnostic_next() end, {nowait = true, buffer = true}}
+  nrmap{l .. 'd[', function() require('lspsaga.diagnostic').lsp_jump_diagnostic_prev() end, {nowait = true, buffer = true}}
+  nrmap{l .. 'dl', function() require("lspsaga.diagnostic").show_line_diagnostics() end   , {nowait = true, buffer = true}}
+  nrmap{l .. 'dp', function() require("lspsaga.provider").preview_definition() end        , {nowait = true, buffer = true}}
+  nrmap{l .. 'da', function() require("lspsaga.codeaction").code_action() end             , {nowait = true, buffer = true}}
+  xrmap{l .. 'da', function() require("lspsaga.codeaction").code_action() end             , {nowait = true, buffer = true}}
+  nrmap{l .. 'ds', function() require("lspsaga.signaturehelp").signature_help() end       , {nowait = true, buffer = true}}
+  nrmap{l .. 'dR', function() require("lspsaga.rename").rename() end                      , {nowait = true, buffer = true}}
+  nrmap{'K'      , function() require("lspsaga.hover").render_hover_doc() end             , {nowait = true, buffer = true}}
+  nrmap{'<C-0>'  , function() require("lspsaga.hover").smart_scroll_hover(1) end          , {nowait = true, buffer = true}}
+  nrmap{'<C-9>'  , function() require("lspsaga.hover").smart_scroll_hover(-1) end         , {nowait = true, buffer = true}}
 
-  telescope_mapper('<Leader>dr', 'lsp_references', nil, true)
-  telescope_mapper('<Leader>dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
-
-  mapper('n', '<Leader>da' ,'require("lspsaga.codeaction").code_action()')
-  mapper('x', '<Leader>da' ,'require("lspsaga.codeaction").code_action()')
-  mapper('n', '<leader>ds' ,'require("lspsaga.signaturehelp").signature_help()')
-  mapper('n', '<leader>dR' ,'require("lspsaga.rename").rename()')
-  mapper('n', 'K'          ,'require("lspsaga.hover").render_hover_doc()')
-  mapper('n', '<C-0>'      ,'require("lspsaga.hover").smart_scroll_hover(1)')
-  mapper('n', '<C-9>'      ,'require("lspsaga.hover").smart_scroll_hover(-1)')
-
-  vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+  vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
+-- |> servers
 local noFuss = {'bashls', 'cmake', 'jsonls', 'jedi_language_server', 'r_language_server', 'yamlls', 'vimls'}
 for _, lsp in ipairs(noFuss) do
   lspconfig[lsp].setup {capabilities = capabilities, on_attach = custom_attach }
@@ -79,11 +76,7 @@ end
 
 lspconfig.clangd.setup {
   cmd = {
-    "clangd",
-    "--background-index",
-    "--suggest-missing-includes",
-    "--clang-tidy",
-    "--header-insertion=iwyu",
+    "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy", "--header-insertion=iwyu",
   },
   on_attach = custom_attach,
   capabilities = capabilities,
@@ -114,12 +107,12 @@ if not g.is_pi then
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
     capabilities = capabilities,
     on_attach = custom_attach,
-    -- filetypes = {"lua"},
     settings = {
       Lua = {
         runtime = {
           version = 'LuaJIT',
-          path = KJ.table_unique(vim.split(package.path, ';'))
+          path = vim.split(package.path, ';')
+          -- path = KJ.table_unique(vim.split(package.path, ';'))
         },
         diagnostics = {
           enable = true,
@@ -129,9 +122,11 @@ if not g.is_pi then
         telemetry = {
           enable = false
         },
-        workspace = {library = get_lua_runtime()},
-        makePreload = 2000,
-        preloadFileSize = 1000,
+        workspace = {
+          library = get_lua_runtime(),
+          maxPreload = 2000,
+          preloadFileSize = 1000,
+        },
       },
     },
   }
@@ -139,6 +134,8 @@ end
 
 
 --------
+  -- vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
+    -- filetypes = {"lua"},
 -- lspconfig.texlab.setup {
 --   settings = {
 --     latex = {forwardSearch = {executable = 'zathura', args = {'%f'}}}
@@ -206,10 +203,10 @@ end
 
 mapper('i', '<c-h>', 'vim.lsp.buf.signature_help()')
 api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
-mapper('n', '<Leader>dn', 'vim.lsp.diagnostic.goto_next()')
-mapper('n', '<Leader>dp', 'vim.lsp.diagnostic.goto_prev()')
-telescope_mapper('<Leader>da', 'lsp_code_actions', nil, true)
-mapper('n', '<Leader>dR', 'MyLspRename()')
+mapper('n', l .. 'dn', 'vim.lsp.diagnostic.goto_next()')
+mapper('n', l .. 'dp', 'vim.lsp.diagnostic.goto_prev()')
+telescope_mapper(l .. 'da', 'lsp_code_actions', nil, true)
+mapper('n', l .. 'dR', 'MyLspRename()')
 
 -- === misc. lsp funcs and extras from @tjdevries ===
 function MyLspRename()
@@ -263,5 +260,23 @@ signs = sign_decider,
 update_in_insert = false,
 }
 )
+-- local completion = require('completion')
+-- === mapping funcs used in custom attach
+-- local mapper = function(mode, key, result)
+-- api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", {noremap = true, silent = true})
+-- end
+
+  -- local nnoremap = vim.keymap.nnoremap
+
+  -- local lspkeys, lspcmd
+  -- lspcmd = "function() " .. cmd .. " end"
+
+
+  -- local xrmap = function(kbd, cmd)
+  --   lspkeys = l .. kbd
+  --   lspcmd = "function() " .. cmd .. " end"
+  --  vim.keymap.nnoremap{lspkeys, lspcmd, {nowait = true, buffer = true}}
+  -- end
+
 
 ]==]

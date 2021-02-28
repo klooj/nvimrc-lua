@@ -37,7 +37,7 @@ M.snazz = function(opts)
   require('colorbuddy').colorscheme(opts.theme)
   vim.cmd[[hi! link colorcolumn cursorline]]
   vim.cmd[[hi! link cursorcolumn cursorline]]
-  vim.cmd[[hi LineNr guifg=#824020]]
+  -- vim.cmd[[hi LineNr guifg=#824020]]
   if opts.transp then
     M.seeThrough()
   end

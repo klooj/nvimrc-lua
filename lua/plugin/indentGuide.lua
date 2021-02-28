@@ -4,26 +4,29 @@ require('indent_guides').setup {
   -- indent_soft_pattern = '\\s',
   -- indent_space_guides = true,
   -- indent_start_level = 1,
+  -- indent_pretty_guides = true,
   indent_tab_guides = true,
+  even_colors = { fg = '#2a3834',bg = '#2a3834' };
+  odd_colors = { fg = '#332b36',bg = '#332b36' };
   exclude_filetypes = {
-    'help',
-    'markdown',
-    'wiki',
     'dashboard',
     'dashpreview',
-    'startify',
+    'floaterm',
+    'help',
+    'log',
+    'markdown',
     'NvimTree',
     'packer',
-    'floaterm',
-    'term',
-    'start',
-    "which_key",
-    "sagahover",
+    'sagahover',
     'sagasignature',
+    'start',
+    'startify',
+    'term',
+    'which_key',
+    'wiki',
   },
 }
 
-  -- indent_pretty_guides = true,
   -- even_colors = {
   --   bg = '#080032',
   --   fg = '#200213',
@@ -41,3 +44,7 @@ require('indent_guides').setup {
 -- bg = '#403010',
 -- fg = '#300130',
 -- bg = '#100150',
+-- even_colors = { fg = '#2a3834',bg = '#2a3834' };
+-- odd_colors = { fg = '#332b36',bg = '#332b36' };
+-- +    even_colors = { fg = '#2b3834',bg = '#2d3542' };
+-- +    odd_colors = { fg = '#2d3542',bg = '#2b3834' };

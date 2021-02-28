@@ -1,4 +1,4 @@
 augroup MdDetect
     au!
-    au BufReadPost *.wiki set filetype=markdown
+    au BufRead *.wiki set filetype=markdown
 augroup END

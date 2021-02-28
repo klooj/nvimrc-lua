@@ -51,7 +51,7 @@ local function init()
   -- use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
     -- requires = {'hrsh7th/vim-vsnip-integ'}
   -- }
-  use {'SirVer/ultisnips', config = function() require('ploog.ultisnips') end}
+  use {'SirVer/ultisnips', config = [[require('ploog.ultisnips')]]}
     -- requires = 'honza/vim-snippets'
   -- }
   -- use 'norcalli/snippets.nvim'
@@ -123,20 +123,20 @@ local function init()
 
   --    === ui accoutrement ===
   use {
-    {'glepnir/zephyr-nvim', opt = true},
+    {'klooj/zephyr-nvim', opt = true},
+    -- {'glepnir/zephyr-nvim', opt = true},
     {'ishan9299/modus-theme-vim', opt = true},
     {'Th3Whit3Wolf/spacebuddy', opt = true},
   }
 
   -- === filetype/syntax specific ===
   -- |> markdown
-  use {'dkarter/bullets.vim', config = [[require('ploog.bullets')]]}
-  use {'reedes/vim-pencil', ft = {'markdown', 'wiki'},
-    requires = { 'plasticboy/vim-markdown', 'reedes/vim-lexical'},
+  use {'dkarter/bullets.vim', ft = {'markdown', 'wiki'}, config = [[require('ploog.markdown')]],
+    requires = { 'reedes/vim-pencil', 'plasticboy/vim-markdown', 'reedes/vim-lexical'}
   }
 
   -- |> json
-  use {'prettier/vim-prettier', requires = 'elzr/vim-json',
+  use {'prettier/vim-prettier', requires = 'elzr/vim-json', config = [[require('ploog.pretty')]],
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}
   }
 
