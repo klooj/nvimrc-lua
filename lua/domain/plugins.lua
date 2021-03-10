@@ -26,6 +26,8 @@ local function init()
     'AndrewRadev/splitjoin.vim'  , 'glepnir/dashboard-nvim'   ,
   }
 
+  use {'norcalli/nvim-terminal.lua', config = [[require('terminal').setup()]] }
+--
   --    === telescope ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
     requires = {'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',

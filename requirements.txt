@@ -19,9 +19,8 @@ pre-commit
 proselint
 pycurl
 pylint
-pyls-black
 pynvim
-python-language-server[all]
+pytest
 regex
 setuptools
 tasklib

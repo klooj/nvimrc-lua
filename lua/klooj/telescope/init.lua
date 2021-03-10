@@ -129,9 +129,9 @@ require('telescope').setup {
 3. require('telescope').extensions.fzf_writer.staged_grep().
 for #3, rg to filter exact matches then press ' | ' to switch to fzf search them]]
 
-if not global.is_pi then
-  require('telescope').load_extension('fzy_native')
-end
+--if not global.is_pi then
+require('telescope').load_extension('fzy_native')
+--end
 require('telescope').load_extension('gh')
 require('telescope').load_extension('fzf_writer')
 require('telescope').load_extension('frecency')

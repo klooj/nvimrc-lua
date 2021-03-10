@@ -22,6 +22,7 @@ require('indent_guides').setup {
     'start',
     'startify',
     'term',
+    'terminal',
     'which_key',
     'wiki',
   },
