@@ -1,7 +1,0 @@
-threshold: medium
-fileignoreconfig:
-- filename: plugin/barbar.vim
-  checksum: 9eb97f0fcee1c9fa7722ffe0951c2bee556ebe0840546781898a2762aefbec57
-fileignoreconfig:
-- filename: lua/klooj/barbar.lua
-  checksum: 441be5969d4b319f4bd84437c2fc6cb53bb5369de3ef8ab9dbf6b5bd51aeb8e7

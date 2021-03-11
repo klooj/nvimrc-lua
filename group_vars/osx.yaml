@@ -1,8 +1,0 @@
----
-# osx play vars
-
-exe_make: /usr/local/gnubin/make
-exe_shell: /usr/local/bin/zsh
-exe_gem: /usr/local/opt/ruby/bin/gem
-
-...
