@@ -13,3 +13,4 @@ scrap.vim
 **/packer_compiled.vim
 yarn.lock
 package-lock.json
+.talismanrc
