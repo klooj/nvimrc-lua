@@ -1,0 +1,10 @@
+---
+# linux play vars
+
+exe_make: /usr/bin/make
+exe_shell: /usr/bin/zsh
+exe_gem: /usr/bin/gem
+
+# install_cargos: yes
+# install_fzf: yes
+...

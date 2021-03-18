@@ -12,30 +12,25 @@ saga.init_lsp_saga {
   finder_action_keys = { open = 'o', vsplit = 'v', split = 's', quit = 'q' },
 }
 
+
 --[[  === custom attach function ===
 Any time a file is opened that matches the type of a language server configured below,
 these actions will take place upon the lsp attaching to the buffer. I have set it up
 to do keymappings that are only relevant in conjunction with an lsp. most of them
 follow the pattern <leader>d
 ]]
-local custom_attach = function(client)
+local custom_init = function(client)
+  client.config.flags.allow_incremental_sync = true
+  client.config.flags.allow_highlight = false
+  client.config.flags.allow_indent = true
+-- end
+
+-- local custom_attach = function(client)
   -- completion.on_attach(client)
 
-  local nrmap = vim.keymap.nnoremap
-  local xrmap = vim.keymap.xnoremap
-  -- local irmap = vim.keymap.inoremap
-  local l     = [[<Leader>]]
-  local telescope_mapper = require('klooj.telescope.mappings')
 
   -- |> configs applying to all clients
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-  if client.config.flags then
-    if filetype ~= 'c' then
-      client.config.flags.allow_incremental_sync = true
-    end
-    client.config.flags.allow_highlight = false
-    client.config.flags.allow_indent = true
-  end
+  -- local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
 
 
   if client.resolved_capabilities.document_formatting then
@@ -45,6 +40,11 @@ local custom_attach = function(client)
     nrmap{l .. "dF", function() vim.lsp.buf.range_formatting() end, {nowait = true, buffer = true}}
   end
 
+  local nrmap = vim.keymap.nnoremap
+  local xrmap = vim.keymap.xnoremap
+  -- local irmap = vim.keymap.inoremap
+  local l     = [[<Leader>]]
+  local telescope_mapper = require('klooj.telescope.mappings')
 
   -- |> keymaps are all prefixed by leader
   telescope_mapper(l .. 'dr', 'lsp_references', nil, true)
@@ -70,7 +70,14 @@ end
 -- |> servers
 local noFuss = {'bashls', 'cmake', 'jsonls', 'jedi_language_server', 'r_language_server', 'yamlls', 'vimls'}
 for _, lsp in ipairs(noFuss) do
-  lspconfig[lsp].setup {capabilities = capabilities, on_attach = custom_attach }
+  lspconfig[lsp].setup {
+    capabilities = capabilities,
+    -- on_attach = custom_attach,
+    on_init = custom_init
+    -- client.config.flags.allow_incremental_sync = true,
+    -- client.config.flags.allow_highlight = false,
+    -- client.config.flags.allow_indent = true,
+  }
 end
 
 
@@ -78,7 +85,8 @@ lspconfig.clangd.setup {
   cmd = {
     "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy", "--header-insertion=iwyu",
   },
-  on_attach = custom_attach,
+  -- on_attach = custom_attach,
+  on_init = custom_init,
   capabilities = capabilities,
 }
 
@@ -105,8 +113,9 @@ end
 if not g.is_pi then
   lspconfig.sumneko_lua.setup {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+    -- on_attach = custom_attach,
+    on_init = custom_init,
     capabilities = capabilities,
-    on_attach = custom_attach,
     settings = {
       Lua = {
         runtime = {

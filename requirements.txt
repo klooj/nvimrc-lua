@@ -17,9 +17,11 @@ pathtools
 pip
 pre-commit
 proselint
+pybtex
 pycurl
 pylint
 pynvim
+PyQt5
 pytest
 regex
 setuptools

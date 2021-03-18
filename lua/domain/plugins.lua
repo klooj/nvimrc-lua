@@ -83,7 +83,9 @@ local function init()
     use {'Glench/Vim-Jinja2-Syntax', ft = {'html', 'jinja', 'yaml', 'yaml.ansible'}}
 
     -- |>  R
-    use {'jalvesaq/Nvim-R', ft = {'R'}}
+    use {'jalvesaq/Nvim-R', config = [[require('ploog.nvimr')]],
+      ft = {'R', 'Rmd', 'Rnw', 'Rd', 'Rrst'}
+    }
 
     -- |>  python
     use {'psf/black', config = [[require('ploog.black')]], ft = {'python'}}
@@ -134,7 +136,13 @@ local function init()
   -- === filetype/syntax specific ===
   -- |> markdown
   use {'dkarter/bullets.vim', ft = {'markdown', 'wiki'}, config = [[require('ploog.markdown')]],
-    requires = { 'reedes/vim-pencil', 'plasticboy/vim-markdown', 'reedes/vim-lexical'}
+    requires = {'reedes/vim-lexical', 'reedes/vim-pencil'}
+  -- 'plasticboy/vim-markdown',
+  }
+  use {'vim-pandoc/vim-pandoc',  ft = {'markdown','wiki', 'Rmd'}, config = [[require('ploog.pandoc')]],
+    requires = {'vim-pandoc/vim-pandoc-syntax', 'vim-pandoc/vim-pandoc-after',
+      'klooj/vim-markdownfootnotes', {'vim-pandoc/vim-rmarkdown', ft = {'Rmd'}},
+    }
   }
 
   -- |> json

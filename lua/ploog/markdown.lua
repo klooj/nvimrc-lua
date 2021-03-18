@@ -1,8 +1,8 @@
 local global = require('domain.global')
 -- pencil see also plugin/pencil.vim
 vim.g['pencil#wrapModeDefault'] = 'soft'
-vim.g['pencil#autoformat'] = 1
-vim.g['pencil#textwidth'] = 80
+-- vim.g['pencil#autoformat'] = 1
+-- vim.g['pencil#textwidth'] = 80
 vim.g['pencil#cursorwrap'] = 0
 vim.g['pencil#joinspaces'] = 1
 
@@ -18,22 +18,22 @@ vim.g['lexical#dictionary_key'] = '<localleader>d'
 vim.g.marked_app = 'Marked'
 
 -- plasticboy
-local opts = {
-	anchorexpr = 'substitute(v:anchor, "-", " ", "g")', -- convert my-tag to my tag
-	auto_insert_bullets = 0,
-	autowrite = 1,
-	conceal = 2,
-	conceal_code_blocks = 0,
-	edit_url_in = 'tab',
-	emphasis_multiline = 0,
-	folding_disabled = 1,
-	follow_anchor = 1,
-	frontmatter = 1,
-	math = 1,
-	new_list_item_indent = 0,
-}
+-- local opts = {
+-- 	anchorexpr = 'substitute(v:anchor, "-", " ", "g")', -- convert my-tag to my tag
+-- 	auto_insert_bullets = 0,
+-- 	autowrite = 1,
+-- 	conceal = 2,
+-- 	conceal_code_blocks = 0,
+-- 	edit_url_in = 'tab',
+-- 	emphasis_multiline = 0,
+-- 	folding_disabled = 1,
+-- 	follow_anchor = 1,
+-- 	frontmatter = 1,
+-- 	math = 1,
+-- 	new_list_item_indent = 0,
+-- }
 
-VG("vim_markdown_", opts)
+-- VG("vim_markdown_", opts)
 
 -- bullets
 vim.g.bullets_checkbox_markers = ' ○◐✗'

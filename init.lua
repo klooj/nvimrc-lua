@@ -1,5 +1,6 @@
 -- if the lsp attaches, use `<CR>` as you would `gf` * this just stopped working out of nowhere!
 local options = require('domain.options')
+
 local aucmd = require('domain.autocommands')
 local vg = vim.g
 function VG(name, opts)

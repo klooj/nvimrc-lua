@@ -6,7 +6,7 @@ local l = [[<leader>]]
 local ll = [[<localleader>]]
 local vc = vim.cmd
 
-vim.fn['pencil#init']()
+-- vim.fn['pencil#init']()
 vim.fn['lexical#init']()
 vim.fn['kpmd#abolish']()
 

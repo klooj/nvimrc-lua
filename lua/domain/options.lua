@@ -38,6 +38,7 @@ function options:load_options()
     -- foldlevelstart = 2;
     grepformat     = "%f:%l:%c:%m,%f:%l:%m";
     grepprg        = 'rg --hidden --vimgrep --smart-case --engine=auto --follow --no-heading --trim -- ';
+    guifont        = 'FiraCode Nerd Font',
     helpheight     = 12;
     hidden         = true;
     history        = 2000;
