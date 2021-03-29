@@ -1,7 +1,12 @@
-return function(filename)
+local finder = {}
+
+function finder.find_require(...)
   local to_search
 
-  if not filename then
+  local args = {...}
+  if #args > 0 then
+    to_search = args[1]
+  else
     local line = vim.fn.getline('.')
 
     -- require('.*')
@@ -23,8 +28,6 @@ return function(filename)
     end
 
     to_search = result
-  else
-    to_search = filename
   end
 
   local found_file = package.searchpath(to_search, package.path)
@@ -33,6 +36,13 @@ return function(filename)
     found_file = package.searchpath(to_search, package.cpath)
   end
 
-  -- TODO: What happens when it's nil?
-  return found_file or ""
+  if found_file == nil then
+    vim.cmd('silent normal! gf')
+  else
+    vim.cmd(string.format('e %s', found_file))
+  end
 end
+
+-- print(vim.inspect(package.searchpath("colorbuddy.group", package.path)))
+
+return finder

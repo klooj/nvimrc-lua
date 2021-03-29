@@ -14,26 +14,26 @@ local function init()
 
   -- === load on startup and either config in lua/plugin or none ===
   use {
-    'nvim-lua/popup.nvim'        , 'nvim-lua/plenary.nvim'    , 'tjdevries/astronauta.nvim'    ,
-    'junegunn/vim-peekaboo'      , 'kshenoy/vim-signature'    , 'romainl/vim-qf'               ,
-    'junegunn/fzf.vim'           , 'tpope/vim-commentary'     , 'tpope/vim-eunuch'             ,
-    'godlygeek/tabular'          , 'tpope/vim-surround'       , 'tpope/vim-repeat'             ,
-    'tpope/vim-scriptease'       , 'monaqa/dial.nvim'         , 'kyazdani42/nvim-web-devicons' ,
-    'tjdevries/colorbuddy.nvim'  , 'liuchengxu/vim-which-key' , 'tpope/vim-fugitive'           ,
-    'rhysd/clever-f.vim'         , 'lewis6991/gitsigns.nvim'  , 'norcalli/nvim-colorizer.lua'  ,
-    'glepnir/indent-guides.nvim' , 'Raimondi/delimitMate'     , 'klooj/vim-checkbox'           ,
-    'glepnir/galaxyline.nvim'    , 'romgrk/barbar.nvim'       , 'tpope/vim-abolish'            ,
-    'AndrewRadev/splitjoin.vim'  , 'glepnir/dashboard-nvim'   ,
-  }
-
+    'lewis6991/gitsigns.nvim'      , 'tjdevries/astronauta.nvim'   ,
+    'glepnir/dashboard-nvim'       , 'liuchengxu/vim-which-key'    , 'tjdevries/colorbuddy.nvim' ,
+    'glepnir/galaxyline.nvim'      , 'monaqa/dial.nvim'            , 'tpope/vim-abolish'         ,
+    'glepnir/indent-guides.nvim'   , 'norcalli/nvim-colorizer.lua' , 'tpope/vim-commentary'      ,
+    'godlygeek/tabular'            , 'nvim-lua/plenary.nvim'       , 'tpope/vim-eunuch'          ,
+    'junegunn/fzf.vim'             , 'nvim-lua/popup.nvim'         , 'tpope/vim-fugitive'        ,
+    'junegunn/vim-peekaboo'        , 'Raimondi/delimitMate'        , 'tpope/vim-repeat'          ,
+    'klooj/vim-checkbox'           , 'rhysd/clever-f.vim'          , 'tpope/vim-scriptease'      ,
+    'kshenoy/vim-signature'        , 'romainl/vim-qf'              , 'tpope/vim-surround'        ,
+    'kyazdani42/nvim-web-devicons' , 'romgrk/barbar.nvim'          ,
+  } -- 'AndrewRadev/splitjoin.vim'    ,
   use {'norcalli/nvim-terminal.lua', config = [[require('terminal').setup()]] }
---
+
   --    === telescope ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
-    requires = {'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',
+    requires = {
+      'nvim-telescope/telescope-fzy-native.nvim', 'brooth/far.vim',
       'nvim-telescope/telescope-github.nvim', 'nvim-telescope/telescope-symbols.nvim',
-      'nvim-telescope/telescope-fzf-writer.nvim',
-      {'nvim-telescope/telescope-frecency.nvim', requires = 'tami5/sql.nvim'}
+      'nvim-telescope/telescope-fzf-writer.nvim', 'tami5/sql.nvim',
+      'nvim-telescope/telescope-frecency.nvim',
     }
   }
 
@@ -44,7 +44,8 @@ local function init()
   }
 
   -- === completion ===
-  use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'}}
+  use {'hrsh7th/nvim-compe', requires = {'tamago324/compe-zsh'},
+    event = 'InsertEnter *', config = [[require('ploog.completion')]]}
   -- use {'nvim-lua/completion-nvim', config = function() require('ploog.completion') end,
     -- requires = 'aca/completion-tabnine'
   -- }
@@ -53,7 +54,7 @@ local function init()
   -- use {'hrsh7th/vim-vsnip',  config = [[require('ploog.vsnip')]],
     -- requires = {'hrsh7th/vim-vsnip-integ'}
   -- }
-  use {'SirVer/ultisnips', config = [[require('ploog.ultisnips')]]}
+  use {'SirVer/ultisnips', config = [[require('ploog.ultisnips')]], event = 'InsertEnter *'}
     -- requires = 'honza/vim-snippets'
   -- }
   -- use 'norcalli/snippets.nvim'
@@ -63,12 +64,12 @@ local function init()
   if not g.is_pi then
 
     use {'lervag/wiki.vim', 'tpope/vim-rhubarb', 'junegunn/gv.vim'}
-    use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
+    -- use {'wbthomason/pdf-scribe.nvim', opt = true, config = [[require('ploog.pdfscribe')]]}
 
     -- |> lsp
     use {'neovim/nvim-lspconfig', config = [[require('ploog.lsp_config')]],
-      requires = 'glepnir/lspsaga.nvim'
-    }  -- 'klooj/nlua.nvim'
+      requires = {'klooj/nlua.nvim', 'glepnir/lspsaga.nvim'}
+    }  --
 
     -- |> make and debug
     use {
@@ -92,6 +93,14 @@ local function init()
 
     -- |> c
     use {'rhysd/vim-clang-format', ft = {'c'}, config = [[require('ploog.clangd')]]}
+
+    -- |> take it one step too far
+    -- use {
+    --   'glacambre/firenvim',
+    --   run = function()
+    --     vim.fn['firenvim#install'](0)
+    --   end
+    -- }
 
     if g.is_mac then
       use {'itspriddle/vim-marked', ft = {'markdown', 'wiki'}}
@@ -121,34 +130,35 @@ local function init()
 
   --   === debug ===
   use {'dstein64/vim-startuptime', cmd = 'StartupTime'}
-  use {'puremourning/vimspector', opt = true,
-    requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}
-  }
+  -- use {'puremourning/vimspector', opt = true,
+    -- requires = {'nvim-telescope/telescope-vimspector.nvim', opt = true}
+  -- }
 
   --    === ui accoutrement ===
   use {
     {'klooj/zephyr-nvim', opt = true},
     -- {'glepnir/zephyr-nvim', opt = true},
-    {'ishan9299/modus-theme-vim', opt = true},
+    -- {'ishan9299/modus-theme-vim', opt = true},
     {'Th3Whit3Wolf/spacebuddy', opt = true},
   }
 
   -- === filetype/syntax specific ===
   -- |> markdown
-  use {'dkarter/bullets.vim', ft = {'markdown', 'wiki'}, config = [[require('ploog.markdown')]],
+  use {'dkarter/bullets.vim', ft = {'markdown', 'wiki', 'pandoc'}, config = [[require('ploog.markdown')]],
     requires = {'reedes/vim-lexical', 'reedes/vim-pencil'}
-  -- 'plasticboy/vim-markdown',
-  }
-  use {'vim-pandoc/vim-pandoc',  ft = {'markdown','wiki', 'Rmd'}, config = [[require('ploog.pandoc')]],
+  } -- 'plasticboy/vim-markdown',
+  use {'vim-pandoc/vim-pandoc',  ft = {'markdown','wiki', 'pandoc'}, config = [[require('ploog.pandoc')]],
     requires = {'vim-pandoc/vim-pandoc-syntax', 'vim-pandoc/vim-pandoc-after',
-      'klooj/vim-markdownfootnotes', {'vim-pandoc/vim-rmarkdown', ft = {'Rmd'}},
-    }
+      'klooj/vim-markdownfootnotes'}
   }
+  use {'vim-pandoc/vim-rmarkdown', ft = {'Rmd'}}
 
   -- |> json
   use {'prettier/vim-prettier', requires = 'elzr/vim-json', config = [[require('ploog.pretty')]],
     ft = {'javascript', 'typescript', 'less', 'css', 'json', 'graphql', 'markdown'}
   }
+
+  use {'cespare/vim-toml', ft = {'toml'}}
 
 end
 
@@ -171,31 +181,17 @@ return plugins
 --   config = [[require('ploog.prosession')]]
 -- }
 
-
 -- treesitter
 -- 'nvim-treesitter/nvim-treesitter-textobjects',
 -- {'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle', config = 'require("klooj.tsPlayground")'}}
 
 -- === git ===
--- use {'will133/vim-dirdiff', cmd = 'DirDiff',
--- config = function()
--- vim.cmd[[ let g:DirDiffExcludes = ".netrwhist, CVS,*.class,*.exe,*.swp,*.git,git*,*.DS_Store" ]]
--- end}
---  https://github.com/stsewd/fzf-checkout.vim
 
 -- use {'tpope/vim-dispatch', cmd = {'Dispatch', 'Make', 'Focus', 'Start'}}
 
 -- use 'SidOfc/mkdx'
 -- use {'SidOfc/mkdx', ft = {'markdown'}}
 
--- moved configs to lua/plugin
--- use {'', config = function() require("ploog.wiki") end}
--- use {'', config = function() require('ploog.cleverf') end}
--- use {'', config = function() require('ploog.anyjump') end}
-
-
--- use {'neoclide/coc.nvim', branch = 'release', ft = {'markdown'},
--- config = 'vim.g.coc_global_extensions = {"coc-markdownlint", "coc-json"}'}
 
 -- mess from before switching back to ultisnips:
 -- use {'nvim-lua/completion-nvim', event = 'InsertEnter *', config = function()
@@ -209,7 +205,6 @@ return plugins
 --   {'aca/completion-tabnine', after = 'completion-nvim'}
 -- }}
 -- use {'norcalli/snippets.nvim', config = 'require("snippets").use_suggested_mappings()'}
--- use {'ojroques/nvim-lspfuzzy', config = 'require("lspfuzzy").setup{}}'
 
 -- for fixing the completion in prompt issue
 -- vim.cmd [[au BufEnter * if &filetype !='TelescopePrompt' | lua require('klooj.completion').imply() ]]
@@ -217,34 +212,27 @@ return plugins
 
 
 --[[
-'cespare/vim-toml', ft = {'toml'}
+use {'mfussenegger/nvim-dap', opt = true, requires = {'theHamsta/nvim-dap-virtual-text', 'mfussenegger/nvim-dap-python', 'nvim-telescope/telescope-dap.nvim'}}
+use {'tjdevries/conf.vim', opt = true, requires = {'tjdevries/standard.vim','skywind3000/quickmenu.vim'}}
+use {'voldikss/vim-floaterm', opt = true, config = 'require("ploog.floaterm")', requires = 'voldikss/fzf-floaterm'}
+
 'andymass/vim-matchup'
 'chaoren/vim-wordmotion''
 'junegunn/vim-easy-align',
 'justinmk/vim-dirvish'
 'kristijanhusak/vim-dirvish-git'
 'machakann/vim-sandwich'             -- replacement for surround, eh
-'hrsh7th/vim-vsnip', 'hrsh7th/vim-vsnip-integ'
 'mattn/vim-sonictemplate'
 'nvim-lua/lsp_extensions.nvim',
 'Olical/vim-enmasse'
 'rhysd/vim-clang-format', opt = true, rocks = {'lua-cjson', 'lpeg', 'asdf'}
 'steelsojka/completion-buffers'
-'tjdevries/express_line.nvim', opt = true
-'tjdevries/gruvbuddy.nvim', opt = true
-'tjdevries/vim-inyoface',
-'tpope/vim-abolish'                   -- search, substitute, or abbreviate words variants
 'tpope/vim-sexp-mappings-for-regular-people'
 'wellle/targets.vim'
 'justinmk/vim-sneak',
 'airblade/vim-rooter', config = 'require("klooj.rooter")'}
 'mharington/formatter.nvim', cmd = 'Format', config = 'require("klooj.formatter")'}
-'AndrewRadev/splitjoin.vim', 'preservim/nerdcommenter',
-use {'mfussenegger/nvim-dap', opt = true, requires = {'theHamsta/nvim-dap-virtual-text',
-'mfussenegger/nvim-dap-python', 'nvim-telescope/telescope-dap.nvim'}}
-use {'tjdevries/conf.vim', opt = true, requires = {'tjdevries/standard.vim','skywind3000/quickmenu.vim'}}
-use {'voldikss/vim-floaterm', opt = true, config = 'require("ploog.floaterm")',
-requires = 'voldikss/fzf-floaterm'}
+'AndrewRadev/splitjoin.vim',
 {'romgrk/doom-one.vim', opt = true}
 
 ]]

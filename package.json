@@ -12,6 +12,7 @@
     "neovim": "^4.9.0",
     "npm": "^6.14.11",
     "prettier": "^2.2.1",
+    "tree-sitter-cli": "^0.19.4",
     "vim-language-server": "^2.1.2",
     "vscode-json-languageserver": "^1.3.1",
     "webpack": "^5.22.0",

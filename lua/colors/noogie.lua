@@ -1,3 +1,4 @@
+-- this is not functional
 local Color, colors, Group, groups, styles = require("colorbuddy").setup()
 
 Color.new('background', nil)

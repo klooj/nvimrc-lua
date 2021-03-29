@@ -1,17 +1,26 @@
-local format    = require('klooj.format')
-local g         = require('domain.global')
-local KJ        = require('klooj.utils')
+local format = require('klooj.format')
+local g = require('domain.global')
+local KJ = require('klooj.utils')
 local lspconfig = require('lspconfig')
-local saga      = require('lspsaga')
+local saga = require('lspsaga')
 -- local api = vim.api
+
+local l = [[<Leader>]]
+local nrmap = vim.keymap.nnoremap
+local xrmap = vim.keymap.xnoremap
+-- local irmap = vim.keymap.inoremap
+local telescope_mapper = require('klooj.telescope.mappings')
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-saga.init_lsp_saga {
-  finder_action_keys = { open = 'o', vsplit = 'v', split = 's', quit = 'q' },
-}
 
+local custom_init = function(client)
+  -- client.config.flags.allow_incremental_sync = true -- on by default now
+  client.config.flags = client.config.flags or {}
+  client.config.flags.allow_highlight = true
+  client.config.flags.allow_indent = true
+end
 
 --[[  === custom attach function ===
 Any time a file is opened that matches the type of a language server configured below,
@@ -19,19 +28,11 @@ these actions will take place upon the lsp attaching to the buffer. I have set i
 to do keymappings that are only relevant in conjunction with an lsp. most of them
 follow the pattern <leader>d
 ]]
-local custom_init = function(client)
-  client.config.flags.allow_incremental_sync = true
-  client.config.flags.allow_highlight = false
-  client.config.flags.allow_indent = true
--- end
 
--- local custom_attach = function(client)
+local custom_attach = function(client)
+
   -- completion.on_attach(client)
-
-
-  -- |> configs applying to all clients
   -- local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
-
 
   if client.resolved_capabilities.document_formatting then
     format.lsp_before_save()
@@ -40,17 +41,18 @@ local custom_init = function(client)
     nrmap{l .. "dF", function() vim.lsp.buf.range_formatting() end, {nowait = true, buffer = true}}
   end
 
-  local nrmap = vim.keymap.nnoremap
-  local xrmap = vim.keymap.xnoremap
-  -- local irmap = vim.keymap.inoremap
-  local l     = [[<Leader>]]
-  local telescope_mapper = require('klooj.telescope.mappings')
+  telescope_mapper(l .. 'dr', 'lsp_references', {
+    layout_strategy = 'vertical',
+    sorting_strategy = 'ascending',
+    prompt_position =  'top',
+    ignore_filename = true,
+  }, true)
+  telescope_mapper(l .. 'dW', 'lsp_workspace_symbols', { ignore_filename = true }, true)
+  telescope_mapper(l .. 'dw', 'lsp_document_symbols', { ignore_filename = true }, true)
+  telescope_mapper(l .. 'dA', 'lsp_code_actions', nil, true)
 
-  -- |> keymaps are all prefixed by leader
-  telescope_mapper(l .. 'dr', 'lsp_references', nil, true)
-  telescope_mapper(l .. 'dw', 'lsp_workspace_symbols', { ignore_filename = true }, true)
-
-  nrmap{'<CR>'   , function() vim.lsp.buf.definition() end                                , {nowait = true, buffer = true}}
+  -- nrmap{'<CR>'   , vim.lsp.buf.definition, buffer = 0}
+  nrmap{'gd'   , function() vim.lsp.buf.definition() end                                , {nowait = true, buffer = true}}
   nrmap{'gh'     , function() require("lspsaga.provider").lsp_finder() end                , {nowait = true, buffer = true}}
   nrmap{l .. 'd]', function() require('lspsaga.diagnostic').lsp_jump_diagnostic_next() end, {nowait = true, buffer = true}}
   nrmap{l .. 'd[', function() require('lspsaga.diagnostic').lsp_jump_diagnostic_prev() end, {nowait = true, buffer = true}}
@@ -67,82 +69,115 @@ local custom_init = function(client)
   vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
+
+
 -- |> servers
+
 local noFuss = {'bashls', 'cmake', 'jsonls', 'jedi_language_server', 'r_language_server', 'yamlls', 'vimls'}
 for _, lsp in ipairs(noFuss) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
-    -- on_attach = custom_attach,
-    on_init = custom_init
-    -- client.config.flags.allow_incremental_sync = true,
-    -- client.config.flags.allow_highlight = false,
-    -- client.config.flags.allow_indent = true,
+    on_init = custom_init,
+    on_attach = custom_attach,
   }
 end
 
 
 lspconfig.clangd.setup {
   cmd = {
-    "clangd", "--background-index", "--suggest-missing-includes", "--clang-tidy", "--header-insertion=iwyu",
+    "clangd",
+    "--background-index",
+    "--suggest-missing-includes",
+    "--clang-tidy",
+    "--header-insertion=iwyu",
   },
   -- on_attach = custom_attach,
   on_init = custom_init,
+  on_attach = custom_attach,
   capabilities = capabilities,
 }
 
 -- SUMNEKO
-local get_lua_runtime = function()
-  local result = {}
-  local sorted_rt = {}
+-- local get_lua_runtime = function()
+--   local result = {}
+--   local sorted_rt = {}
 
-  for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
-    local lua_path = path .. "/lua/";
-    if vim.fn.isdirectory(lua_path) then
-      result[lua_path] = true
-    end
-  end
+--   for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+--     local lua_path = path .. "/lua/";
+--     if vim.fn.isdirectory(lua_path) then
+--       result[lua_path] = true
+--     end
+--   end
 
-  result[vim.fn.expand("$VIMRUNTIME/lua")] = true
-  result[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-  result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
+--   result[vim.fn.expand("$VIMRUNTIME/lua")] = true
+--   result[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+--   result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
 
-  sorted_rt = KJ.table_unique(result)
-  return sorted_rt
-end
+--   sorted_rt = KJ.table_unique(result)
+--   return sorted_rt
+-- end
 
 if not g.is_pi then
-  lspconfig.sumneko_lua.setup {
+  require('nlua.lsp.nvim').setup(lspconfig, {
     cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
-    -- on_attach = custom_attach,
     on_init = custom_init,
+    on_attach = custom_attach,
     capabilities = capabilities,
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT',
-          path = vim.split(package.path, ';')
-          -- path = KJ.table_unique(vim.split(package.path, ';'))
-        },
-        diagnostics = {
-          enable = true,
-          disable = "trailing-space",
-          globals = {'vim'},
-        },
-        telemetry = {
-          enable = false
-        },
-        workspace = {
-          library = get_lua_runtime(),
-          maxPreload = 2000,
-          preloadFileSize = 1000,
-        },
-      },
-    },
-  }
+    -- globals = {'vim'},
+  })
+  -- lspconfig.sumneko_lua.setup {
+    -- cmd = {g.sumneko_binary, "-E", g.sumneko_root_path .. "/main.lua"},
+    -- on_init = custom_init,
+    -- on_attach = custom_attach,
+    -- capabilities = capabilities,
+    -- settings = {
+      -- Lua = {
+      --   runtime = {
+      --     version = 'LuaJIT',
+      --     path = vim.split(package.path, ';')
+      --   },
+      --   diagnostics = {
+      --     enable = true,
+      --     disable = "trailing-space",
+      --     globals = {'vim'},
+      --   },
+      --   telemetry = {
+      --     enable = false
+      --   },
+      --   workspace = {
+      --     library = get_lua_runtime(),
+      --     -- library = {
+      --       -- [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+      --       -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+      --     -- },
+      --     maxPreload = 2000,
+      --     preloadFileSize = 1000,
+      --   },
+      -- },
+    -- },
+  -- }
 end
 
+saga.init_lsp_saga {
+  finder_action_keys = {
+    open = 'o',
+    vsplit = 'v',
+    split = 's',
+    quit = 'q',
+    scroll_down = '<C-s>',
+    scroll_up = '<C-a>'
+  },
+  code_action_keys = {
+    quit = 'q', exec = '<C-CR>'
+  },
+  rename_action_keys = {
+    quit = '<C-c>', exec = '<C-CR>'
+  },
+}
 
 --------
+--[=[ accumulated scrap
+
   -- vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
     -- filetypes = {"lua"},
 -- lspconfig.texlab.setup {
@@ -289,3 +324,4 @@ update_in_insert = false,
 
 
 ]==]
+]=]

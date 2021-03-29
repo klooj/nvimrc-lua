@@ -44,7 +44,7 @@ function autocmd.load_autocmds()
 
     ft = {
       -- {"BufRead,BufNewFile","*.wiki","setf markdown"};
-      {"FileType","json","set filetype=jsonc"};
+      -- {"FileType","json","set filetype=jsonc"};
       {"FileType","which_key","set laststatus=0 noshowmode noruler | autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler"};
       {"BufRead,BufNewFile", "*/{playbooks,plays}/*.{yaml,yml}", "set filetype=yaml.ansible"},
       {"FileType", "dashboard", "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"},

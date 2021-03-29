@@ -3,7 +3,6 @@ local pmods = {
   -- warn_disabled = 0,
   enabled = {
     'command',
-    'executors',
     'folding',
     'formatting',
     'hypertext',
@@ -12,6 +11,7 @@ local pmods = {
     'toc',
     'yaml',
   },
+    -- 'executors',
   disabled = {
     'bibliographies',
     'completion',

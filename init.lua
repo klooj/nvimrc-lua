@@ -1,7 +1,13 @@
--- if the lsp attaches, use `<CR>` as you would `gf` * this just stopped working out of nowhere!
 local options = require('domain.options')
-
 local aucmd = require('domain.autocommands')
+
+--[=[ helper function for declaring vim.global options in config files.
+  this accepts nested tables and is equivalent to let g:what#this='that' or vim.g[[what#this]] = 'that'
+  usage: VG('optionprefix', table)
+  for example:
+    local opts = {this = 'that', here = 'there', but = { why = 'because', how = 'lua magic'}}
+    VG('what#', opts)
+]=]
 local vg = vim.g
 function VG(name, opts)
   for k, v in pairs(opts) do
@@ -9,6 +15,7 @@ function VG(name, opts)
   end
 end
 
+-- i do not use any of these default plugins. the intention is to speed up loading time.
 local disable_vplugs = function()
   local vplgs = { 'gzip', 'tar', 'tarPlugin', 'zip', 'zipPlugin', 'getscript', 'getscriptPlugin',
     'vimball', 'vimballPlugin', 'matchit', 'matchparen', '2html_plugin', 'logiPat', 'rrhelper',
@@ -30,6 +37,7 @@ end
 
 disable_vplugs()
 leader_map()
+vim.cmd[[runtime plugin/astronauta.vim]] -- load this now so that clicks clack
 options:load_options()
 
 vim.cmd[[filetype plugin indent on]]
@@ -41,5 +49,3 @@ require('domain.global')
 require('poob.pfunc')
 require('domain.keymaps')
 aucmd.load_autocmds()
-
---------------
