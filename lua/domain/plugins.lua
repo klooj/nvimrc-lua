@@ -15,7 +15,7 @@ local function init()
   -- === load on startup and either config in lua/plugin or none ===
   use {
     'lewis6991/gitsigns.nvim'      , 'tjdevries/astronauta.nvim'   ,
-    'glepnir/dashboard-nvim'       , 'liuchengxu/vim-which-key'    , 'tjdevries/colorbuddy.nvim' ,
+    'glepnir/dashboard-nvim'       , 'tjdevries/colorbuddy.nvim'   ,
     'glepnir/galaxyline.nvim'      , 'monaqa/dial.nvim'            , 'tpope/vim-abolish'         ,
     'glepnir/indent-guides.nvim'   , 'norcalli/nvim-colorizer.lua' , 'tpope/vim-commentary'      ,
     'godlygeek/tabular'            , 'nvim-lua/plenary.nvim'       , 'tpope/vim-eunuch'          ,
@@ -24,9 +24,8 @@ local function init()
     'klooj/vim-checkbox'           , 'rhysd/clever-f.vim'          , 'tpope/vim-scriptease'      ,
     'kshenoy/vim-signature'        , 'romainl/vim-qf'              , 'tpope/vim-surround'        ,
     'kyazdani42/nvim-web-devicons' , 'romgrk/barbar.nvim'          ,
-  } -- 'AndrewRadev/splitjoin.vim'    ,
+  } -- 'AndrewRadev/splitjoin.vim'    ,'liuchengxu/vim-which-key'
   use {'norcalli/nvim-terminal.lua', config = [[require('terminal').setup()]] }
-
   --    === telescope ===
   use {'nvim-lua/telescope.nvim', config = function() require('klooj.telescope') end,
     requires = {
@@ -135,6 +134,7 @@ local function init()
   -- }
 
   --    === ui accoutrement ===
+  use {'AckslD/nvim-whichkey-setup.lua', requires = {'liuchengxu/vim-which-key'}}
   use {
     {'klooj/zephyr-nvim', opt = true},
     -- {'glepnir/zephyr-nvim', opt = true},

@@ -23,78 +23,77 @@ leader maps; these are displayed by which-key popup
 
 function maps:load_whichKey_define()
   self.whichKey = {
-    ["n|<Leader>"]         = map_cu("silent WhichKey '<Space>'"):with_noremap():with_silent()       ,
-    ["v|<Leader>"]         = map_cu("silent WhichKeyVisual '<Space>'"):with_noremap():with_silent() ,
-    ["n|<LocalLeader>"]    = map_cu("silent WhichKey '\\'"):with_noremap():with_silent()            ,
-    ["v|<LocalLeader>"]    = map_cu("silent WhichKeyVisual '\\'"):with_noremap():with_silent()      ,
-    ["n|<leader><leader>"] = map_cmd([[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]]):with_noremap():with_expr(),
+    -- ["n|<Leader>"]         = map_cu("silent WhichKey '<Space>'"):with_noremap():with_silent()       ,
+    -- ["v|<Leader>"]         = map_cu("silent WhichKeyVisual '<Space>'"):with_noremap():with_silent() ,
+    -- ["n|<LocalLeader>"]    = map_cu("silent WhichKey '\\'"):with_noremap():with_silent()            ,
+    -- ["v|<LocalLeader>"]    = map_cu("silent WhichKeyVisual '\\'"):with_noremap():with_silent()      ,
     -- ["n|<LocalLeader>x"]   = map_cr("ToggleCheckbox"):with_noremap(),
 
-    ["n|<Leader>,"]       = map_cr("Commentary"):with_noremap():with_silent()               ,
-    ["x|<Leader>,"]       = map_cr("'<,'>Commentary"):with_noremap():with_silent()          ,
-    ["n|<Leader>;"]       = map_cmd(":%s:::g<Left><Left><Left>"):with_noremap()             ,
-    ["n|<Leader>."]       = map_cr([[vsplit $FOONV/init.lua]]):with_noremap():with_silent() ,
-    ["n|<Leader>\\"]      = map_cr("NvimTreeToggle"):with_noremap():with_silent()           ,
-    ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,
-    ["n|<Leader><Left>"]  = map_cr("BufferMoveNext"):with_noremap():with_silent()           ,
-    ["n|<Leader><Right>"] = map_cr("BufferMovePrevious"):with_noremap():with_silent()       ,
+    -- ["n|<Leader>,"]       = map_cr("Commentary"):with_noremap():with_silent()               ,
+    -- ["x|<Leader>,"]       = map_cr("'<,'>Commentary"):with_noremap():with_silent()          ,
+    -- ["n|<Leader>;"]       = map_cmd(":%s:::g<Left><Left><Left>"):with_noremap()             ,
+    -- ["n|<Leader>."]       = map_cr([[vsplit $FOONV/init.lua]]):with_noremap():with_silent() ,
+    -- ["n|<Leader>\\"]      = map_cr("NvimTreeToggle"):with_noremap():with_silent()           ,
+    -- ["n|<Leader>="]       = map_cmd("<C-W>="):with_noremap():with_silent()                  ,
+    -- ["n|<Leader><Left>"]  = map_cr("BufferMoveNext"):with_noremap():with_silent()           ,
+    -- ["n|<Leader><Right>"] = map_cr("BufferMovePrevious"):with_noremap():with_silent()       ,
     -- |> [a]ctions
-    ["n|<Leader>a#"] = map_cmd(":py3 import vim, random; vim.current.line += str(random.randint(0,9))<CR><esc>A"):with_noremap():with_silent(),
-    ["n|<Leader>ac"] = map_cr("ColorizerToggle"):with_noremap():with_silent() ,
-    ["n|<Leader>ah"] = map_cr("Helptags"):with_noremap():with_silent()        ,
-    ["n|<Leader>au"] = map_cr("UndotreeToggle"):with_noremap():with_silent()  ,
-    ["n|<Leader>aw"] = map_cr("StripWhitespace"):with_noremap():with_silent() ,
+    -- ["n|<Leader>a#"] = map_cmd(":py3 import vim, random; vim.current.line += str(random.randint(0,9))<CR><esc>A"):with_noremap():with_silent(),
+    -- ["n|<Leader>ac"] = map_cr("ColorizerToggle"):with_noremap():with_silent() ,
+    -- ["n|<Leader>ah"] = map_cr("Helptags"):with_noremap():with_silent()        ,
+    -- ["n|<Leader>au"] = map_cr("UndotreeToggle"):with_noremap():with_silent()  ,
+    -- ["n|<Leader>aw"] = map_cr("StripWhitespace"):with_noremap():with_silent() ,
     --   |- [p]acker
-    ["n|<Leader>apc"] = map_cr("PackerClean"):with_noremap():with_silent()   ,
-    ["n|<Leader>app"] = map_cr("PackerCompile"):with_noremap():with_silent() ,
-    ["n|<Leader>api"] = map_cr("PackerInstall"):with_noremap():with_silent() ,
-    ["n|<Leader>aps"] = map_cr("PackerSync"):with_noremap():with_silent()    ,
-    ["n|<Leader>apu"] = map_cr("PackerUpdate"):with_noremap():with_silent()  ,
+    -- ["n|<Leader>apc"] = map_cr("PackerClean"):with_noremap():with_silent()   ,
+    -- ["n|<Leader>app"] = map_cr("PackerCompile"):with_noremap():with_silent() ,
+    -- ["n|<Leader>api"] = map_cr("PackerInstall"):with_noremap():with_silent() ,
+    -- ["n|<Leader>aps"] = map_cr("PackerSync"):with_noremap():with_silent()    ,
+    -- ["n|<Leader>apu"] = map_cr("PackerUpdate"):with_noremap():with_silent()  ,
 
     -- |> [A]dd lazy packs
-    ["n|<Leader>Ac"] = map_cr([[source $FOONV/lazy/conf.vim ]]):with_noremap():with_silent()      ,
-    ["n|<Leader>Ad"] = map_cr([[source $FOONV/lazy/dap.vim]]):with_noremap():with_silent()        ,
-    ["n|<Leader>Av"] = map_cr([[source $FOONV/lazy/vimspector.vim]]):with_noremap():with_silent() ,
-    ["n|<Leader>Ab"] = map_cr([[packadd vim-boxdraw]]):with_noremap():with_silent() ,
+    -- ["n|<Leader>Ac"] = map_cr([[source $FOONV/lazy/conf.vim ]]):with_noremap():with_silent()      ,
+    -- ["n|<Leader>Ad"] = map_cr([[source $FOONV/lazy/dap.vim]]):with_noremap():with_silent()        ,
+    -- ["n|<Leader>Av"] = map_cr([[source $FOONV/lazy/vimspector.vim]]):with_noremap():with_silent() ,
+    -- ["n|<Leader>Ab"] = map_cr([[packadd vim-boxdraw]]):with_noremap():with_silent() ,
 
     -- |> [b]uffer
-    ["n|<Leader>bb"] = map_cr("set scrollbind"):with_noremap():with_silent()                   ,
-    ["n|<Leader>bc"] = map_cmd('"_c'):with_noremap():with_silent()                             ,
-    ["n|<Leader>bd"] = map_cmd('"_d'):with_noremap():with_silent()                             ,
-    ["n|<Leader>bh"] = map_cmd("<C-W>t<C-W>K"):with_noremap():with_silent()                    ,
-    ["n|<Leader>bO"] = map_cr("BufferOrderByDirectory"):with_noremap():with_silent()           ,
-    ["n|<Leader>bp"] = map_cr("BufferPick"):with_noremap():with_silent()                       ,
-    ["n|<Leader>bR"] = map_cr("BufferCloseBuffersRight"):with_noremap():with_silent()          ,
-    ["n|<Leader>bs"] = map_cr("call WindowSwap#EasyWindowSwap()"):with_noremap():with_silent() ,
-    ["n|<Leader>bv"] = map_cmd("<C-W>t<C-W>H"):with_noremap():with_silent()                    ,
-    ["n|<Leader>bw"] = map_cr("BufferWipeout"):with_noremap():with_silent()                    ,
-    ["n|<Leader>bx"] = map_cr("BufferClose"):with_noremap():with_silent()                      ,
-    ["n|<Leader>bX"] = map_cr("BufferCloseAllButCurrent"):with_noremap():with_silent()         ,
+    -- ["n|<Leader>bb"] = map_cr("set scrollbind"):with_noremap():with_silent()                   ,
+    -- ["n|<Leader>bc"] = map_cmd('"_c'):with_noremap():with_silent()                             ,
+    -- ["n|<Leader>bd"] = map_cmd('"_d'):with_noremap():with_silent()                             ,
+    -- ["n|<Leader>bh"] = map_cmd("<C-W>t<C-W>K"):with_noremap():with_silent()                    ,
+    -- ["n|<Leader>bO"] = map_cr("BufferOrderByDirectory"):with_noremap():with_silent()           ,
+    -- ["n|<Leader>bp"] = map_cr("BufferPick"):with_noremap():with_silent()                       ,
+    -- ["n|<Leader>bR"] = map_cr("BufferCloseBuffersRight"):with_noremap():with_silent()          ,
+    -- ["n|<Leader>bs"] = map_cr("call WindowSwap#EasyWindowSwap()"):with_noremap():with_silent() ,
+    -- ["n|<Leader>bv"] = map_cmd("<C-W>t<C-W>H"):with_noremap():with_silent()                    ,
+    -- ["n|<Leader>bw"] = map_cr("BufferWipeout"):with_noremap():with_silent()                    ,
+    -- ["n|<Leader>bx"] = map_cr("BufferClose"):with_noremap():with_silent()                      ,
+    -- ["n|<Leader>bX"] = map_cr("BufferCloseAllButCurrent"):with_noremap():with_silent()         ,
     --     |- [b]uf [o]ptions
-    ["n|<Leader>boc"] = map_cr("set cursorcolumn"):with_noremap():with_silent()                               ,
-    ["n|<Leader>boC"] = map_cr("set nocursorcolumn"):with_noremap():with_silent()                             ,
-    ["n|<Leader>bow"] = map_cr("hi ColorColumn ctermbg=202020 guibg=202020"):with_noremap():with_silent()     ,
-    ["n|<Leader>boW"] = map_cr("hi ColorColumn ctermbg=darkcyan guibg=darkcyan"):with_noremap():with_silent() ,
-    ["n|<Leader>boN"] = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
-    ["n|<Leader>bon"] = map_cr("set number!"):with_noremap():with_silent()                                    ,
+    -- ["n|<Leader>boc"] = map_cr("set cursorcolumn"):with_noremap():with_silent()                               ,
+    -- ["n|<Leader>boC"] = map_cr("set nocursorcolumn"):with_noremap():with_silent()                             ,
+    -- ["n|<Leader>bow"] = map_cr("hi ColorColumn ctermbg=202020 guibg=202020"):with_noremap():with_silent()     ,
+    -- ["n|<Leader>boW"] = map_cr("hi ColorColumn ctermbg=darkcyan guibg=darkcyan"):with_noremap():with_silent() ,
+    -- ["n|<Leader>boN"] = map_cr("set nonumber!"):with_noremap():with_silent()                                  ,
+    -- ["n|<Leader>bon"] = map_cr("set number!"):with_noremap():with_silent()                                    ,
 
     -- |> [d]ebug
-    ["n|<Leader>d?"]  = map_cr("lua print(vim.inspect(vim.lsp.buf_get_clients()))"):with_noremap():with_silent() ,
-    ["n|<Leader>dM"]  = map_cr("Neomake"):with_noremap():with_silent() ,
-    ["n|<Leader>ddo"] = map_cr("Luadev"):with_noremap():with_silent()  ,
+    -- ["n|<Leader>d?"]  = map_cr("lua print(vim.inspect(vim.lsp.buf_get_clients()))"):with_noremap():with_silent() ,
+    -- ["n|<Leader>dM"]  = map_cr("Neomake"):with_noremap():with_silent() ,
+    -- ["n|<Leader>ddo"] = map_cr("Luadev"):with_noremap():with_silent()  ,
     ["n|<Leader>ddl"] = map_cmd("<Plug>(Luadev-RunLine)")              ,
     ["v|<Leader>ddv"] = map_cmd("<Plug>(Luadev-Run)")                  ,
     ["n|<Leader>ddw"] = map_cmd("<Plug>(Luadev-RunWord)")              ,
 
     -- |> [e]dit
-    ["n|<Leader>e."] = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                  ,
-    ["n|<Leader>ec"] = map_cr([[vsplit $FOONV/lua/ploog/completion.lua]]):with_noremap() ,
-    ["n|<Leader>ee"] = map_cr("Telescope symbols"):with_noremap()                         ,
-    ["n|<Leader>ek"] = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()    ,
-    ["n|<Leader>eL"] = map_cr([[vsplit $FOONV/lua/ploog/lsp_config.lua]]):with_noremap() ,
-    ["n|<Leader>ep"] = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()    ,
-    ["n|<Leader>et"] = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()           ,
-    ["n|<Leader>ew"] = map_cr([[vsplit $FOONV/lua/plugin/whichKey.lua]]):with_noremap()   ,
+    -- ["n|<Leader>e."] = map_cr([[vsplit $FOONV/init.lua]]):with_noremap()                  ,
+    -- ["n|<Leader>ec"] = map_cr([[vsplit $FOONV/lua/ploog/completion.lua]]):with_noremap() ,
+    -- ["n|<Leader>ee"] = map_cr("Telescope symbols"):with_noremap()                         ,
+    -- ["n|<Leader>ek"] = map_cr([[vsplit $FOONV/lua/domain/keymaps.lua]]):with_noremap()    ,
+    -- ["n|<Leader>eL"] = map_cr([[vsplit $FOONV/lua/ploog/lsp_config.lua]]):with_noremap() ,
+    -- ["n|<Leader>ep"] = map_cr([[vsplit $FOONV/lua/domain/plugins.lua]]):with_noremap()    ,
+    -- ["n|<Leader>et"] = map_cr([[vsplit ~/Desktop/info/todo.md]]):with_noremap()           ,
+    -- ["n|<Leader>ew"] = map_cr([[vsplit $FOONV/lua/plugin/whichKey.lua]]):with_noremap()   ,
 
     -- |> [f]ind (most of this is in lua/klooj/telesceope/init.lua )
     ["n|<Leader>ff"] = map_cr("lua require('telescope').extensions.fzf_writer.staged_grep()"):with_noremap() ,
@@ -102,34 +101,33 @@ function maps:load_whichKey_define()
     ["n|<Leader>fZ"] = map_cr("lua require('telescope').extensions.fzf_writer.grep()"):with_noremap()        ,
 
     -- [g]it
-    ["n|<Leader>ga"]  = map_cr("Git add ."):with_noremap()                               ,
-    ["n|<Leader>gb"]  = map_cr("GBrowse"):with_noremap()                                 ,
-    ["x|<Leader>gb"]  = map_cr("GBrowse"):with_noremap()                                 ,
-    ["n|<Leader>gc"]  = map_cr("Gcommit"):with_noremap()                                 ,
-    ["n|<Leader>gd"]  = map_cr("Gdiffsplit!"):with_noremap()                             ,
-    ["n|<Leader>gf"]  = map_cr("diffget //2")                                            ,
+    -- ["n|<Leader>ga"]  = map_cr("Git add ."):with_noremap()                               ,
+    -- ["x|<Leader>gb"]  = map_cr("GBrowse"):with_noremap()                                 ,
+    -- ["n|<Leader>gc"]  = map_cr("Gcommit"):with_noremap()                                 ,
+    -- ["n|<Leader>gd"]  = map_cr("Gdiffsplit!"):with_noremap()                             ,
+    -- ["n|<Leader>gf"]  = map_cr("diffget //2")                                            ,
 
-    ["n|<Leader>ghs"] = map_cr("lua require'gitsigns'.stage_hunk()"):with_noremap()      ,
-    ["n|<Leader>ghu"] = map_cr("lua require'gitsigns'.undo_stage_hunk()"):with_noremap() ,
-    ["n|<Leader>ghr"] = map_cr("lua require'gitsigns'.reset_hunk()"):with_noremap()      ,
-    ["n|<Leader>ghp"] = map_cr("lua require'gitsigns'.preview_hunk()"):with_noremap()    ,
-    ["n|<Leader>ghb"] = map_cr("lua require'gitsigns'.blame_line()"):with_noremap()      ,
+    -- ["n|<Leader>ghs"] = map_cr("lua require'gitsigns'.stage_hunk()"):with_noremap()      ,
+    -- ["n|<Leader>ghu"] = map_cr("lua require'gitsigns'.undo_stage_hunk()"):with_noremap() ,
+    -- ["n|<Leader>ghr"] = map_cr("lua require'gitsigns'.reset_hunk()"):with_noremap()      ,
+    -- ["n|<Leader>ghp"] = map_cr("lua require'gitsigns'.preview_hunk()"):with_noremap()    ,
+    -- ["n|<Leader>ghb"] = map_cr("lua require'gitsigns'.blame_line()"):with_noremap()      ,
 
-    ["n|<Leader>gj"]  = map_cr("diffget //3")                                            ,
-    ["n|<Leader>gl"]  = map_cr("Git log"):with_noremap()                                 ,
-    ["n|<Leader>gm"]  = map_cr("Git mergetool"):with_noremap()                           ,
-    ["n|<Leader>gp"]  = map_cr("Git pull"):with_noremap()                                ,
-    ["n|<Leader>gP"]  = map_cr("Git push"):with_noremap()                                ,
-    ["n|<Leader>gS"]  = map_cr("G"):with_silent()                                        ,
-    ["n|<Leader>gs"]  = map_cr("Gstatus"):with_noremap()                                 ,
-    ["n|<Leader>gV"]  = map_cr("GV!"):with_noremap()                                     ,
-    ["n|<Leader>gv"]  = map_cr("GV"):with_noremap()                                      ,
+    -- ["n|<Leader>gj"]  = map_cr("diffget //3")                                            ,
+    -- ["n|<Leader>gl"]  = map_cr("Git log"):with_noremap()                                 ,
+    -- ["n|<Leader>gm"]  = map_cr("Git mergetool"):with_noremap()                           ,
+    -- ["n|<Leader>gp"]  = map_cr("Git pull"):with_noremap()                                ,
+    -- ["n|<Leader>gP"]  = map_cr("Git push"):with_noremap()                                ,
+    -- ["n|<Leader>gS"]  = map_cr("G"):with_silent()                                        ,
+    -- ["n|<Leader>gs"]  = map_cr("Gstatus"):with_noremap()                                 ,
+    -- ["n|<Leader>gV"]  = map_cr("GV!"):with_noremap()                                     ,
+    -- ["n|<Leader>gv"]  = map_cr("GV"):with_noremap()                                      ,
     --
-    ["n|<Leader>h"]   = map_cmd("<C-W>s"):with_noremap():with_silent()                        ,
-    ["n|<Leader>H"]   = map_cr("echo synIDattr(synID(line('.'), col('.'), 1), 'name')"):with_noremap():with_silent() ,
-    ["n|<Leader>j"]   = map_cr("AnyJump"):with_noremap():with_silent()                        ,
-    ["x|<Leader>j"]   = map_cr("AnyJumpVisual"):with_noremap():with_silent()                  ,
-    ["n|<Leader>k"]   = map_cr("BufferPick"):with_noremap():with_silent()                     ,
+    -- ["n|<Leader>h"]   = map_cmd("<C-W>s"):with_noremap():with_silent()                        ,
+    -- ["n|<Leader>H"]   = map_cr("echo synIDattr(synID(line('.'), col('.'), 1), 'name')"):with_noremap():with_silent() ,
+    -- ["n|<Leader>j"]   = map_cr("AnyJump"):with_noremap():with_silent()                        ,
+    -- ["x|<Leader>j"]   = map_cr("AnyJumpVisual"):with_noremap():with_silent()                  ,
+    -- ["n|<Leader>k"]   = map_cr("BufferPick"):with_noremap():with_silent()                     ,
 
     -- |> [q]uickfix
     ["n|<Leader>qp"] = map_cmd("<Plug>(qf_qf_previous)")                   ,
@@ -201,15 +199,16 @@ function maps:load_whichKey_define()
     ['x|<Leader>tRl']  = map_cr("Tabularize multiple_spaces"):with_noremap()  ,
     ['x|<Leader>tRm']  = map_cr("Tabularize remove_leading_spaces"):with_noremap()  ,
 
-    ["n|<Leader>v"]    = map_cmd("<C-W>v"):with_noremap():with_silent()                        ,
-    ["n|<Leader>V"]    = map_cr("vertical wincmd f"):with_noremap():with_silent()              ,
-    ["n|<Leader>z"]    = map_cr([[vsplit ~/.zshrc]]):with_noremap():with_silent()              ,
+    -- ["n|<Leader>v"]    = map_cmd("<C-W>v"):with_noremap():with_silent()                        ,
+    -- ["n|<Leader>V"]    = map_cr("vertical wincmd f"):with_noremap():with_silent()              ,
+    -- ["n|<Leader>z"]    = map_cr([[vsplit ~/.zshrc]]):with_noremap():with_silent()              ,
 
   }
 end
 
 function maps:load_vim_define()
 self.vim= {
+    ["n|<leader><leader>"] = map_cmd([[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]]):with_noremap():with_expr(),
 -- moving within and among text, windows, buffers, and tabs
     ["n|k"]       = map_cmd('gk'):with_noremap()                    ,
     ["n|j"]       = map_cmd('gj'):with_noremap()                    ,
@@ -294,12 +293,13 @@ end
 
 
 local function load_maps()
-maps:load_vim_define()
-maps:load_plugin_define()
-maps:load_whichKey_define()
-pbind.nvim_load_mapping(maps.vim)
-pbind.nvim_load_mapping(maps.plugin)
-pbind.nvim_load_mapping(maps.whichKey)
+  require('domain.leader')
+  maps:load_vim_define()
+  maps:load_plugin_define()
+  maps:load_whichKey_define()
+  pbind.nvim_load_mapping(maps.vim)
+  pbind.nvim_load_mapping(maps.plugin)
+  pbind.nvim_load_mapping(maps.whichKey)
 end
 
 load_maps()

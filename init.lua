@@ -37,7 +37,7 @@ end
 
 disable_vplugs()
 leader_map()
-vim.cmd[[runtime plugin/astronauta.vim]] -- load this now so that clicks clack
+vim.cmd[[runtime plugin/astronauta.vim]] -- load this now so that clicks will clack
 options:load_options()
 
 vim.cmd[[filetype plugin indent on]]

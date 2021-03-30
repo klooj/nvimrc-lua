@@ -1,4 +1,4 @@
--- vim.keymap.nnoremap{'<CR>', require('find_require').find_require(), {nowait = true, buffer = true}}
+-- vim.keymap.nnoremap{'<CR>', require('klooj.find_require'), {nowait = true, buffer = true}}
 
   -- nrmap{'<CR>'   , vim.lsp.buf.definition, buffer = 0}
   -- require('find_require').find_require()<CR>
